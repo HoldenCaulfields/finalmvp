@@ -111,7 +111,7 @@ export default function FeedbackHub() {
     };
 
     return (
-        <div className="fixed bottom-24 md:bottom-8 right-0 md:right-8 z-[1200] font-sans antialiased">
+        <div className="fixed bottom-24 md:bottom-8 right-0 md:right-8 z-100 font-sans antialiased">
             <AnimatePresence>
                 {isOpen && (
                     <motion.div

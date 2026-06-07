@@ -21,7 +21,7 @@ const MARKETPLACE_PRESETS = [
   {
     name: "Sạc dự phòng cũ 🔋",
     category: "item",
-    url: "https://images.unsplash.com/photo-1609592424109-dd77348bf638?w=800&q=80"
+    url: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=800&q=80"
   },
   {
     name: "Phục vụ quán cafe ☕",

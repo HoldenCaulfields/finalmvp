@@ -26,84 +26,11 @@ import StudyHub from "./components/StudyHub";
 import MarketplaceHub from "./components/MarketplaceHub";
 import FeedbackHub from "./components/FeedbackHub";
 
-const INITIAL_POSTS: Post[] = [
-  {
-    id: 1,
-    author: "Lê Khắc Trường",
-    avatar: "KT",
-    faculty: "Cơ khí - Xây dựng",
-    image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1000&q=80",
-    caption: "Thời gian trôi nhanh quá các bạn ơi! Chớp mắt một cái là chúng mình chuẩn bị tốt nghiệp rồi. Nhìn những tà áo xanh, những nụ cười rạng rỡ này, lòng thắt lại một chút vì sắp rời xa trường lớp thân thương. Chúc tập thể K20 luôn vững vàng chân cứng đá mềm nhé! 🎓🎓🎓",
-    likes: 124,
-    commentsCount: 3,
-    comments: [
-      { id: 101, author: "Trần Minh Anh", avatar: "MA", text: "Ảnh đỉnh chóp luôn bạn ơi! Chúc K20 tụi mình ai cũng có việc ngon nha!", time: "4 giờ trước" },
-      { id: 102, author: "Cô Vy (Khoa Kinh Tế)", avatar: "CV", text: "Xúc động quá 🥺 Mãi lưu giữ những khoảnh khắc tuyệt vời này nhé!", time: "2 giờ trước" },
-      { id: 103, author: "Thầy Hùng Điện", avatar: "TH", text: "Trông em nào cũng chững chạc và đầy hy vọng. Chúc mừng các em!", time: "1 giờ trước" }
-    ],
-    time: "2 giờ trước",
-    liked: false,
-    tags: ["#kyniemtotnghiep", "#cuasinhvien", "#khoacokhixaydung", "#thanhxuan"]
-  },
-  {
-    id: 2,
-    author: "Phạm Khánh Ly",
-    avatar: "KL",
-    faculty: "Điện - Điện tử",
-    club: "Coffee Giao Lưu",
-    image: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1000&q=80",
-    caption: "Buổi offline cuối tuần siêu nhiều tiếng cười của CLB Coffee Giao Lưu ☕️❤️ Hôm nay không chỉ có các thành viên cũ mà có rất nhiều anh chị khóa trên về chia sẻ kinh nghiệm phỏng vấn và thực tập tại Nha Trang. Tuyệt vời và ý nghĩa cực kỳ!",
-    likes: 85,
-    commentsCount: 2,
-    comments: [
-      { id: 201, author: "Quốc Đạt", avatar: "QD", text: "Tiếc quá tuần này mình bận không tham gia được, hẹn mọi người tuần sau nha!", time: "5 giờ trước" },
-      { id: 202, author: "Lan Hương", avatar: "LH", text: "Cảm ơn các thầy cô và anh chị đã hỗ trợ nhiệt tình hết cỡ!", time: "3 giờ trước" }
-    ],
-    time: "5 giờ trước",
-    liked: true,
-    tags: ["#cafeoffline", "#khoadiendientu", "#giao-luu", "#ketnoibanbe"]
-  },
-  {
-    id: 3,
-    author: "Nguyễn Vũ Toàn",
-    avatar: "VT",
-    faculty: "Công nghệ Ô tô",
-    image: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=1000&q=80",
-    caption: "Giờ thực hành bổ ích và căng não tại xưởng cơ khí động cơ 🛠️⚙️ Cùng nhau tháo lắp động cơ V6, lấm lem dầu mỡ nhưng ai cũng vui vì được sờ tận tay, học đúng chất nghề thực tế. Khánh Hòa đầy nắng gió thử thách chí bền!",
-    likes: 98,
-    commentsCount: 1,
-    comments: [
-      { id: 301, author: "Thành Nam", avatar: "TN", text: "Bộ quần áo xanh bảo hộ chất lừ bạn ơi, đúng chuẩn dân ô tô chất chơi!", time: "7 giờ trước" }
-    ],
-    time: "10 giờ trước",
-    liked: false,
-    tags: ["#congngheoto", "#thuchanhthechat", "#vungtaynghe", "#khanhhoa"]
-  },
-  {
-    id: 4,
-    author: "Đỗ Thị Kim Ngân",
-    avatar: "KN",
-    faculty: "Kinh tế - Tổng hợp",
-    club: "Tiếng Anh",
-    image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80",
-    caption: "CLB Tiếng Anh (English Zone) hôm nay sinh hoạt hoành tráng lắm nha 🎙️🇬🇧 Chúng mình cùng nhau tranh biện về chủ đề 'Liệu có nên sớm tự lập từ năm nhất'. Cảm kích sự hỗ trợ và chấm điểm từ thầy cô nước ngoài từ đoàn liên kết!",
-    likes: 72,
-    commentsCount: 2,
-    comments: [
-      { id: 401, author: "Văn Sáng", avatar: "VS", text: "Nhóm mình hôm nay thuyết trình hay xuất thần luôn Ngân ơi 🎉", time: "1 ngày trước" },
-      { id: 402, author: "Hồng Nhung", avatar: "HN", text: "Love this squad! Cứ tự tin rực rỡ như thế này nhé!", time: "18 giờ trước" }
-    ],
-    time: "1 ngày trước",
-    liked: false,
-    tags: ["#englishclub", "#tranhbien", "#khoakinhtetonghop", "#nhiethuyet"]
-  }
-];
-
 export default function App() {
   const [activeTab, setActiveTab] = useState<"Faculty" | "Club" | "Study" | "Marketplace">("Faculty");
   const [activeFaculty, setActiveFaculty] = useState<string>("Tất cả");
   const [activeClub, setActiveClub] = useState<string>("Tất cả");
-  const [posts, setPosts] = useState<Post[]>(INITIAL_POSTS);
+  const [posts, setPosts] = useState<Post[]>([]);
 
   const [commentPost, setCommentPost] = useState<Post | null>(null);
   const [lightboxPost, setLightboxPost] = useState<Post | null>(null);
@@ -148,14 +75,6 @@ export default function App() {
 
       // Merge Firestore fetched posts with INITIAL_POSTS in memory
       const merged = [...fetched];
-      INITIAL_POSTS.forEach((initPost) => {
-        if (!merged.some((p) => p.id === initPost.id)) {
-          merged.push({
-            ...initPost,
-            liked: profile ? (initPost.likedUsers || []).includes(profile.id) : (initPost.liked || false)
-          });
-        }
-      });
 
       // Sort in memory by ID descending
       merged.sort((a, b) => b.id - a.id);
