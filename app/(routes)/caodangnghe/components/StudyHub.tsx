@@ -103,17 +103,6 @@ const ELECTRONIC_COMPONENTS: ComponentItem[] = [
     functionText: "Tạo ra các xung vuông dao động liên tục (chế độ Astable), tạo độ trễ thời gian đóng ngắt (chế độ Monostable).",
     fact: "NE555 được thiết kế vào năm 1971 bởi Hans Camenzind và đến nay vẫn là một trong những IC bán chạy nhất mọi thời đại.",
     application: "Mạch đèn xi-nhan nhấp nháy liên tục, còi cảnh sát phát tiếng hú kêu, bộ phát tín hiệu điều khiển hồng ngoại cơ bản."
-  },
-  {
-    id: "ic-lm7805",
-    name: "IC Ổn Áp L7805 / LM7805",
-    englishName: "5V Linear Regulator IC",
-    symbol: "REG / U",
-    icon: "🎛️",
-    desc: "Mạch tích hợp ổn định mức điện áp ngõ ra một chiều cố định là 5V dương từ nguồn điện vào ngắt quãng có mức từ 7V đến 25V.",
-    functionText: "Giảm áp và giữ điện áp đầu ra luôn chính xác 5V ổn định, bảo vệ các linh kiện vi xử lý nhạy cảm phía sau.",
-    fact: "Sinh nhiệt khá lớn trong quá trình hạ áp tuyến tính, cần gắn thêm lá tản nhiệt nhôm nếu dòng tải ngõ ra lớn hơn 100mA.",
-    application: "Khối ổn áp trung tâm cấp nguồn ổn định 5V cho vi điều khiển Arduino hoặc mạch sạc pin khẩn cấp từ pin 9V."
   }
 ];
 
@@ -245,13 +234,13 @@ export default function StudyHub() {
     <div className="w-full max-w-6xl mx-auto px-4 md:px-8 py-6 animate-fade-in space-y-8 min-h-[70vh]">
       
       {/* ── INTERNAL SUB TABS HEADER ── */}
-      <div className="flex flex-col sm:flex-row items-center justify-between border-b border-neutral-200/50 pb-4 gap-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between border-b border-neutral-200/50">
         <div>
           <h2 className="font-sans font-black text-xl text-neutral-900 flex items-center gap-2">
-            <span>🎓</span> Góc Học Tập & Nghiên Cứu Khoa Học
+            <span>🎓</span> Góc Học Tập & trao đổi
           </h2>
           <p className="text-xs text-neutral-400 font-light mt-0.5">
-            Phòng thí nghiệm điện tử ảo & Góc huấn luyện từ vựng tiếng Anh chuyên ngành CDN
+            Phòng thí nghiệm điện tử ảo & Góc huấn luyện từ vựng tiếng Anh
           </p>
         </div>
 
@@ -266,7 +255,7 @@ export default function StudyHub() {
             }`}
           >
             <Cpu size={14} />
-            <span>Mạch & Linh kiện Điện tử</span>
+            <span>Mạch Điện tử</span>
           </button>
           
           <button
@@ -278,7 +267,7 @@ export default function StudyHub() {
             }`}
           >
             <Languages size={14} />
-            <span>Bàn Học Tiếng Anh</span>
+            <span>Học Tiếng Anh</span>
           </button>
         </div>
       </div>
@@ -292,25 +281,25 @@ export default function StudyHub() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-2"
           >
             {/* 4-Band Resistor Color Identifier (Calculations sidebar/box) */}
             <div className="lg:col-span-7 bg-white p-6 md:p-8 rounded-3xl border border-neutral-200/50 shadow-sm space-y-6 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-2 mb-2">
                   <span className="p-1 px-2 rounded-md bg-rose-50 border border-rose-100 text-[10px] text-rose-700 font-extrabold uppercase">
-                    Lab ảo điện tử
+                    Lab điện tử
                   </span>
                   <h3 className="font-sans font-extrabold text-sm text-neutral-900">
                     Ứng dụng giải mã điện trở 4 vòng màu
                   </h3>
                 </div>
-                <p className="text-xs text-neutral-400 font-light leading-relaxed mb-6">
+                <p className="text-xs text-neutral-400 font-light leading-relaxed mb-2">
                   Chọn mã màu chính xác cho từng vòng để máy tự động tính giá trị điện dung trở kháng của điện trở thực hành!
                 </p>
 
                 {/* VISUAL LAYOUT OF RESISTOR DRAWN WITH CSS */}
-                <div className="py-12 bg-neutral-50/70 rounded-2xl border border-neutral-100 flex items-center justify-center min-h-[160px] relative overflow-hidden select-none mb-8">
+                <div className=" bg-neutral-50/70 rounded-2xl border border-neutral-100 flex items-center justify-center min-h-[160px] relative overflow-hidden select-none mb-2">
                   
                   {/* Resistor body line wire left */}
                   <div className="absolute left-6 right-6 h-1.5 bg-gradient-to-r from-neutral-300 via-neutral-400 to-neutral-300 rounded" />
@@ -390,7 +379,7 @@ export default function StudyHub() {
               </div>
 
               {/* Band selection drop downs */}
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-6 border-t border-neutral-100 select-none">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 border-t border-neutral-100 select-none">
                 {/* Band 1 dropdown */}
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-neutral-400 uppercase tracking-wide block">Vòng 1 (Số 1)</label>

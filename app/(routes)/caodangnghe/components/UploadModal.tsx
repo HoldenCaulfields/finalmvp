@@ -36,7 +36,7 @@ const PRESET_IMAGES = [
 export default function UploadModal({ onClose, onPublish, user }: UploadModalProps) {
   const [imageUrl, setImageUrl] = useState("");
   const [caption, setCaption] = useState("");
-  const [faculty, setFaculty] = useState("Kinh tế - Tổng hợp");
+  const [faculty, setFaculty] = useState("Điện - Điện tử");
   const [club, setClub] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -130,7 +130,7 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
   };
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center p-4 overflow-y-auto" id="upload-dialog-overlay">
+    <div className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto" id="upload-dialog-overlay">
       
       {/* Dark blurry backdrop */}
       <motion.div
@@ -229,32 +229,6 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
             </div>
           </div>
 
-          {/* Preset templates selector */}
-          <div className="space-y-2 select-none">
-            <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">
-              Hoặc chọn ảnh mẫu nhanh chóng:
-            </label>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-              {PRESET_IMAGES.map((preset) => {
-                const isSelected = imageUrl === preset.url;
-                return (
-                  <button
-                    key={preset.name}
-                    type="button"
-                    onClick={() => handleSelectPreset(preset.url)}
-                    className={`p-2 rounded-xl text-[10px] font-bold border transition-all text-center flex flex-col justify-center items-center gap-1 cursor-pointer truncate ${
-                      isSelected
-                        ? "bg-rose-50 border-rose-500 text-rose-700 shadow-sm"
-                        : "bg-neutral-50/50 border-neutral-200 hover:bg-neutral-50"
-                    }`}
-                  >
-                    <span>{preset.name}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
           {/* Custom image URL string */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider flex items-center gap-1 select-none">
@@ -304,15 +278,15 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block select-none">
-                Khoa ngành liên quan
+                Khoa ngành của bạn:
               </label>
               <select
                 value={faculty}
                 onChange={(e) => setFaculty(e.target.value)}
                 className="w-full bg-neutral-50 border border-neutral-200 rounded-xl p-2.5 text-xs text-neutral-800 outline-none focus:border-rose-600 transition-all font-semibold"
               >
-                <option value="Kinh tế - Tổng hợp">🏛️ Kinh tế - Tổng hợp</option>
                 <option value="Điện - Điện tử">⚡ Điện - Điện tử</option>
+                <option value="Kinh tế - Tổng hợp">🏛️ Kinh tế - Tổng hợp</option>
                 <option value="Cơ khí - Xây dựng">⚙️ Cơ khí - Xây dựng</option>
                 <option value="Công nghệ Ô tô">🚗 Công nghệ Ô tô</option>
               </select>
@@ -320,7 +294,7 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
 
             <div className="space-y-1.5">
               <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block select-none">
-                Phong trào / CLB (Không bắt buộc)
+                Phong trào / CLB:
               </label>
               <select
                 value={club}
@@ -330,7 +304,7 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
                 <option value="">Không có</option>
                 <option value="Tiếng Anh">🇬🇧 CLB Tiếng Anh</option>
                 <option value="Coffee Giao Lưu">☕ Coffee Giao Lưu</option>
-                <option value="Mua Bán">🤝 CLB Mua Bán - Kết Nối Nghề</option>
+                <option value="Mua Bán">🤝 CLB Mua Bán - làm thêm</option>
               </select>
             </div>
           </div>
@@ -338,11 +312,11 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
           {/* Tags list */}
           <div className="space-y-1.5">
             <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block select-none">
-              Từ khóa Thẻ tìm kiếm (Cách nhau bởi dấu cách hoặc phẩy)
+              Từ khóa tìm kiếm (Cách nhau bởi dấu cách hoặc phẩy)
             </label>
             <input
               type="text"
-              placeholder="kyniem, totnghiep, khoacokhi, thanxhuan"
+              placeholder="kyniem, totnghiep, khoacokhi, lamthem, nghihe"
               value={tagInput}
               onChange={(e) => setTagInput(e.target.value)}
               className="w-full bg-neutral-50 border border-neutral-200 rounded-xl px-3.5 py-2.5 text-xs text-neutral-900 outline-none focus:border-rose-600 transition-all placeholder:text-neutral-400 shadow-inner"
@@ -364,7 +338,7 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
               disabled={isSubmitting || !imageUrl || !caption.trim()}
               className="flex-1 bg-neutral-950 hover:bg-rose-950 text-white border-none rounded-xl py-3 text-xs font-bold cursor-pointer transition-colors shadow-lg active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? "Đang gửi đi..." : "🚀 Phát hành kỷ niệm"}
+              {isSubmitting ? "Đang gửi đi..." : "🚀 Đăng bài"}
             </button>
           </div>
 

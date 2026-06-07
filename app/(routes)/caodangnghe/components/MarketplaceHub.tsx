@@ -37,6 +37,11 @@ const MARKETPLACE_PRESETS = [
     name: "Gia sư / Phát tờ rơi 📚",
     category: "job",
     url: "https://images.unsplash.com/photo-1521898284481-a5ec348cb555?w=800&q=80"
+  },
+  {
+    name: "Shipper giao hàng",
+    category: "job",
+    url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=800&q=80"
   }
 ];
 
@@ -207,13 +212,13 @@ export default function MarketplaceHub({
 
         <div className="md:col-span-8 space-y-3 z-10">
           <span className="inline-block px-3 py-1 bg-rose-600/20 border border-rose-500/20 text-xs font-black uppercase text-rose-300 rounded-full tracking-wider">
-            🤝 Kết nối & Chia sẻ
+            🤝 Kết nối & Việc làm
           </span>
           <h2 className="font-sans font-black text-2xl tracking-tight leading-tight">
             Chợ Sinh Viên - Việc Làm Thêm & Trao Đổi Cũ
           </h2>
           <p className="text-xs text-neutral-300 font-light leading-relaxed max-w-xl">
-            Không gian độc quyền dành riêng cho học sinh, sinh viên trường Cao đẳng Công nghệ và Năng lượng Khánh Hòa. Dễ dàng tìm kiếm việc tự sướng kiếm thêm, thanh lý nhanh sạc dự phòng, giao lưu sặc sỡ và ủng hộ quán xá đồng môn!
+            Không gian độc quyền dành riêng cho sinh viên trao đổi mua bán đồ cũ, tìm việc làm thêm, hỗ trỡ lẫn nhau về trang trải cuộc sống.
           </p>
         </div>
 
@@ -434,7 +439,7 @@ export default function MarketplaceHub({
       {/* ── INTERNAL SUBMIT MODAL DIALOG ── */}
       <AnimatePresence>
         {showAddModal && (
-          <div className="fixed inset-0 z-100 flex items-center justify-center p-4 overflow-y-auto" id="ad-submit-dialog">
+          <div className="fixed inset-0 z-100 flex items-center justify-center overflow-y-auto" id="ad-submit-dialog">
             
             {/* Blurry dim backdrop */}
             <motion.div
@@ -457,7 +462,7 @@ export default function MarketplaceHub({
                 <div className="flex items-center gap-2">
                   <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
                   <h3 className="font-sans font-extrabold text-sm text-neutral-900 uppercase tracking-wide">
-                    Đăng tin rao vặt của bạn 🚀
+                    Đăng tin rao vặt 🚀
                   </h3>
                 </div>
                 <button
@@ -475,7 +480,7 @@ export default function MarketplaceHub({
                 <div className="p-3 bg-amber-50 border border-amber-200 rounded-2xl flex gap-3 text-[11px] text-amber-800 leading-normal select-none">
                   <AlertTriangle size={16} className="text-amber-600 flex-shrink-0" />
                   <p>
-                    <strong>Quy định:</strong> Nghiêm cấm bán hàng trái pháp luật hoặc đăng tin ảo gây phiền hà. Mọi bài viết của bạn sẽ hiển thị công khai trên cổng trường.
+                    <strong>Quy định:</strong> Nghiêm cấm bán hàng trái pháp luật hoặc đăng tin ảo gây phiền hà. Mọi bài viết của bạn sẽ hiển thị công khai.
                   </p>
                 </div>
 
@@ -495,7 +500,7 @@ export default function MarketplaceHub({
 
                 {/* Title and details */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-neutral-400 uppercase tracking-wide">Tiêu đề tin rao gọn gàng</label>
+                  <label className="text-[10px] font-extrabold text-neutral-400 uppercase tracking-wide">Tiêu đề tin đăng ngắn gọn</label>
                   <input
                     type="text"
                     required
@@ -536,7 +541,7 @@ export default function MarketplaceHub({
 
                 {/* Details text area */}
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-extrabold text-neutral-400 uppercase tracking-wide">Mô tả chi tiết bài đăng</label>
+                  <label className="text-[10px] font-extrabold text-neutral-400 uppercase tracking-wide">Mô tả chi tiết:</label>
                   <textarea
                     required
                     rows={4}
@@ -598,7 +603,7 @@ export default function MarketplaceHub({
                     disabled={isSubmitting || !adTitle.trim() || !adPrice.trim() || !adContact.trim() || !adDetails.trim()}
                     className="flex-1 bg-neutral-950 hover:bg-rose-950 text-white border-none rounded-xl py-3 text-xs font-bold cursor-pointer transition-colors shadow-lg active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed"
                   >
-                    {isSubmitting ? "Đang phát hành..." : "🚀 Đăng tin công khai"}
+                    {isSubmitting ? "Đang phát hành..." : "🚀 Đăng ngay"}
                   </button>
                 </div>
 

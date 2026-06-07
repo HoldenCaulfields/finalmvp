@@ -281,10 +281,10 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
             </span>
             
             <h2 className="text-xl md:text-2xl font-black tracking-tight leading-tight">
-              Sân Chơi Kết Nối Kỷ Niệm Khánh Hòa
+              Sân Chơi Kết Nối Sinh Viên
             </h2>
             <p className="text-xs text-neutral-300 leading-relaxed max-w-2xl font-light">
-              Nơi vinh danh những cá nhân nổi bật đầy tài sắc cùng các tập thể lớp học tràn ngập nụ cười rạng rỡ của trường chúng ta. Gửi ảnh dự thi, tích lũy điểm bình chọn trực tiếp và săn phần thưởng vô cùng xinh xắn!
+              Cuộc thi được tổ chức nhằm mục đích vui là chính - để lại kỷ niệm đang học ở trường, không làm ảnh hưởng đến hình ảnh trường.
             </p>
             
             {/* Contest Selector Bar */}
@@ -322,8 +322,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
           <div className="lg:col-span-4 flex flex-col items-stretch sm:items-center lg:items-end justify-center w-full gap-3 pt-4 lg:pt-0 border-t lg:border-t-0 lg:border-l border-white/10 lg:pl-6">
             <div className="text-center lg:text-right">
               <div className="text-[10px] uppercase font-bold tracking-widest text-neutral-400">Thời gian diễn ra</div>
-              <div className="text-sm font-black text-rose-300">01/06 - 30/06/2026</div>
-              <div className="text-[9px] text-neutral-400 font-medium">Bình chọn tự động cập nhật tích hợp Firestore</div>
+              <div className="text-sm font-black text-rose-300">01/06 - 30/07/2026</div>
             </div>
             
             <button
@@ -364,7 +363,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                 <Trophy size={16} />
               </div>
               <div>
-                <h3 className="text-sm font-black text-neutral-900 leading-none">Bảng xếp hạng tài hoa</h3>
+                <h3 className="text-sm font-black text-neutral-900 leading-none">Bảng xếp hạng tài năng</h3>
                 <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider mt-0.5">Top 3 đang dẫn đầu lượt bình chọn</p>
               </div>
             </div>
@@ -468,54 +467,13 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
       {/* ── CORE SEARCH, COMBINED FILTERS AND CONTEST LIST GRID ── */}
       <div className="space-y-4" id="all-candidates-contest-list">
         
-        {/* Controls and filters bar */}
-        <div className="flex flex-col md:flex-row gap-3 justify-between items-stretch md:items-center bg-white p-4 rounded-2xl border border-neutral-200/50 shadow-sm">
-          <div className="relative flex-1 max-w-md">
-            <input 
-              type="text" 
-              placeholder={activeContest === "handsome_talented" ? "Tìm họ tên nam sinh, tác giả..." : "Tìm tên lớp học, chi đoàn..."}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-neutral-50 border border-neutral-200/70 rounded-xl pl-9 pr-8 py-2.5 text-xs text-neutral-900 outline-none focus:bg-white focus:border-rose-600 transition-all placeholder:text-neutral-400"
-            />
-            <span className="absolute left-3.5 top-3 text-neutral-400">
-              <Search size={13} className="opacity-75" />
-            </span>
-            {searchQuery && (
-              <button 
-                onClick={() => setSearchQuery("")}
-                className="absolute right-2.5 top-2.5 w-5 h-5 rounded-full bg-neutral-200 text-neutral-500 flex items-center justify-center text-[10px] border-none font-bold"
-              >
-                ✕
-              </button>
-            )}
-          </div>
-
-          <div className="flex items-center gap-2 overflow-x-auto scrollbar-none pb-1 md:pb-0">
-            <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider hidden sm:block">Khoa:</span>
-            {["Tất cả", ...FACULTY_LIST].map((fac) => (
-              <button
-                key={fac}
-                onClick={() => setSelectedFaculty(fac)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap border cursor-pointer ${
-                  selectedFaculty === fac 
-                    ? "bg-neutral-900 text-white border-neutral-950 font-bold shadow-sm" 
-                    : "bg-white text-neutral-600 border-neutral-200 hover:border-neutral-300"
-                }`}
-              >
-                {fac}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* Results indicator */}
         <div className="flex justify-between items-center px-1">
           <span className="text-[10px] font-bold text-neutral-400 uppercase tracking-widest block">
             Danh sách dự thi ({filteredEntries.length} bài thi)
           </span>
           <span className="text-[10px] font-md text-neutral-400">
-            {activeContest === "handsome_talented" ? "Thí sinh tự do hoặc Khoa giới thiệu" : "Hình ảnh tập thể hoặc lớp học vui vẻ"}
+            {activeContest === "handsome_talented" ? "Thí sinh" : "Hình ảnh lớp học vui vẻ"}
           </span>
         </div>
 
@@ -638,7 +596,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
       {/* ── SUBMISSION / REGISTER CONTEST MODAL FORM ── */}
       <AnimatePresence>
         {showSubmitModal && (
-          <div className="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 select-none">
+          <div className="fixed inset-0 bg-neutral-900/60 backdrop-blur-sm flex items-center justify-center z-50 select-none">
             <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -660,10 +618,10 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                   </div>
                   <div>
                     <h3 className="text-sm font-black text-neutral-900">
-                      Gửi ảnh dự cuộc thi
+                      Gửi ảnh dự thi
                     </h3>
                     <p className="text-[10px] text-neutral-400 font-bold uppercase tracking-wider">
-                      {activeContest === "handsome_talented" ? "Nam sinh ưu tú & tài sắc" : "Tập thể lớp học vui nhộn"}
+                      {activeContest === "handsome_talented" ? "Nam sinh ưu tú & tài năng" : "Tập thể lớp học vui nhộn"}
                     </p>
                   </div>
                 </div>
@@ -672,7 +630,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                   {/* Candidate Name input */}
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">
-                      {activeContest === "handsome_talented" ? "Họ tên thí sinh đăng ký" : "Tên lớp học / Chi đoàn tiêu biểu"}
+                      {activeContest === "handsome_talented" ? "Họ tên thí sinh" : "Tên lớp học"}
                     </label>
                     <input 
                       type="text" 
@@ -687,7 +645,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                   {/* Slogan / Self introduction input */}
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">
-                      Slogan hoặc Lời giới thiệu dự thi
+                      Đôi lời giới thiệu
                     </label>
                     <textarea 
                       required
@@ -702,7 +660,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                   {/* Faculty Selector and Select Club options */}
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">
-                      Khoa đang học / Khoa sinh hoạt
+                      Khoa đang học
                     </label>
                     <select
                       value={faculty}
@@ -718,7 +676,7 @@ export default function ContestsHub({ user, onLoginRequired }: ContestsHubProps)
                   {/* Drag and Drop Cloudinary Uploader */}
                   <div className="space-y-2 select-none">
                     <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider block">
-                      Ảnh tác phẩm tham gia
+                      Tải ảnh tham gia
                     </label>
                     
                     <div

@@ -88,8 +88,7 @@ export default function HeroHeader() {
                 referrerPolicy="no-referrer"
               />
 
-              {/* Mẹo nhỏ: Thêm một lớp phủ tối (Overlay) để text bên trên luôn rõ ràng */}
-              <div className="absolute inset-0 bg-neutral-950/20" />
+              <div className="absolute inset-0 bg-neutral-950/10" />
             </div>
           );
         })}

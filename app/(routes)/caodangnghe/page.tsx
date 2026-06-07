@@ -24,6 +24,7 @@ import { useAuth } from "@/hooks/useAuth";
 import ContestsHub from "./components/ContestHub";
 import StudyHub from "./components/StudyHub";
 import MarketplaceHub from "./components/MarketplaceHub";
+import FeedbackHub from "./components/FeedbackHub";
 
 const INITIAL_POSTS: Post[] = [
   {
@@ -371,6 +372,8 @@ export default function App() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }}
       />
+
+      <FeedbackHub />
 
       {syncError && (
         <div className="bg-amber-50 border-b border-amber-200/60 px-4 py-2.5 text-xs text-amber-800 text-center select-none font-medium flex items-center justify-center gap-2 animate-fade-in relative z-50">
