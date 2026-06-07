@@ -19,8 +19,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "SinhVienNet",
-  description: "Don't talk about lonelynet",
+  title: "LovelyNet",
+  description: "the world is your oyster",
   icons: {
     icon: "/logo.svg",
   },

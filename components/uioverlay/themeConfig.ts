@@ -33,7 +33,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     tagline: "Chợ Phan Rang",
     title: "Tạo Quán Ăn - Tìm Tài Xế",
     shortName: "PR",
-    baseRoute: "/caodangnghe",
+    baseRoute: "/chophanrang",
     themeClasses: {
       badgeBg: "bg-rose-500",
       badgeText: "text-rose-500",
@@ -123,7 +123,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     tagline: "Cộng Đồng Học Tập",
     title: "Góc Học Tập - Trao Đổi Kiến Thức",
     shortName: "ST",
-    baseRoute: "/study",
+    baseRoute: "/caodangnghe",
     themeClasses: {
       badgeBg: "bg-emerald-500",
       badgeText: "text-emerald-500",
