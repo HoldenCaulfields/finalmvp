@@ -4,8 +4,8 @@ import { usePathname, useRouter } from 'next/navigation';
 //import { useViewStore } from '@/stores/useViewStore';
 
 const tabs = [
-    { id: 'community', label: 'Groups', icon: "🏠", path: '/' },
-    { id: 'ideas', label: 'Ideas', icon: "💡", path: '/ideas' },
+    { id: 'map', label: 'Map', icon: "🌍", path: '/' },
+    { id: 'groups', label: 'Groups', icon: "🏛️", path: '/groups' },
     { id: 'create', label: 'Create', icon: '+', isAction: true },
     { id: 'teams', label: 'Teams', icon: "🤝", path: '/teams' },
     { id: 'profile', label: 'Me', icon: "👤", path: '/setting' },

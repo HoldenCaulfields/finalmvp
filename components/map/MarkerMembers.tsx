@@ -2,8 +2,8 @@
 import L from "leaflet";
 import { Marker } from "react-leaflet";
 
-const members = [{ uid: "1", name: "John Doe", location: [11.563022, 109.013219], avatar: "https://randomuser.me/api" },
-                 { uid: "2", name: "Jane Smith", location: [11.573022, 109.023219], avatar: "https://randomuser.me/api" }];
+const members = [{ uid: "1", name: "John Doe", location: [11.563022, 109.013219], avatar: "" },
+                 { uid: "2", name: "Jane Smith", location: [11.573022, 109.023219], avatar: "" }];
 
 export default function MarkerMembers() {
 
@@ -15,7 +15,6 @@ export default function MarkerMembers() {
             key={marker.uid}
             position={marker.location ? [marker.location[0], marker.location[1]] : [0, 0]}
             icon={createMemberIcon(marker.name || "SV", marker.avatar || "")}
-            //eventHandlers={{ click: () => setSelectedUser(marker) }}
           />
         ))
       }
@@ -47,10 +46,6 @@ function createMemberIcon(name: string, photoUrl?: string) {
             }
           </div>
 
-          <!-- STATUS DOT -->
-          <div class="absolute bottom-0 right-0 w-2.5 h-2.5 
-                      bg-green-500 border-2 border-black rounded-full">
-          </div>
         </div>
 
         <!-- LABEL -->

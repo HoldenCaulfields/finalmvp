@@ -272,7 +272,7 @@ export default function App() {
   const clubTypes = ["Tất cả", "🏆 Cuộc Thi Bình Chọn", "Tiếng Anh", "Coffee Giao Lưu", "Mua Bán"];
 
   return (
-    <div className="min-h-screen bg-neutral-50/70 text-neutral-900 font-sans antialiased flex flex-col justify-between selection:bg-rose-100 selection:text-rose-900">
+    <div className="min-h-screen bg-white text-neutral-900 font-sans antialiased flex flex-col justify-between selection:bg-rose-100 selection:text-rose-900">
       
       <Navbar 
         onUploadClick={() => {

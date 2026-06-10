@@ -6,6 +6,9 @@ import MarkerMembers from "./map/MarkerMembers";
 import Flyto from "./map/Flyto";
 import CimanetMarker from "./map/CimanetMarker";
 import StartupMarker from "./map/StartupMarker";
+import TaiXePR from "./map/TaiXePR";
+import JobMarker from "./map/JobMarker";
+import CDNMarker from "./map/CDNMarker";
 
 export default function Map() {
     const { viewMode }  = useViewStore();
@@ -28,6 +31,9 @@ export default function Map() {
                 <Flyto />
                 <ChoPhanRang />
                 <CimanetMarker />
+                <CDNMarker />
+                <TaiXePR />
+                <JobMarker />
                 <StartupMarker />
                 { viewMode === 'members' && <MarkerMembers /> }
                 

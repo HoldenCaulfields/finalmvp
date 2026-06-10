@@ -8,18 +8,15 @@ export default function TaiXePR() {
 
     return (
         <Marker
-            position={[11.563022, 109.013219]}
+            position={[11.57455, 108.98268]}
             icon={createTaiXeIcon()}
             zIndexOffset={100}
-            eventHandlers={{ click: () => openMarker('market') }}
+            eventHandlers={{ click: () => openMarker('driver') }}
         />
     );
 }
 
 function createTaiXeIcon() {
-  // Thay thế đường dẫn bằng ảnh thực tế của Chợ Phan Rang
-  const imageUrl = "https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=150&auto=format&fit=crop"; 
-
   return L.divIcon({
     className: "cho-phan-rang-leaflet-icon",
     html: `
@@ -29,7 +26,7 @@ function createTaiXeIcon() {
         <span class="absolute bottom-2 inline-flex h-3 w-10 bg-emerald-400 opacity-25 rounded-full animate-ping"></span>
 
         <!-- Khung chứa chính: Hình tròn Badge cao cấp -->
-        <div class="relative w-16 h-16 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 
+        <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 
                     p-[3px] shadow-[0_8px_20px_rgba(16,185,129,0.4)]
                     transition-all duration-300 ease-in-out
                     hover:scale-115 hover:-translate-y-1 hover:shadow-[0_12px_25px_rgba(16,185,129,0.6)]
@@ -37,15 +34,11 @@ function createTaiXeIcon() {
                     flex items-center justify-center">
           
           <!-- Lớp nền phụ trắng bo tròn tạo khoảng đệm thẩm mỹ -->
-          <div class="w-full h-full bg-white rounded-full p-[2px] flex items-center justify-center overflow-hidden">
+          <div class="w-full h-full bg-emerald-500 rounded-full p-[2px] flex items-center justify-center overflow-hidden">
             
             <!-- Vùng chứa ảnh: Đảm bảo flexbox luôn CĂN GIỮA ảnh tuyệt đối -->
-            <div class="w-full h-full rounded-full overflow-hidden bg-gray-50 flex items-center justify-center">
-              <img 
-                src="${imageUrl}" 
-                alt="tai xe phan rang" 
-                class="w-full h-full object-cover transition-transform duration-500 hover:scale-120"
-              />
+            <div class="w-full h-full text-4xl font-bold rounded-full overflow-hidden bg-gray-50 flex items-center justify-center">
+              🚗
             </div>
 
           </div>

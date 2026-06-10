@@ -12,10 +12,12 @@ interface FilterItem {
 
 const filterItems: FilterItem[] = [
   { id: "all", label: "Tất cả", icon: "✨" },
-  { id: "quan-an", label: "Ăn uống", icon: "🍲" },
-  { id: "tai-xe", label: "Di chuyển", icon: "🚗" },
-  { id: "viec-lam", label: "Việc làm", icon: "💼" },
-  { id: "trao-doi", label: "Trao đổi", icon: "🛒" },
+  { id: "market", label: "Ăn uống", icon: "🍲" },
+  { id: "driver", label: "Di chuyển", icon: "🚗" },
+  { id: "jobs", label: "Việc làm", icon: "💼" },
+  { id: "cinema", label: "Cinema", icon: "🎬" },
+  { id: "study", label: "Học tập", icon: "📚" },
+  { id: "startup", label: "Khởi nghiệp", icon: "🚀" }
 ];
 
 interface FilterBarProps {
@@ -25,18 +27,24 @@ interface FilterBarProps {
 export default function FilterBar({ onChange }: FilterBarProps) {
   const [activeId, setActiveId] = useState<string>("all");
   const viewMode = useViewStore(s => s.viewMode);
+  const setSelectedMarkerType = useViewStore(s => s.setSelectedMarkerType);
+  const openMarker = useViewStore(s => s.openMarker);
 
   if (viewMode === 'members') return null;
 
   const handleSelect = (id: string) => {
+    openMarker(id === 'all' ? null : id as any); // Open marker or reset to map view
     setActiveId(id);
+    const markerType = id === 'all' ? null : id as any; // Convert to MarkerType or null
+    setSelectedMarkerType(markerType);
+
     if (onChange) {
       onChange(id);
     }
   };
 
   return (
-    <div className="fixed top-18 left-1/2 -translate-x-1/2 z-1000 w-full max-w-fit px-4 pointer-events-none transition-all duration-300">
+    <div className="fixed top-18 left-1/2 -translate-x-1/2 z-1000 w-full max-w-fit pointer-events-none transition-all duration-300">
       <div className="pointer-events-auto flex items-center gap-1 p-1 bg-white/95 backdrop-blur-xl border border-zinc-200/80 shadow-2xl shadow-zinc-900/10 rounded-2xl md:rounded-full overflow-x-auto no-scrollbar">
         {filterItems.map((item) => {
           const isActive = item.id === activeId;

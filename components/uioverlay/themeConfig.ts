@@ -91,7 +91,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
   },
   cinema: {
     tagline: "Studio & Cinema",
-    title: "Phim Ảnh - Thuê Thiết Bị - Ê-kíp",
+    title: "Hội mê phim và làm phim",
     shortName: "CM",
     baseRoute: "/cimanet",
     themeClasses: {
@@ -178,5 +178,35 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "team", title: "Học Nhóm", icon: Users, color: "bg-slate-900", path: "/startup/groups" },
       { id: "location", title: "Địa Điểm Học", icon: MapPin, color: "bg-orange-600", path: "/startup/places" }
     ]
-  }
+  },
+  driver: {
+    tagline: "Tai xế & Giao hàng",
+    title: "Kết Nối Tài xế - Giao hàng nhanh",
+    shortName: "SU",
+    baseRoute: "/startup",
+    themeClasses: {
+      badgeBg: "bg-orange-500",
+      badgeText: "text-orange-500",
+      badgePulse: "bg-orange-500",
+      borderAccent: "border-orange-100",
+      hoverBorder: "hover:border-orange-400",
+      hoverText: "group-hover:text-orange-600",
+      avatarBg: "bg-orange-500",
+      iconBoxBg: "bg-orange-50",
+      iconBoxText: "text-orange-500",
+      primaryBtnBg: "bg-slate-900",
+      primaryBtnHover: "hover:bg-orange-500",
+      pulseColor: "text-orange-400",
+    },
+    stats: [
+      { id: "ideas", label: "Ý tưởng", value: "3.4k+", icon: BookOpen },
+      { id: "teams", label: "Đội ngũ", value: "28+", icon: GraduationCap },
+      { id: "launched", label: "Startup đã ra mắt", value: "50+", icon: Users },
+    ],
+    quickServices: [
+      { id: "docs", title: "Tải Tài Liệu", icon: BookOpen, color: "bg-orange-500", path: "/startup/docs" },
+      { id: "team", title: "Học Nhóm", icon: Users, color: "bg-slate-900", path: "/startup/groups" },
+      { id: "location", title: "Địa Điểm Học", icon: MapPin, color: "bg-orange-600", path: "/startup/places" }
+    ]
+  },
 };
