@@ -183,7 +183,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     tagline: "Tai xế & Giao hàng",
     title: "Kết Nối Tài xế - Giao hàng nhanh",
     shortName: "DR",
-    baseRoute: "/drivers",
+    baseRoute: "/chophanrang",
     themeClasses: {
       badgeBg: "bg-orange-500",
       badgeText: "text-orange-500",

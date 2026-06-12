@@ -166,19 +166,19 @@ function MainAppContent() {
               />
               <div className="relative z-20 px-6 sm:px-12 py-10 sm:py-16 md:py-20 max-w-2xl text-white space-y-4">
                 <span className="inline-flex items-center gap-1 px-3 py-1 bg-rose-brand text-white text-[10px] font-black uppercase tracking-widest rounded-full shadow-md leading-none">
-                  <Sparkles className="w-3 h-3 text-white" /> Khám phá tinh hoa Ninh Thuận
+                  <Sparkles className="w-3 h-3 text-white" /> Ăn uống ngon hơn, rẻ hơn
                 </span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight select-none">
                   Ẩm Thực Chợ <span className="font-serif italic font-semibold text-rose-brand">Phan Rang</span>
                 </h2>
                 <p className="text-xs sm:text-sm font-medium leading-relaxed text-gray-200 text-slate-100 max-w-lg">
-                  Nắng gắt biển rộng tụ họp tinh khôi trong dĩa cơm gà Khánh Kỳ thơm ngậy, rổ bánh căn mực tươi bốc khói hay từng ngụm mật nho ngọt mát lành. Đặt ngay giao nhanh phố biển!
+                  Khám phá những món ăn ngon và rẻ ở Chợ Phan Rang, thông minh hơn trong tiêu dùng và trao đổi mua bán.
                 </p>
                 <div className="pt-2 flex flex-wrap gap-2 sm:gap-3">
-                  <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md p-2 px-3 rounded-full text-xs font-semibold select-none border border-white/15">
-                    🚲 Giao hàng toàn thành phố
+                  <div className="flex items-center gap-1.5 bg-rose-500 backdrop-blur-md p-2 px-3 rounded-full text-xs font-semibold select-none border border-white/15">
+                    🚲 Giao hàng nhanh nội thành
                   </div>
-                  <div className="flex items-center gap-1.5 bg-white/10 backdrop-blur-md p-2 px-3 rounded-full text-xs font-semibold select-none border border-white/15">
+                  <div className="flex items-center gap-1.5 bg-green-600 backdrop-blur-md p-2 px-3 rounded-full text-xs font-semibold select-none border border-white/15">
                     ⭐ Đánh giá 5 sao uy tín
                   </div>
                 </div>
@@ -348,13 +348,13 @@ function MainAppContent() {
       <footer className="bg-charcoal text-white border-t border-rose-500/10 py-8 shrink-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left text-xs text-gray-400 font-medium">
           <div className="space-y-1">
-            <p className="text-sm font-black text-white">Chợ Phan Rang - Ninh Thuận</p>
-            <p>Bản quyền thuộc Hợp tác xã số hóa ẩm thực Ninh Thuận © 2026.</p>
+            <p className="text-sm font-black text-white">Chợ Phan Rang - Tháp Chàm</p>
+            <p>© 2026.</p>
           </div>
           <div className="flex items-center gap-4">
             <a href="#about" className="hover:text-rose-brand">Giới thiệu Chợ</a>
             <a href="#rules" className="hover:text-rose-brand">Điều khoản an toàn</a>
-            <a href="#help" className="hover:text-rose-brand">Hotline cứu hộ: 1900 6868</a>
+            <a href="#help" className="hover:text-rose-brand">Zalo hợp tác: 0793784133</a>
           </div>
         </div>
       </footer>

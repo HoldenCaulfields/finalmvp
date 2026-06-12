@@ -38,9 +38,8 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onHomeClick} 
             className="flex items-center gap-2 cursor-pointer select-none group shrink-0"
           >
-            <div className="relative w-9 h-9 sm:w-11 sm:h-11 bg-gradient-to-tr from-rose-500 to-rose-400 rounded-full flex items-center justify-center text-white shadow-md shadow-rose-200 transition-transform group-hover:scale-105">
+            <div className="relative w-9 h-9 sm:w-11 sm:h-11 bg-rose-600 rounded-full flex items-center justify-center text-white shadow-md shadow-rose-200 transition-transform group-hover:scale-105">
               <Store className="w-4.5 h-4.5 sm:w-5.5 sm:h-5.5" />
-              <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 sm:w-3 sm:h-3 bg-green-500 rounded-full border-2 border-white animate-pulse" />
             </div>
             <div>
               <h1 className="text-base sm:text-2xl font-extrabold tracking-tight text-charcoal flex items-center gap-1 leading-none">
@@ -167,7 +166,7 @@ export const Header: React.FC<HeaderProps> = ({
             type="text"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Tìm cơm gà, bánh căn..."
+            placeholder="Tìm món ăn, đồ uống..."
             className="w-full pl-9 pr-3 py-2 text-xs bg-gray-soft border border-gray-200 rounded-full focus:outline-none focus:border-rose-brand transition-all placeholder:text-gray-400 font-semibold"
           />
           <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-gray-400" />
@@ -251,7 +250,7 @@ export const Header: React.FC<HeaderProps> = ({
                         className="w-full text-left px-4 py-2 text-xs font-bold text-charcoal hover:bg-rose-brand-light hover:text-rose-brand flex items-center gap-2 transition-all"
                       >
                         <User className="w-3.5 h-3.5" />
-                        Trang cá nhân của bạn
+                        Trang cá nhân
                       </button>
 
                       <button

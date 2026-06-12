@@ -119,12 +119,12 @@ export const RegisterDriverModal: React.FC<RegisterDriverModalProps> = ({ isOpen
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-lg sm:text-xl font-extrabold text-charcoal">Hội Tài Xế Chợ Phan Rang</h3>
+              <h3 className="text-lg sm:text-xl font-extrabold text-charcoal">Hội Tài Xế Phan Rang</h3>
               <span className="hidden sm:inline px-2 py-0.5 text-[9px] font-black uppercase text-rose-brand bg-white border border-rose-300 rounded-full">
-                Thu nhập từ 300k/ngày
+                Tăng thu nhập
               </span>
             </div>
-            <p className="text-xs text-gray-400 mt-0.5">Tham gia giao món ăn đặc sản, đón khách tour Chợ Đêm kiếm thêm thu nhập</p>
+            <p className="text-xs text-gray-400 mt-0.5">Tham gia giao hàng, đón khách trong khu vực Phan Rang</p>
           </div>
         </div>
 

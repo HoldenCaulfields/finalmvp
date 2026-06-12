@@ -17,13 +17,13 @@ interface CreateStallModalProps {
 }
 
 const CATEGORY_PRESETS = [
-  'Bánh Căn',
   'Cơm Gà',
   'Bánh Xèo',
   'Hải Sản',
   'Nhậu & Đặc sản',
   'Giải Khát / Trái cây',
-  'Món Ăn Vặt'
+  'Món Ăn Vặt',
+  'Bánh Căn',
 ];
 
 const PRESET_BANNERS = [
@@ -255,8 +255,8 @@ export const CreateStallModal: React.FC<CreateStallModalProps> = ({
         <div className="flex items-center gap-2 border-b border-rose-100 pb-4 mb-5">
           <Store className="w-6 h-6 text-rose-brand animate-bounce" />
           <div>
-            <h3 className="text-lg sm:text-xl font-extrabold text-charcoal">Hợp Tác Xã Chợ Phan Rang</h3>
-            <p className="text-xs text-gray-400">Đăng tuyển gian hàng và món ăn mới của bạn</p>
+            <h3 className="text-lg sm:text-xl font-extrabold text-charcoal">Hợp tác với Chợ Phan Rang</h3>
+            <p className="text-xs text-gray-400">Đăng mở gian hàng và món ăn mới của bạn</p>
           </div>
         </div>
 
@@ -283,7 +283,7 @@ export const CreateStallModal: React.FC<CreateStallModalProps> = ({
           <div className="text-center py-8">
             <Sparkles className="w-12 h-12 text-rose-brand/30 mx-auto mb-4" />
             <p className="text-sm font-bold text-gray-500 leading-relaxed max-w-xs mx-auto mb-5">
-              Để hạn chế rác, bạn cần đăng nhập tài khoản trước khi đăng ký mở gian hàng hoặc đăng món!
+              Bạn cần đăng nhập tài khoản trước khi đăng ký mở gian hàng hoặc đăng món!
             </p>
             <button
               onClick={() => loginWithGoogle()}
@@ -300,7 +300,7 @@ export const CreateStallModal: React.FC<CreateStallModalProps> = ({
             </div>
             <h4 className="text-lg font-black text-charcoal">Đã Đăng Ký Thành Công!</h4>
             <p className="text-xs text-gray-400 mt-1 max-w-sm px-4 leading-relaxed">
-              Thông tin đang được phân bổ vào sơ đồ ki-ốt của Chợ Đêm Phan Rang Ninh Thuận. Bạn có thể kiểm tra trực tiếp ngoài bảng tin.
+              Thông tin đang được xử lý bởi Chợ Phan Rang Ninh Thuận. Bạn có thể kiểm tra trực tiếp ngoài bảng tin.
             </p>
           </div>
         ) : activeTab === 'stall' ? (
@@ -334,7 +334,7 @@ export const CreateStallModal: React.FC<CreateStallModalProps> = ({
               </div>
 
               <div>
-                <label className="text-xs font-extrabold text-charcoal block mb-1">Địa chỉ ki-ốt *</label>
+                <label className="text-xs font-extrabold text-charcoal block mb-1">Địa chỉ chi tiết *</label>
                 <input
                   type="text"
                   required
@@ -347,7 +347,7 @@ export const CreateStallModal: React.FC<CreateStallModalProps> = ({
             </div>
 
             <div>
-              <label className="text-xs font-extrabold text-charcoal block mb-1">Vài dòng giới thiệu quán *</label>
+              <label className="text-xs font-extrabold text-charcoal block mb-1">Vài dòng giới thiệu quán ăn *</label>
               <textarea
                 required
                 rows={2}
