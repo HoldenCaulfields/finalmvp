@@ -2,7 +2,7 @@ import {
   Factory, HardDrive, Calendar, Briefcase, UserCheck, TrendingUp,
   Film, Video, Award, BookOpen, GraduationCap, Users,
   ShoppingBag, Truck, MessageSquare, Search, ClipboardList, 
-  Tv, Sparkles, Compass, MapPin, LucideIcon
+  Tv, Sparkles, Compass, MapPin, LucideIcon, Car,
 } from "lucide-react";
 
 export interface ThemeConfig {
@@ -31,7 +31,7 @@ export interface ThemeConfig {
 export const THEME_CONFIGS: Record<string, ThemeConfig> = {
   market: {
     tagline: "Chợ Phan Rang",
-    title: "Tạo Quán Ăn - Tìm Tài Xế",
+    title: "Tạo Quán Ăn - Đặt món",
     shortName: "PR",
     baseRoute: "/chophanrang",
     themeClasses: {
@@ -153,7 +153,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     tagline: "Tuổi Trẻ & Khởi Nghiệp",
     title: "Kết Nối Startup - Tìm Mentor - Gọi Vốn",
     shortName: "SU",
-    baseRoute: "/startup",
+    baseRoute: "https://anothermvp.vercel.app",
     themeClasses: {
       badgeBg: "bg-orange-500",
       badgeText: "text-orange-500",
@@ -182,8 +182,8 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
   driver: {
     tagline: "Tai xế & Giao hàng",
     title: "Kết Nối Tài xế - Giao hàng nhanh",
-    shortName: "SU",
-    baseRoute: "/startup",
+    shortName: "DR",
+    baseRoute: "/drivers",
     themeClasses: {
       badgeBg: "bg-orange-500",
       badgeText: "text-orange-500",
@@ -199,14 +199,14 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       pulseColor: "text-orange-400",
     },
     stats: [
-      { id: "ideas", label: "Ý tưởng", value: "3.4k+", icon: BookOpen },
-      { id: "teams", label: "Đội ngũ", value: "28+", icon: GraduationCap },
-      { id: "launched", label: "Startup đã ra mắt", value: "50+", icon: Users },
+      { id: "drivers", label: "Tài xế", value: "3.4k+", icon: Car },
+      { id: "orders", label: "Đơn hàng", value: "28+", icon: ClipboardList },
+      { id: "deliveries", label: "Giao hàng", value: "50+", icon: Users },
     ],
     quickServices: [
-      { id: "docs", title: "Tải Tài Liệu", icon: BookOpen, color: "bg-orange-500", path: "/startup/docs" },
-      { id: "team", title: "Học Nhóm", icon: Users, color: "bg-slate-900", path: "/startup/groups" },
-      { id: "location", title: "Địa Điểm Học", icon: MapPin, color: "bg-orange-600", path: "/startup/places" }
+      { id: "docs", title: "Đơn hàng", icon: BookOpen, color: "bg-orange-500", path: "/drivers/docs" },
+      { id: "team", title: "Giao lưu tài xế", icon: Users, color: "bg-slate-900", path: "/drivers/groups" },
+      { id: "location", title: "Địa Điểm triển khai", icon: MapPin, color: "bg-orange-600", path: "/drivers/places" }
     ]
   },
 };

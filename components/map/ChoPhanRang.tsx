@@ -31,7 +31,7 @@ function createCollegeIcon() {
         </div>
         
         <!-- Main Marker Body -->
-        <div class="relative w-18 h-18 rounded-full bg-gradient-to-br from-rose-500 via-rose-600 to-rose-800 
+        <div class="relative w-16 h-16 rounded-full bg-gradient-to-br from-rose-500 via-rose-600 to-rose-800 
                     shadow-[0_20px_50px_rgba(244,63,94,0.4)] flex items-center justify-center z-10 
                     transition-all duration-500 hover:scale-110 hover:rotate-6 group">
             

@@ -10,29 +10,6 @@ interface UploadModalProps {
   user: User | null;
 }
 
-const PRESET_IMAGES = [
-  {
-    name: "Tốt nghiệp 🎓",
-    url: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1000&q=80"
-  },
-  {
-    name: "Học tập 📚",
-    url: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1000&q=80"
-  },
-  {
-    name: "Xưởng thực hành ⚙️",
-    url: "https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=1000&q=80"
-  },
-  {
-    name: "Dã ngoại / CLB 🚌",
-    url: "https://images.unsplash.com/photo-1521737852567-6949f3f9f2b5?w=1000&q=80"
-  },
-  {
-    name: "Phong trào thể thao ⚽",
-    url: "https://images.unsplash.com/photo-1517649763962-0c623066013b?w=1000&q=80"
-  }
-];
-
 export default function UploadModal({ onClose, onPublish, user }: UploadModalProps) {
   const [imageUrl, setImageUrl] = useState("");
   const [caption, setCaption] = useState("");
@@ -84,10 +61,6 @@ export default function UploadModal({ onClose, onPublish, user }: UploadModalPro
     if (e.target.files && e.target.files[0]) {
       await processFile(e.target.files[0]);
     }
-  };
-
-  const handleSelectPreset = (url: string) => {
-    setImageUrl(url);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

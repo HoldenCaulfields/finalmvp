@@ -35,7 +35,7 @@ function createCDNIcon() {
             
             <div class="w-full h-full rounded-full bg-rose-600 flex items-center justify-center shadow-inner">
                 <span class="text-xs font-black tracking-tight text-white select-none">
-                    CD
+                    CDN
                 </span>
             </div>
 
