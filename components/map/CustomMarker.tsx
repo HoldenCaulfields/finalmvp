@@ -3,40 +3,40 @@ import L from "leaflet";
 import { Marker } from "react-leaflet";
 
 interface CustomMarkerProps {
-    position: [number, number];
-    title: string;
-    iconType: string;
-    isSubMarker?: boolean;
-    onClick: () => void;
+  position: [number, number];
+  title: string;
+  iconType: string;
+  isSubMarker?: boolean;
+  onClick: () => void;
 }
 
 export default function CustomMarker({ position, title, iconType, isSubMarker = false, onClick }: CustomMarkerProps) {
-    // Lấy hàm tạo icon tương ứng. Nếu là subMarker hoặc không tìm thấy hàm riêng, dùng hàm default.
-    const iconFactory = isSubMarker
-        ? createSubMarkerIcon
-        : (MAIN_ICON_FACTORIES[iconType] || createDefaultMainIcon);
+  // Lấy hàm tạo icon tương ứng. Nếu là subMarker hoặc không tìm thấy hàm riêng, dùng hàm default.
+  const iconFactory = isSubMarker
+    ? createSubMarkerIcon
+    : (MAIN_ICON_FACTORIES[iconType] || createDefaultMainIcon);
 
-    return (
-        <Marker
-            position={position}
-            icon={iconFactory(title, iconType)}
-            zIndexOffset={iconType === "market" ? 200 : (isSubMarker ? 50 : 100)}
-            eventHandlers={{ click: onClick }}
-        />
-    );
+  return (
+    <Marker
+      position={position}
+      icon={iconFactory(title, iconType)}
+      zIndexOffset={iconType === "market" ? 200 : (isSubMarker ? 50 : 100)}
+      eventHandlers={{ click: onClick }}
+    />
+  );
 }
 
 // ==========================================
 // 1. FACTORY MAP - QUẢN LÝ CÁC HÀM TẠO ICON CHÍNH
 // ==========================================
 const MAIN_ICON_FACTORIES: Record<string, (title: string) => L.DivIcon> = {
-    market: createMarketIcon,
-    startup: createStartupIcon,
-    jobs: createJobsIcon,
-    cinema: createCinemaIcon,
-    driver: createDriverIcon,
-    caodangnghe: createCDNIcon,
-    langnghe: createLangNgheIcon,
+  market: createMarketIcon,
+  startup: createStartupIcon,
+  jobs: createJobsIcon,
+  cinema: createCinemaIcon,
+  driver: createDriverIcon,
+  caodangnghe: createCDNIcon,
+  langnghe: createLangNgheIcon,
 };
 
 // ==========================================
@@ -45,9 +45,9 @@ const MAIN_ICON_FACTORIES: Record<string, (title: string) => L.DivIcon> = {
 
 // --- CHỢ PHAN RANG (Góc nhìn truyền thống, nổi bật) ---
 function createMarketIcon(title: string) {
-    return L.divIcon({
-        className: "custom-leaflet-icon",
-        html: `
+  return L.divIcon({
+    className: "custom-leaflet-icon",
+    html: `
        <div class="relative flex flex-col items-center justify-center" style="transform: translate(-50%, -50%);">
          
          <!-- Outer Energy Rings -->
@@ -86,16 +86,16 @@ function createMarketIcon(title: string) {
          </div>
        </div>
      `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }
 
 // --- STARTUP / IDEALAB (Giao diện Cinematic White-Rose-Black, High-Contrast) ---
 function createStartupIcon(title: string) {
-    return L.divIcon({
-        className: "startup-marker",
-        html: `
+  return L.divIcon({
+    className: "startup-marker",
+    html: `
         <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
           <div class="relative w-11 h-11 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 
                       p-[2px] shadow-[0_4px_12px_rgba(225,29,72,0.35)]
@@ -128,16 +128,16 @@ function createStartupIcon(title: string) {
   
         </div>
       `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }
 
 // --- KẾT NỐI VIỆC LÀM (Sạch sẽ, Chuyên nghiệp) ---
 function createJobsIcon(title: string) {
-    return L.divIcon({
-        className: "jobs-marker",
-        html: `
+  return L.divIcon({
+    className: "jobs-marker",
+    html: `
           <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
             <div class="relative w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 
                         p-[2px] shadow-[0_4px_12px_rgba(225,29,72,0.35)]
@@ -170,16 +170,16 @@ function createJobsIcon(title: string) {
     
           </div>
         `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }
 
 // --- CINEMA NETWORK (Phong cách Hộp đèn điện ảnh) ---
 function createCinemaIcon(title: string) {
-    return L.divIcon({
-        className: "custom-leaflet-icon",
-        html: `
+  return L.divIcon({
+    className: "custom-leaflet-icon",
+    html: `
           <div class="flex flex-col items-center" style="transform: translate(-50%, -50%);">
             
             <!-- Glow nền -->
@@ -205,16 +205,16 @@ function createCinemaIcon(title: string) {
     
           </div>
         `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }
 
 // --- TÀI XẾ / VẬN CHUYỂN ---
 function createDriverIcon(title: string) {
-    return L.divIcon({
-        className: "cho-phan-rang-leaflet-icon",
-        html: `
+  return L.divIcon({
+    className: "cho-phan-rang-leaflet-icon",
+    html: `
           <div class="flex flex-col items-center" style="transform: translate(-50%, -85%);">
             <!-- Khung chứa chính: Hình tròn Badge cao cấp -->
             <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 
@@ -249,9 +249,9 @@ function createDriverIcon(title: string) {
     
           </div>
         `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }
 
 function createCDNIcon() {
@@ -357,49 +357,64 @@ function createLangNgheIcon() {
 
 // --- HÀM BACKUP NẾU KHÔNG TÌM THẤY TYPE ---
 function createDefaultMainIcon(title: string) {
-    return L.divIcon({
-        html: `<div class="p-2 bg-zinc-800 text-white rounded shadow-md text-xs whitespace-nowrap">📍 ${title}</div>`,
-        iconSize: [0, 0], iconAnchor: [0, 0]
-    });
+  return L.divIcon({
+    html: `<div class="p-2 bg-zinc-800 text-white rounded shadow-md text-xs whitespace-nowrap">📍 ${title}</div>`,
+    iconSize: [0, 0], iconAnchor: [0, 0]
+  });
 }
 
 // ==========================================
 // 3. HÀM TẠO ICON CHUNG CHO TOÀN BỘ SUB-MARKERS (QUÁN ĂN, CAFE...)
 // ==========================================
 function createSubMarkerIcon(title: string, iconType: string) {
-    const config: Record<string, { emoji: string; color: string }> = {
-        // Cấu hình cho marker nhỏ
-        food: { emoji: '🍲', color: 'from-zinc-700 to-zinc-900' },
-        shop: { emoji: '🛍️', color: 'from-zinc-700 to-zinc-900' },
-        office: { emoji: '🏢', color: 'from-zinc-700 to-zinc-900' },
-    };
+  const config: Record<string, { emoji: string; color: string }> = {
+    // existing
+    food: { emoji: '🍲', color: 'from-orange-400 to-red-500' },
+    shop: { emoji: '🛍️', color: 'from-pink-500 to-rose-500' },
+    office: { emoji: '🏢', color: 'from-blue-500 to-indigo-600' },
 
-    const current = config[iconType] || { emoji: '📍', color: 'from-zinc-500 to-zinc-600' };
+    // startup / jobs
+    tech: { emoji: '💻', color: 'from-cyan-500 to-blue-600' },
+    finance: { emoji: '💰', color: 'from-emerald-500 to-green-600' },
+    media: { emoji: '🎬', color: 'from-purple-500 to-indigo-500' },
+    edu: { emoji: '🎓', color: 'from-yellow-400 to-orange-500' },
 
-    // Kích thước nhỏ hơn cho các sub-markers
-    const sizeClass = 'w-8 h-8';
-    const textClass = 'text-xl';
+    // cinema
+    studio: { emoji: '🎥', color: 'from-gray-700 to-gray-900' },
+    cafe: { emoji: '☕', color: 'from-amber-500 to-orange-600' },
+    team: { emoji: '👥', color: 'from-indigo-400 to-purple-500' },
 
-    return L.divIcon({
-        className: "sub-marker-generic",
-        html: `
+    // driver
+    station: { emoji: '⛽', color: 'from-sky-500 to-blue-700' },
+
+    // study / làng nghề
+    craft: { emoji: '🏺', color: 'from-orange-600 to-amber-700' },
+    student: { emoji: '🧑‍🎓', color: 'from-lime-500 to-green-600' },
+
+    // fallback
+    default: { emoji: '📍', color: 'from-gray-400 to-gray-600' },
+  };
+
+  const current = config[iconType] || config.default;
+
+  // Kích thước nhỏ hơn cho các sub-markers
+  const sizeClass = 'w-10 h-10';
+  const textClass = 'text-xl';
+
+  return L.divIcon({
+    className: "sub-marker-generic",
+    html: `
       <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
         <div class="relative ${sizeClass} rounded-full bg-gradient-to-br ${current.color} p-[2px] shadow-md transition-all duration-300 ease-in-out hover:scale-115 cursor-pointer flex items-center justify-center">
           <div class="w-full h-full bg-white rounded-full p-[1.5px] flex items-center justify-center overflow-hidden">
-            <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center shadow-inner">
+            <div class="w-full h-full rounded-full ${current.color} flex items-center justify-center shadow-inner">
               <span class="${textClass} font-black text-white select-none">${current.emoji}</span>
             </div>
-          </div>
-          <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-zinc-900 rotate-45 z-[-1]"></div>
-        </div>
-        <div class="mt-1">
-          <div class="px-2 py-0.5 bg-zinc-900/90 text-white rounded-md shadow-md border border-zinc-700/50 whitespace-nowrap">
-            <p class="text-[10px] font-medium tracking-wide">${title}</p>
           </div>
         </div>
       </div>
     `,
-        iconSize: [0, 0],
-        iconAnchor: [0, 0],
-    });
+    iconSize: [0, 0],
+    iconAnchor: [0, 0],
+  });
 }

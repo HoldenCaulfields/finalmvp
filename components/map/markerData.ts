@@ -7,7 +7,7 @@ export const mapCategoriesData: MainMarkerCategory[] = [
     title: 'Chợ Phan Rang',
     position: [11.573281710540968, 108.99317309988206],
     iconType: 'market',
-    zoomLevel: 14,
+    zoomLevel: 13,
     subMarkers: [
       { id: 'm1', position: [11.5745, 108.9942], title: 'Quán Bánh Căn Đêm', type: 'food' },
       { id: 'm2', position: [11.5721, 108.9925], title: 'Sạp Trái Cây Cô Ba', type: 'shop' },

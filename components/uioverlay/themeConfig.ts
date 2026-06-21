@@ -1,7 +1,7 @@
 import {
   Factory, HardDrive, Calendar, Briefcase, UserCheck, TrendingUp,
   Film, Video, Award, BookOpen, GraduationCap, Users,
-  ShoppingBag, Truck, MessageSquare, Search, ClipboardList, 
+  ShoppingBag, Truck, MessageSquare, Search, ClipboardList,
   Tv, Sparkles, Compass, MapPin, Car, LucideIcon,
   PlusCircle, Heart, Phone, DollarSign
 } from "lucide-react";
@@ -135,4 +135,41 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "find-station", title: "Trạm Tiếp Nhiên Liệu", subtitle: "Điểm dừng hỗ trợ", icon: MapPin, path: "/drivers/stations" }
     ]
   },
+  langnghe: {
+    tagline: "Văn hóa truyền thống",
+    title: "Dệt thổ cẩm Chăm Mỹ Nghiệp",
+    shortName: "LN",
+    baseRoute: "/langnghe",
+    phoneContact: "0905556667",
+    donateInfo: "/langnghe/support",
+    stats: [
+      { id: "crafts", label: "Sản phẩm", value: "1.2k+", icon: Sparkles },
+      { id: "artisans", label: "Nghệ nhân", value: "320+", icon: Users },
+      { id: "villages", label: "Làng nghề", value: "12+", icon: Compass },
+    ],
+    actions: [
+      {
+        id: "add-product",
+        title: "Đăng Sản Phẩm",
+        subtitle: "Quảng bá thủ công",
+        icon: PlusCircle,
+        path: "/langnghe/create",
+        isPrimary: true
+      },
+      {
+        id: "visit-village",
+        title: "Khám Phá Làng Nghề",
+        subtitle: "Du lịch trải nghiệm",
+        icon: MapPin,
+        path: "/langnghe/explore"
+      },
+      {
+        id: "connect-artisan",
+        title: "Kết Nối Nghệ Nhân",
+        subtitle: "Hợp tác sản xuất",
+        icon: Users,
+        path: "/langnghe/artisans"
+      }
+    ]
+  }
 };
