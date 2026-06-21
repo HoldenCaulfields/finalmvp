@@ -6,6 +6,8 @@ import Loading from "@/components/Loading";
 import dynamic from "next/dynamic";
 import MarkerOverlay from "@/components/uioverlay/MarkerOverlay";
 import Navbar from "@/components/Navbar";
+import CreateMarkerModal from "@/components/map/CreateMarkerModal";
+import TipLocationBar from "@/components/map/TipLocationBar";
 
 const Map = dynamic(() => import("@/components/Map"), {
   ssr: false,
@@ -24,6 +26,8 @@ export default function App() {
         </div>
         <BottomBar />
         <MarkerOverlay />
+        <CreateMarkerModal />
+        <TipLocationBar />
       </div>
     </main>
   );

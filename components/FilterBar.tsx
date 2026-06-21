@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { useViewStore } from "@/stores/useViewStore";
@@ -26,17 +26,13 @@ interface FilterBarProps {
 
 export default function FilterBar({ onChange }: FilterBarProps) {
   const [activeId, setActiveId] = useState<string>("all");
-  const viewMode = useViewStore(s => s.viewMode);
-  const setSelectedMarkerType = useViewStore(s => s.setSelectedMarkerType);
-  const openMarker = useViewStore(s => s.openMarker);
+  const { selectedCategoryId, selectCategory } = useViewStore();
 
-  if (viewMode === 'members') return null;
+  if (selectedCategoryId !== null) return null;
 
   const handleSelect = (id: string) => {
-    openMarker(id === 'all' ? null : id as any); // Open marker or reset to map view
+    selectCategory(id === 'all' ? null : id as any); 
     setActiveId(id);
-    const markerType = id === 'all' ? null : id as any; // Convert to MarkerType or null
-    setSelectedMarkerType(markerType);
 
     if (onChange) {
       onChange(id);

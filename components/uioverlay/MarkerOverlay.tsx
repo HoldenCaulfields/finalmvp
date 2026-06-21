@@ -6,15 +6,15 @@ import { useRouter } from "next/navigation";
 import { THEME_CONFIGS } from "./themeConfig";
 
 export default function MarkerOverlay() {
-  const selectedMarkerType = useViewStore((s) => s.selectedMarkerType);
-  const closeMarker = useViewStore((s) => s.closeMarker);
+  const selectedCategoryId = useViewStore((s) => s.selectedCategoryId);
+  const selectCategory = useViewStore( s => s.selectCategory);
   const router = useRouter();
 
-  const activeConfig = THEME_CONFIGS[selectedMarkerType || "market"];
+  const activeConfig = THEME_CONFIGS[selectedCategoryId || "market"];
 
   return (
     <AnimatePresence>
-      {selectedMarkerType && (
+      {selectedCategoryId && (
         <div className="fixed inset-0 pointer-events-none z-1000 p-4 md:p-6 font-sans flex flex-col justify-between select-none">
 
           {/* ================= 1. BIÊN TRÊN (TOP HUD HUD) ================= */}
@@ -26,7 +26,7 @@ export default function MarkerOverlay() {
               className="pointer-events-auto flex items-center justify-between w-full max-w-2xl bg-white/95 backdrop-blur-xl border border-slate-100 p-2.5 rounded-2xl shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
             >
               <button
-                onClick={closeMarker}
+                onClick={() => selectCategory(null)}
                 className="p-2 hover:bg-slate-100 rounded-xl transition-colors text-slate-800"
               >
                 <ArrowLeft size={18} />

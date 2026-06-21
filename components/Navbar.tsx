@@ -1,16 +1,16 @@
 'use client'
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Loader2, 
-  User as UserIcon, 
-  LogOut, 
-  Map as MapIcon, 
-  Users, 
-  Handshake, 
-  Car, 
-  Code, 
-  Plus, 
-  Bell,
+import {
+  Loader2,
+  User as UserIcon,
+  LogOut,
+  Map as MapIcon,
+  Users,
+  Handshake,
+  Car,
+  Code,
+  Plus,
+  Bell, X,
   Search,
   ChevronDown
 } from 'lucide-react';
@@ -34,7 +34,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { user, loading, login, logout } = useAuth();
   const [activeTab, setActiveTab] = useState('map');
-  const viewMode = useViewStore( s => s.viewMode);
+  const selectedCategoryId = useViewStore(s => s.selectedCategoryId);
+  const { isCreateOpen, setDropMarkerMode } = useViewStore();
+  const { isSelectingLocation, startSelectingLocation, cancelSelection } = useViewStore();
 
   const router = useRouter();
 
@@ -54,15 +56,37 @@ export default function Navbar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  if ( viewMode === 'members') return null;
+  const handleStartGhim = () => {
+    if (isSelectingLocation) {
+      cancelSelection();
+      return;
+    }
+
+    // Mặc định xin quyền lấy vị trí GPS hiện tại của User
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          startSelectingLocation([position.coords.latitude, position.coords.longitude]);
+        },
+        () => {
+          // Nếu user từ chối quyền, fallback về tọa độ mặc định hệ thống
+          startSelectingLocation();
+        }
+      );
+    } else {
+      startSelectingLocation();
+    }
+  };
+
+  if (selectedCategoryId !== null) return null;
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-1200 transition-all duration-300">
       <div className="max-w-7xl mx-auto">
         <div className={cn(
           "flex justify-between items-center h-16 transition-all border rounded-2xl md:rounded-[2.5rem] px-4 md:px-8",
-          scrolled 
-            ? "glass-nav border-zinc-200/80 shadow-lg shadow-zinc-200/20" 
+          scrolled
+            ? "glass-nav border-zinc-200/80 shadow-lg shadow-zinc-200/20"
             : "bg-white/95 border-transparent shadow-sm"
         )}>
 
@@ -104,22 +128,30 @@ export default function Navbar() {
               );
             })}
             <div className="w-px h-4 bg-zinc-200 mx-2" />
-            <button className="flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold text-white bg-zinc-900 hover:bg-rose-600 transition-all shadow-md shadow-zinc-900/10 active:scale-95">
-              <Plus className="w-3.5 h-3.5" />
-              Ghim vị trí
+            <button
+              onClick={handleStartGhim}
+              className={cn(
+                "flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-bold transition-all shadow-md active:scale-95 z-50",
+                isSelectingLocation
+                  ? "bg-zinc-900 text-white"
+                  : "bg-rose-600 text-white hover:bg-rose-700"
+              )}
+            >
+              {isSelectingLocation ? <X className="w-3.5 h-3.5 text-rose-500" /> : <Plus className="w-3.5 h-3.5" />}
+              {isSelectingLocation ? "Hủy chọn" : "Ghim vị trí"}
             </button>
           </div>
 
           {/* User Section */}
           <div className="flex items-center gap-4">
             <div className="hidden sm:flex items-center gap-2">
-               <button className="p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-colors relative">
-                 <Bell className="w-5 h-5" />
-                 <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 border-2 border-white rounded-full" />
-               </button>
-               <button className="p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-colors">
-                 <Search className="w-5 h-5" />
-               </button>
+              <button className="p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-colors relative">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 border-2 border-white rounded-full" />
+              </button>
+              <button className="p-2 text-zinc-500 hover:text-zinc-900 hover:bg-zinc-100 rounded-full transition-colors">
+                <Search className="w-5 h-5" />
+              </button>
             </div>
 
             {loading ? (

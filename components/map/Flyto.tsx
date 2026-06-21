@@ -1,29 +1,24 @@
-'use client';
+
+'use client'
 import { useMap } from "react-leaflet";
 import { useEffect } from "react";
 import { useViewStore } from "@/stores/useViewStore";
 
 export default function Flyto() {
-    const map = useMap();
-    const selectedMarkerType = useViewStore((s) => s.selectedMarkerType);
+  const map = useMap();
+  const { selectedCategoryId, categories } = useViewStore();
 
-    useEffect(() => {
-        if (selectedMarkerType === 'market') {
-            map.flyTo([11.573281710540968, 108.99317309988206], 13, { duration: 2 });
-        } else if (selectedMarkerType === 'cinema') {
-            map.flyTo([16.4637, 107.5909], 13, { duration: 2 });
-        } else if (selectedMarkerType === 'study') {
-            map.flyTo([11.56370, 109.01373], 13, { duration: 2 });
-        } else if (selectedMarkerType === 'startup') {
-            map.flyTo([10.762622, 106.660172], 13, { duration: 2 });
-        } else if (selectedMarkerType === 'driver') {
-            map.flyTo([11.57455, 108.98268], 13, { duration: 2 });
-        } else if (selectedMarkerType === 'jobs') {
-            map.flyTo([21.01584, 105.83637], 13, { duration: 2 });
-        } else {
-            map.flyTo([14, 107], 6, { duration: 2 });
-        }
-    }, [selectedMarkerType, map]);
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const activeCategory = categories.find(c => c.id === selectedCategoryId);
+      if (activeCategory) {
+        map.flyTo(activeCategory.position, activeCategory.zoomLevel || 13, { duration: 2 });
+      }
+    } else {
+      // Tọa độ mặc định khi không chọn cái nào (Zoom out toàn bộ)
+      map.flyTo([14, 107], 6, { duration: 2 });
+    }
+  }, [selectedCategoryId, categories, map]);
 
-    return null;
+  return null;
 }
