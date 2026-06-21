@@ -44,18 +44,16 @@ function createCollegeIcon() {
                 />
             </div>
 
-            <!-- Floating Particles -->
-            <div class="absolute -top-1 -right-1 w-4 h-4 bg-amber-400 rounded-full border-2 border-white animate-bounce shadow-lg"></div>
-            <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-emerald-400 rounded-full border-2 border-white animate-pulse shadow-lg"></div>
+          <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-rose-600 rotate-45 z-[-1] shadow-sm"></div>
+
         </div>
         
         <!-- Creative Glass Label -->
-        <div class="absolute top-full mt-4 pointer-events-none">
-          <div class="relative px-4 py-1 bg-white border-2 border-rose-300 rounded-full shadow-2xl flex flex-col items-center backdrop-blur-md">
+        <div class="absolute top-full mt-2 pointer-events-none">
+          <div class="relative px-4 py-1 bg-white border-2 border-rose-500 rounded-full shadow-2xl flex flex-col items-center backdrop-blur-md">
             <span class="text-[12px] font-bold text-rose-700 whitespace-nowrap tracking-wider">
               Chợ Phan Rang
             </span>
-            <div class="absolute -top-1 w-2 h-2 bg-white rotate-45 border-l border-t border-rose-300"></div>
           </div>
         </div>
       </div>

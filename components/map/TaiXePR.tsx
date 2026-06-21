@@ -10,7 +10,7 @@ export default function TaiXePR() {
         <Marker
             position={[11.57455, 108.98268]}
             icon={createTaiXeIcon()}
-            zIndexOffset={100}
+            zIndexOffset={10}
             eventHandlers={{ click: () => openMarker('driver') }}
         />
     );
@@ -21,10 +21,6 @@ function createTaiXeIcon() {
     className: "cho-phan-rang-leaflet-icon",
     html: `
       <div class="flex flex-col items-center" style="transform: translate(-50%, -85%);">
-        
-        <!-- Sóng xung kích phát sáng lan tỏa dịu nhẹ (màu Emerald/Green đại diện cho chợ/thực phẩm tươi sống) -->
-        <span class="absolute bottom-2 inline-flex h-3 w-10 bg-emerald-400 opacity-25 rounded-full animate-ping"></span>
-
         <!-- Khung chứa chính: Hình tròn Badge cao cấp -->
         <div class="relative w-14 h-14 rounded-full bg-gradient-to-br from-emerald-500 to-teal-600 
                     p-[3px] shadow-[0_8px_20px_rgba(16,185,129,0.4)]
@@ -49,9 +45,8 @@ function createTaiXeIcon() {
 
         <!-- Nhãn tên địa danh nằm gọn gàng ngay phía dưới Marker -->
         <div class="mt-2">
-          <div class="px-3 py-1 bg-gradient-to-r from-slate-900 to-slate-800 text-white rounded-full shadow-md border border-slate-700/50 whitespace-nowrap">
-            <p class="text-[12px] font-medium tracking-wide flex items-center gap-1.5">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <div class="px-3 py-1 bg-teal-100 text-teal-800 rounded-full shadow-md border border-teal-500 whitespace-nowrap">
+            <p class="text-[12px] font-bold tracking-wide flex items-center gap-1.5">
               Tài xế Phan Rang
             </p>
           </div>

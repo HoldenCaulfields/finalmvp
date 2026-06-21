@@ -169,10 +169,10 @@ function MainAppContent() {
                   <Sparkles className="w-3 h-3 text-white" /> Ăn uống ngon hơn, rẻ hơn
                 </span>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight select-none">
-                  Ẩm Thực Chợ <span className="font-serif italic font-semibold text-rose-brand">Phan Rang</span>
+                  Ẩm Thực <span className="font-serif italic font-semibold text-rose-brand"> Phan Rang</span>
                 </h2>
-                <p className="text-xs sm:text-sm font-medium leading-relaxed text-gray-200 text-slate-100 max-w-lg">
-                  Khám phá những món ăn ngon và rẻ ở Chợ Phan Rang, thông minh hơn trong tiêu dùng và trao đổi mua bán.
+                <p className="text-xs sm:text-sm font-medium leading-relaxed text-slate-900 max-w-lg">
+                  Khám phá những món ăn ngon và rẻ ở Chợ Phan Rang, trao đổi mua bán, đăng ký làm tài xế giao hàng.
                 </p>
                 <div className="pt-2 flex flex-wrap gap-2 sm:gap-3">
                   <div className="flex items-center gap-1.5 bg-rose-500 backdrop-blur-md p-2 px-3 rounded-full text-xs font-semibold select-none border border-white/15">

@@ -21,9 +21,6 @@ function createIcon() {
     className: "startup-marker",
     html: `
       <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
-        
-        <span class="absolute bottom-1.5 inline-flex h-2.5 w-7 bg-orange-400 opacity-30 rounded-full animate-ping"></span>
-
         <div class="relative w-11 h-11 rounded-full bg-gradient-to-br from-orange-500 to-orange-600 
                     p-[2px] shadow-[0_4px_12px_rgba(225,29,72,0.35)]
                     transition-all duration-300 ease-in-out
