@@ -21,21 +21,22 @@ function createCDNIcon() {
     className: "sinh-vien-net",
     html: `
       <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
-        <div class="relative w-11 h-11 rounded-full bg-gradient-to-br from-rose-500 to-rose-600 
-                    p-[2px] shadow-[0_4px_12px_rgba(225,29,72,0.35)]
+        <div class="relative w-12 h-12 rounded-full bg-rose-500
+                    p-1 shadow-[0_4px_12px_rgba(225,29,72,0.35)]
                     transition-all duration-300 ease-in-out
                     hover:scale-115 hover:-translate-y-0.5 hover:shadow-[0_8px_16px_rgba(225,29,72,0.5)]
                     cursor-pointer
                     flex items-center justify-center">
           
-          <div class="w-full h-full bg-white rounded-full p-[1.5px] flex items-center justify-center overflow-hidden">
-            
-            <div class="w-full h-full rounded-full bg-rose-600 flex items-center justify-center shadow-inner">
-                <span class="text-xs font-black tracking-tight text-white select-none">
-                    CDN
-                </span>
+          <div class="w-full h-full bg-white rounded-full flex items-center justify-center overflow-hidden">
+            <div class="absolute inset-0.5 rounded-full bg-white flex items-center justify-center
+                        shadow-inner overflow-hidden">
+                <img
+                    src="/cdn.png"
+                    class="w-full h-full object-cover transition-transform duration-700 scale-125"
+                    alt="School logo"
+                />
             </div>
-
           </div>
 
           <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2.5 h-2.5 bg-rose-600 rotate-45 z-[-1] shadow-sm"></div>
