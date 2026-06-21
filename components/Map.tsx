@@ -1,7 +1,5 @@
-// @/components/Map.tsx
-'use client';
 import { MapContainer, TileLayer, useMapEvents, Marker } from "react-leaflet";
-import { useViewStore } from "@/stores/useViewStore";
+import { useViewStore } from "../stores/useViewStore";
 import Flyto from "./map/Flyto";
 import { useEffect, useMemo, useRef } from "react";
 import { mapCategoriesData } from "./map/markerData";
@@ -9,9 +7,9 @@ import CustomMarker from "./map/CustomMarker";
 import L from 'leaflet';
 
 export default function Map() {
-  // 🔥 TỐI ƯU HIỆU NĂNG: Chia nhỏ Selectors giúp chặn đứng hiện tượng lag giật
   const categories = useViewStore((s) => s.categories);
   const selectedCategoryId = useViewStore((s) => s.selectedCategoryId);
+  const selectedFilterId = useViewStore((s) => s.selectedFilterId);
   const setCategories = useViewStore((s) => s.setCategories);
   const selectCategory = useViewStore((s) => s.selectCategory);
   const selectSubMarker = useViewStore((s) => s.selectSubMarker);
@@ -22,28 +20,30 @@ export default function Map() {
 
   const markerRef = useRef<any>(null);
 
-  // Khởi tạo dữ liệu gốc
+  // Initialize data if category list is empty
   useEffect(() => {
-    setCategories(mapCategoriesData);
-  }, [setCategories]);
+    if (categories.length === 0) {
+      setCategories(mapCategoriesData);
+    }
+  }, [setCategories, categories]);
 
-  // ✨ NÂNG CẤP UI: Thiết kế Marker Nháp "Cinematic Glass" White-Rose-Black siêu mịn
+  // Draft locator icon
   const draftIcon = useMemo(() => L.divIcon({
     className: 'custom-draft-marker',
     html: `
-      <div class="relative flex items-center justify-center w-12 h-12">
+      <div class="relative flex items-center justify-center w-12 h-12" style="transform: translate(-24px, -24px);">
         <div class="absolute w-12 h-12 bg-rose-500/20 rounded-full animate-ping opacity-70"></div>
         <div class="absolute w-8 h-8 bg-rose-500/40 rounded-full animate-pulse"></div>
         
         <div class="relative w-6 h-6 bg-zinc-950 border-2 border-white rounded-full flex items-center justify-center shadow-[0_8px_24px_rgba(244,63,94,0.5)]">
-          <div class="w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-rose-500/20"></div>
+          <div class="w-2.5 h-2.5 bg-rose-500 rounded-full ring-2 ring-rose-500/10"></div>
           
           <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[5px] border-t-zinc-950"></div>
         </div>
       </div>
     `,
     iconSize: [48, 48],
-    iconAnchor: [24, 28] // Căn chỉnh tâm icon chuẩn điểm nhọn của ghim
+    iconAnchor: [0, 0]
   }), []);
 
   const eventHandlers = useMemo(() => ({
@@ -56,21 +56,33 @@ export default function Map() {
     },
   }), [setDraftLatLng]);
 
-  // Lọc sẵn sub-markers để hạn chế tính toán lặp bên trong JSX
+  // Pre-filter active categories shown
+  const visibleCategories = useMemo(() => {
+    if (!selectedFilterId || selectedFilterId === "all") {
+      return categories;
+    }
+    return categories.filter((c) => c.id === selectedFilterId);
+  }, [categories, selectedFilterId]);
+
+  // Pre-filter active sub-markers
   const activeSubMarkers = useMemo(() => {
-    return categories
-      .filter(cat => cat.id === selectedCategoryId)
-      .flatMap(cat => cat.subMarkers);
+    const activeCat = categories.find(cat => cat.id === selectedCategoryId);
+    return activeCat ? (activeCat.subMarkers || []) : [];
   }, [categories, selectedCategoryId]);
 
+  const handleSubMarkerClick = (subId: string, subTitle: string) => {
+    selectSubMarker(subId);
+    alert(`📍 Bạn đã chọn điểm liên kết: "${subTitle}". Đang tải thông tin chi tiết dịch vụ.`);
+  };
+
   return (
-    <div className="relative w-full h-full overflow-hidden flex flex-col bg-zinc-100">
+    <div className="relative w-full h-full overflow-hidden flex flex-col bg-zinc-100 min-h-[400px]">
       <MapContainer
-        center={[11.5732, 108.9931]}
-        zoom={11}
+        center={[16.047079, 108.206230]}
+        zoom={6}
         zoomControl={false}
         minZoom={3}
-        className="h-full w-full"
+        className="h-full w-full absolute inset-0"
         maxBounds={[[-85, -180], [85, 180]]}
         maxBoundsViscosity={1.0}
       >
@@ -79,13 +91,13 @@ export default function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         />
         
-        {/* Hệ thống định vị camera thông minh */}
+        {/* Camera system handling smooth pan operations */}
         <Flyto />
         
-        {/* Lắng nghe click chuột trên diện rộng */}
+        {/* Global click registration listener */}
         <MapLocationPicker />
 
-        {/* HIỂN THỊ MARKER ĐANG CHỌN (DRAFT) */}
+        {/* Dynamic drafted placeholder marker */}
         {isSelectingLocation && draftLatLng && (
           <Marker
             position={draftLatLng}
@@ -96,8 +108,8 @@ export default function Map() {
           />
         )}
 
-        {/* HIỂN THỊ CÁC DANH MỤC LỚN (MAIN) */}
-        {categories.map((category) => (
+        {/* Iterate & render primary main hubs */}
+        {visibleCategories.map((category) => (
           <CustomMarker
             key={category.id}
             position={category.position}
@@ -107,7 +119,7 @@ export default function Map() {
           />
         ))}
 
-        {/* HIỂN THỊ CÁC ĐIỂM CON (SUB MARKERS) */}
+        {/* Iterate & render active sub components */}
         {activeSubMarkers.map((sub) => (
           <CustomMarker
             key={sub.id}
@@ -115,7 +127,7 @@ export default function Map() {
             title={sub.title}
             iconType={sub.type}
             isSubMarker={true}
-            onClick={() => selectSubMarker(sub.id)}
+            onClick={() => handleSubMarkerClick(sub.id, sub.title)}
           />
         ))}
       </MapContainer>
@@ -123,7 +135,7 @@ export default function Map() {
   );
 }
 
-// Hợp phần xử lý click nhấp điểm trên Bản đồ tách biệt hoàn toàn
+// Map events handler separated for high performance and isolation
 function MapLocationPicker() {
   const isSelectingLocation = useViewStore((s) => s.isSelectingLocation);
   const setDraftLatLng = useViewStore((s) => s.setDraftLatLng);

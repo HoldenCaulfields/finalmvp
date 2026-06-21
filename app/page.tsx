@@ -2,19 +2,17 @@
 
 import FilterBar from "@/components/FilterBar";
 import BottomBar from "@/components/BottomBar";
-import Loading from "@/components/Loading";
-import dynamic from "next/dynamic";
 import MarkerOverlay from "@/components/uioverlay/MarkerOverlay";
 import Navbar from "@/components/Navbar";
 import CreateMarkerModal from "@/components/map/CreateMarkerModal";
 import TipLocationBar from "@/components/map/TipLocationBar";
+import ViewMode from "@/components/ViewMode";
+import { useViewStore } from "@/stores/useViewStore";
 
-const Map = dynamic(() => import("@/components/Map"), {
-  ssr: false,
-  loading: () => <Loading />,
-});
 
 export default function App() {
+  const activeRoute = useViewStore(s => s.activeRoute);
+
   return (
     <main className="relative h-dvh flex flex-col bg-zinc-50 overflow-hidden font-sans">
       <Navbar />
@@ -22,13 +20,15 @@ export default function App() {
 
       <div className="flex-1 flex flex-col relative overflow-hidden">
         <div className="flex-1 relative">
-          <Map />
+          <ViewMode activeRoute={activeRoute} />
         </div>
         <BottomBar />
         <MarkerOverlay />
         <CreateMarkerModal />
         <TipLocationBar />
       </div>
+
+        
     </main>
   );
 }

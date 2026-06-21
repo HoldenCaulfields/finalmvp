@@ -1,4 +1,4 @@
-import { create } from 'zustand';
+/* import { create } from 'zustand';
 
 export interface SubMarker {
     id: string;
@@ -68,4 +68,81 @@ export const useViewStore = create<State>((set) => ({
         draftLatLng: null
     }),
     setDropMarkerMode: (open) => set({ isCreateOpen: open })
-}))
+})) */
+
+    import { create } from "zustand";
+
+export interface SubMarker {
+  id: string;
+  position: [number, number];
+  title: string;
+  type: string;
+}
+
+export interface Category {
+  id: string;
+  title: string;
+  position: [number, number];
+  iconType: string;
+  zoomLevel: number;
+  subMarkers: SubMarker[];
+}
+
+export type MainMarkerCategory = Category;
+
+interface ViewStore {
+  categories: Category[];
+  selectedCategoryId: string | null;
+  selectedSubMarkerId: string | null;
+  selectedFilterId: string;
+  isSelectingLocation: boolean;
+  isCreateOpen: boolean;
+  draftLatLng: [number, number] | null;
+  dropMarkerMode: boolean;
+  activeRoute: string;
+  
+  setCategories: (categories: Category[]) => void;
+  selectCategory: (id: string | null) => void;
+  selectSubMarker: (id: string | null) => void;
+  setSelectedFilterId: (id: string) => void;
+  setDropMarkerMode: (mode: boolean) => void;
+  startSelectingLocation: (coords?: [number, number]) => void;
+  confirmLocationSelection: () => void;
+  cancelSelection: () => void;
+  setDraftLatLng: (coords: [number, number] | null) => void;
+  setActiveRoute: (route: string) => void;
+}
+
+export const useViewStore = create<ViewStore>((set) => ({
+  categories: [],
+  selectedCategoryId: null,
+  selectedSubMarkerId: null,
+  selectedFilterId: "all",
+  isSelectingLocation: false,
+  isCreateOpen: false,
+  draftLatLng: null,
+  dropMarkerMode: false,
+  activeRoute: "map",
+
+  setCategories: (categories) => set({ categories }),
+  selectCategory: (id) => set({ selectedCategoryId: id, selectedSubMarkerId: null }),
+  selectSubMarker: (id) => set({ selectedSubMarkerId: id }),
+  setSelectedFilterId: (id) => set({ selectedFilterId: id, selectedCategoryId: null, selectedSubMarkerId: null }),
+  setDropMarkerMode: (mode) => set({ dropMarkerMode: mode }),
+  startSelectingLocation: (coords) => set({
+    isSelectingLocation: true,
+    isCreateOpen: false,
+    draftLatLng: coords || [11.5732, 108.9931],
+  }),
+  confirmLocationSelection: () => set({
+    isSelectingLocation: false,
+    isCreateOpen: true,
+  }),
+  cancelSelection: () => set({
+    isSelectingLocation: false,
+    isCreateOpen: false,
+    draftLatLng: null,
+  }),
+  setDraftLatLng: (coords) => set({ draftLatLng: coords }),
+  setActiveRoute: (route) => set({ activeRoute: route }),
+}));

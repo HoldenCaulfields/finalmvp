@@ -1,5 +1,3 @@
-'use client';
-import { useState } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/utils/cn";
 import { useViewStore } from "@/stores/useViewStore";
@@ -17,7 +15,7 @@ const filterItems: FilterItem[] = [
   { id: "jobs", label: "Việc làm", icon: "💼" },
   { id: "cinema", label: "Cinema", icon: "🎬" },
   { id: "study", label: "Học tập", icon: "📚" },
-  { id: "startup", label: "Khởi nghiệp", icon: "🚀" }
+  { id: "startup", label: "Khởi nghiệp", icon: "🚀" },
 ];
 
 interface FilterBarProps {
@@ -25,14 +23,12 @@ interface FilterBarProps {
 }
 
 export default function FilterBar({ onChange }: FilterBarProps) {
-  const [activeId, setActiveId] = useState<string>("all");
-  const { selectedCategoryId, selectCategory } = useViewStore();
+  const { selectedCategoryId, selectedFilterId, setSelectedFilterId, activeRoute } = useViewStore();
 
-  if (selectedCategoryId !== null) return null;
+  if (selectedCategoryId !== null || activeRoute !== 'map') return null;
 
   const handleSelect = (id: string) => {
-    selectCategory(id === 'all' ? null : id as any); 
-    setActiveId(id);
+    setSelectedFilterId(id);
 
     if (onChange) {
       onChange(id);
@@ -40,18 +36,18 @@ export default function FilterBar({ onChange }: FilterBarProps) {
   };
 
   return (
-    <div className="fixed top-18 left-1/2 -translate-x-1/2 z-1000 w-full max-w-fit pointer-events-none transition-all duration-300">
-      <div className="pointer-events-auto flex items-center gap-1 p-1 bg-white/95 backdrop-blur-xl border border-zinc-200/80 shadow-2xl shadow-zinc-900/10 rounded-2xl md:rounded-full overflow-x-auto no-scrollbar">
+    <div className="fixed top-16 left-1/2 -translate-x-1/2 z-[1000] w-full max-w-fit px-4 pointer-events-none transition-all duration-300">
+      <div className="pointer-events-auto flex items-center gap-1.5 p-1 bg-white/95 backdrop-blur-xl border border-zinc-200/80 shadow-2xl shadow-zinc-900/10 rounded-2xl md:rounded-full overflow-x-auto no-scrollbar scroll-smooth">
         {filterItems.map((item) => {
-          const isActive = item.id === activeId;
+          const isActive = item.id === selectedFilterId;
 
           return (
             <button
               key={item.id}
               onClick={() => handleSelect(item.id)}
               className={cn(
-                "relative group flex items-center gap-2.5 px-4 py-2 rounded-xl md:rounded-full transition-all flex-shrink-0 outline-none",
-                isActive ? "text-white" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
+                "relative group flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 rounded-xl md:rounded-full transition-all flex-shrink-0 outline-none cursor-pointer",
+                isActive ? "text-white font-bold" : "text-zinc-500 hover:text-zinc-900 hover:bg-zinc-50"
               )}
             >
               {isActive && (

@@ -36,7 +36,7 @@ export const mapCategoriesData: MainMarkerCategory[] = [
     zoomLevel: 13,
     subMarkers: [
       { id: 'c1', position: [16.4650, 107.5925], title: 'Studio Quay Phim Tài Liệu', type: 'studio' },
-      { id: 'c2', position: [16.4620, 107.5890], title: 'Cine Cafe - Thảo Luận Kịch Bản', type: 'cafe' },
+      { id: 'c2', position: [16.4620, 107.5890], title: 'Cine Cafe - Thảo Luận Kịch Bản', type: 'script' },
       { id: 'c3', position: [16.4670, 107.5950], title: 'Hội Biên Tập Video Trẻ', type: 'team' },
     ]
   },
@@ -61,7 +61,7 @@ export const mapCategoriesData: MainMarkerCategory[] = [
     subMarkers: [
       { id: 'd1', position: [11.5760, 108.9840], title: 'Trạm Tiếp Tế Tài Xế 1', type: 'station' },
       { id: 'd2', position: [11.5730, 108.9810], title: 'Điểm Tập Kết Xe Đêm', type: 'station' },
-      { id: 'd3', position: [11.5715, 108.9855], title: 'Quán Cafe Võng Tài Xế', type: 'cafe' },
+      { id: 'd3', position: [11.5715, 108.9855], title: 'Quán Cafe Võng Tài Xế', type: 'driver' },
     ]
   },
   {
