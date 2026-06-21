@@ -2,7 +2,7 @@
 'use client';
 
 import { useViewStore } from "@/stores/useViewStore";
-import { MapPin, Navigation, CheckCircle2 } from "lucide-react";
+import { MapPin, CheckCircle2 } from "lucide-react";
 
 export default function TipLocationBar() {
   const { isSelectingLocation, confirmLocation, cancelSelection } = useViewStore();
@@ -10,7 +10,7 @@ export default function TipLocationBar() {
   if (!isSelectingLocation) return null;
 
   return (
-    <div className="absolute bottom-22 md:bottom-6 left-1/2 -translate-x-1/2 z-2000 w-[calc(100%-2rem)] max-w-md animate-in fade-in slide-in-from-bottom-5 duration-300">
+    <div className="absolute bottom-26 md:bottom-6 left-1/2 -translate-x-1/2 z-1000 w-[calc(100%-2rem)] max-w-md animate-in fade-in slide-in-from-bottom-5 duration-300">
       <div className="bg-white border border-zinc-200 rounded-2xl p-4 shadow-[0_15px_40px_rgba(0,0,0,0.1)] flex flex-col gap-3">
         
         {/* Dòng hướng dẫn trực quan cho người mới */}
