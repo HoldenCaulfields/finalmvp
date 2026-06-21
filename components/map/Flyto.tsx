@@ -9,7 +9,7 @@ export default function Flyto() {
 
     useEffect(() => {
         if (selectedMarkerType === 'market') {
-            map.flyTo([11.573281710540968, 108.99317309988206], 15, { duration: 2 });
+            map.flyTo([11.573281710540968, 108.99317309988206], 13, { duration: 2 });
         } else if (selectedMarkerType === 'cinema') {
             map.flyTo([16.4637, 107.5909], 13, { duration: 2 });
         } else if (selectedMarkerType === 'study') {

@@ -9,6 +9,7 @@ import StartupMarker from "./map/StartupMarker";
 import TaiXePR from "./map/TaiXePR";
 import JobMarker from "./map/JobMarker";
 import CDNMarker from "./map/CDNMarker";
+import LangNgheMarker from "./map/LangNgheMarker";
 
 export default function Map() {
     const { viewMode }  = useViewStore();
@@ -35,6 +36,7 @@ export default function Map() {
                 <TaiXePR />
                 <JobMarker />
                 <StartupMarker />
+                <LangNgheMarker />
                 { viewMode === 'members' && <MarkerMembers /> }
                 
             </MapContainer>
