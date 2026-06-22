@@ -13,9 +13,6 @@ export default function BottomBar() {
 
   const { isSelectingLocation, startSelectingLocation, cancelSelection } = useViewStore();
 
-  // Switch overlay active status: If selecting location, or if a category details is active on the map, don't show tabs overlay
-  if (selectedCategoryId !== null && activeRoute === "map") return null;
-
   const totalMain = categories.length;
   const totalSub = categories.reduce((sum, cat) => sum + (cat.subMarkers?.length || 0), 0);
 
@@ -69,7 +66,7 @@ export default function BottomBar() {
   return (
     <>
       {/* DESKTOP DESIRED VIEW: Original Stats Banner (hidden on mobile, visible on map screen) */}
-      {activeRoute === "map" && (
+      {activeRoute === "map" && selectedCategoryId === null && (
         <div className="hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 z-[1000] w-full max-w-4xl px-4 pointer-events-none">
           <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-zinc-200/80 shadow-2xl rounded-2xl md:rounded-[2rem] px-5 py-3.5 flex items-center justify-between gap-3 text-zinc-600 transition-all">
             {/* Left Side: Status */}

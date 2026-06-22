@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  User, 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Award, 
-  Sparkles, 
-  TrendingUp, 
-  CreditCard, 
-  CheckCircle, 
-  PlusCircle, 
-  X, 
-  LogOut, 
-  Coins, 
+import {
+  MapPin,
+  Award,
+  Sparkles,
+  TrendingUp,
+  CreditCard,
+  CheckCircle,
+  PlusCircle,
+  X,
+  LogOut,
+  Coins,
   ArrowRight,
-  ShieldAlert,
   Tag,
   BarChart2,
-  Lock,
-  ExternalLink
 } from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 import { useViewStore } from "../../stores/useViewStore";
@@ -81,42 +75,63 @@ export default function ProfileView() {
 
   if (!user) {
     return (
-      <div className="h-full w-full overflow-y-auto px-4 pt-20 lg:pt-28 pb-32 lg:pb-24 max-w-lg mx-auto flex flex-col justify-center items-center text-center">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-white p-8 rounded-[2.5rem] border border-zinc-200/80 shadow-2xl relative overflow-hidden"
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 50 }}
+          className="fixed inset-0 z-1000 bg-slate-50/98 backdrop-blur-xl p-6 flex items-center justify-center"
         >
-          <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 rounded-full blur-2xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
+          <div className="max-w-md w-full text-center space-y-8">
+            {/* Icon trang trí phía trên */}
+            <div className="relative mx-auto w-24 h-24">
+              <div className="absolute inset-0 bg-rose-200 blur-2xl opacity-40 rounded-full animate-pulse"></div>
+              <div className="relative w-24 h-24 bg-white shadow-2xl shadow-rose-100 rounded-[2.5rem] flex items-center justify-center border border-rose-50">
+                <LogOut className="w-10 h-10 text-rose-500" />
+              </div>
+            </div>
 
-          <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center text-rose-500 mx-auto mb-6 shadow-md shadow-rose-100">
-            <User className="w-8 h-8" />
+            <div className="space-y-2">
+              <h2 className="text-3xl font-black text-slate-900 tracking-tight">Chào bạn mới!</h2>
+              <p className="text-slate-500 font-medium px-8">
+                Đăng nhập nhanh chóng để khám phá hồ sơ và kết nối cùng bạn bè
+              </p>
+            </div>
+
+            {/* Nút Đăng nhập Google */}
+            <button
+              onClick={login}
+              className="group relative w-full flex items-center justify-center gap-3 py-4 bg-white text-slate-700 font-bold rounded-2xl border-2 border-slate-100 shadow-sm hover:shadow-xl hover:border-rose-100 hover:text-rose-600 transition-all duration-300 active:scale-[0.98]"
+            >
+              {/* SVG Google Icon chuẩn */}
+              <svg className="w-6 h-6" viewBox="0 0 48 48">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+              </svg>
+              <span>Tiếp tục với Google</span>
+
+              {/* Hiệu ứng tia sáng khi hover */}
+              <div className="absolute inset-0 rounded-2xl bg-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </button>
+
+            <p className="text-xs text-slate-400 font-medium">
+              Bằng cách đăng nhập, bạn đồng ý với Điều khoản dịch vụ của chúng tôi.
+            </p>
           </div>
-
-          <h3 className="text-xl font-extrabold text-zinc-900 tracking-tight">Khu vực Hồ sơ & Quản trị Doanh thu</h3>
-          <p className="text-xs text-zinc-500 mt-3 leading-relaxed max-w-sm mx-auto">
-            Đăng nhập để xem thống kê tiếp cận khách hàng, nạp quỹ quảng bá địa điểm, quản lý dịch vụ và kích hoạt doanh thu của bạn.
-          </p>
-
-          <button
-            onClick={() => login()}
-            className="w-full mt-8 bg-zinc-950 text-white hover:bg-zinc-800 font-bold text-xs py-4 rounded-2xl shadow-xl transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-98"
-          >
-            Đăng nhập nhanh với Mock Auth <ArrowRight className="w-4 h-4 text-rose-500" />
-          </button>
         </motion.div>
-      </div>
+      </AnimatePresence>
     );
   }
 
   return (
     <div className="h-full w-full max-h-full overflow-y-auto bg-zinc-50/60 pt-20 lg:pt-28 pb-32 lg:pb-24 px-4">
       <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* LEFT COLUMN: Avatar & Quick Actions */}
         <div className="lg:col-span-1 space-y-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             className="bg-white rounded-3xl p-6 border border-zinc-200/80 shadow-md relative overflow-hidden text-center"
@@ -143,7 +158,7 @@ export default function ProfileView() {
               {isUpgraded && <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold border border-amber-300">Gold Verified</span>}
             </h3>
             <p className="text-[11px] text-zinc-400 uppercase tracking-wider font-extrabold mt-1">Cộng tác viên Phan Rang</p>
-            
+
             <p className="text-xs text-zinc-600 italic bg-zinc-50 rounded-2xl p-4 mt-4 border border-zinc-100 line-clamp-3">
               "{bio}"
             </p>
@@ -166,7 +181,7 @@ export default function ProfileView() {
           </motion.div>
 
           {/* Quick Business Wallet Overview */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
@@ -196,7 +211,7 @@ export default function ProfileView() {
 
         {/* RIGHT COLUMN: Business details, upgrade section & statistical performance */}
         <div className="lg:col-span-2 space-y-6">
-          
+
           {/* Editing Panel (AnimatePresence) */}
           <AnimatePresence>
             {isEditing && (
@@ -212,13 +227,13 @@ export default function ProfileView() {
                     <X className="w-4 h-4" />
                   </button>
                 </div>
-                
+
                 <form onSubmit={handleSave} className="space-y-4 text-xs">
                   <div>
                     <label className="block text-zinc-500 font-bold mb-1">Tên hiển thị / Tên thương hiệu</label>
-                    <input 
-                      type="text" 
-                      value={displayName} 
+                    <input
+                      type="text"
+                      value={displayName}
                       onChange={e => setDisplayName(e.target.value)}
                       className="w-full p-3 border border-zinc-200 rounded-xl outline-none focus:border-rose-500 font-bold text-zinc-900"
                     />
@@ -226,18 +241,18 @@ export default function ProfileView() {
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="block text-zinc-500 font-bold mb-1">Số điện thoại liên hệ</label>
-                      <input 
-                        type="text" 
-                        value={phone} 
+                      <input
+                        type="text"
+                        value={phone}
                         onChange={e => setPhone(e.target.value)}
                         className="w-full p-3 border border-zinc-200 rounded-xl outline-none focus:border-rose-500 font-mono text-zinc-900"
                       />
                     </div>
                     <div>
                       <label className="block text-zinc-500 font-bold mb-1">Email</label>
-                      <input 
-                        type="text" 
-                        value={user.email || 'th@gm.com'} 
+                      <input
+                        type="text"
+                        value={user.email || 'th@gm.com'}
                         disabled
                         className="w-full p-3 border border-zinc-200 rounded-xl bg-zinc-50 text-zinc-400 cursor-not-allowed"
                       />
@@ -245,8 +260,8 @@ export default function ProfileView() {
                   </div>
                   <div>
                     <label className="block text-zinc-500 font-bold mb-1">Mô tả ngắn / Slogan doanh nghiệp</label>
-                    <textarea 
-                      value={bio} 
+                    <textarea
+                      value={bio}
                       onChange={e => setBio(e.target.value)}
                       className="w-full p-3 border border-zinc-200 rounded-xl outline-none focus:border-rose-500 h-20 text-zinc-900 font-medium"
                     />
@@ -271,7 +286,7 @@ export default function ProfileView() {
           {/* MONETIZATION STRATEGY & PREMIUM PLANS BAR */}
           <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/80 rounded-3xl p-6 relative overflow-hidden">
             <div className="absolute -top-4 -right-4 w-32 h-32 bg-amber-250/20 rounded-full blur-2xl pointer-events-none" />
-            
+
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
@@ -352,7 +367,7 @@ export default function ProfileView() {
 
             <div className="space-y-3.5">
               {myPins.map((pin) => (
-                <div 
+                <div
                   key={pin.id}
                   className="flex items-center justify-between p-4 rounded-2xl border border-zinc-100 hover:border-zinc-200 hover:bg-zinc-50/50 transition-all duration-300 group"
                 >
@@ -375,9 +390,8 @@ export default function ProfileView() {
                   </div>
 
                   <div className="text-right">
-                    <span className={`text-[10px] px-2 py-1 rounded-full font-bold block ${
-                      pin.status === "active" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-amber-50 text-amber-700 border border-amber-200"
-                    }`}>
+                    <span className={`text-[10px] px-2 py-1 rounded-full font-bold block ${pin.status === "active" ? "bg-emerald-50 text-emerald-700 border border-emerald-200" : "bg-amber-50 text-amber-700 border border-amber-200"
+                      }`}>
                       {pin.status === "active" ? "Đã duyệt" : "Chờ duyệt"}
                     </span>
                     <span className="text-[10px] text-zinc-500 block mt-1">Doanh thu háng: <strong className="text-zinc-800 font-bold">{pin.revenue}</strong></span>
@@ -392,7 +406,7 @@ export default function ProfileView() {
             <h4 className="text-sm font-black text-zinc-900 uppercase mb-4 flex items-center gap-2">
               <TrendingUp className="w-3.5 h-3.5 text-rose-500" /> Chiến lược tạo Doanh thu cho Nhà phát triển MVP
             </h4>
-            
+
             <p className="text-xs text-zinc-650 leading-relaxed mb-4">
               Ninh Thuận LovelyNet cung cấp một mô hình kinh doanh siêu cục bộ (Hyper-local) rất khả thi, không phụ thuộc vào nguồn tài trợ lớn mà tập trung kết nối cung-cầu ngay tại TP Phan Rang Tháp Chàm:
             </p>
@@ -446,13 +460,13 @@ export default function ProfileView() {
       <AnimatePresence>
         {showUpgradeModal && (
           <div className="fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-[3000] flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               className="bg-white rounded-[2rem] w-full max-w-sm p-6 shadow-2xl relative overflow-hidden"
             >
-              <button 
+              <button
                 onClick={() => setShowUpgradeModal(false)}
                 className="absolute top-4 right-4 p-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-500 rounded-full cursor-pointer transition"
               >
@@ -507,7 +521,7 @@ export default function ProfileView() {
                     <div className="flex items-center gap-2 text-zinc-700">
                       <CheckCircle className="w-4 h-4 text-emerald-500" /> Tích hợp sđt gọi diện thoại ngay lập tức
                     </div>
-                    
+
                     <button
                       onClick={() => handleQrPayment(99000)}
                       className="w-full bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs py-3.5 rounded-xl transition mt-4 cursor-pointer"
@@ -526,13 +540,13 @@ export default function ProfileView() {
       <AnimatePresence>
         {showAddAdsModal && (
           <div className="fixed inset-0 bg-zinc-950/60 backdrop-blur-sm z-[3000] flex items-center justify-center p-4">
-            <motion.div 
+            <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               className="bg-white rounded-[2rem] w-full max-w-sm p-6 shadow-2xl relative"
             >
-              <button 
+              <button
                 onClick={() => setShowAddAdsModal(false)}
                 className="absolute top-4 right-4 p-2 bg-zinc-100 hover:bg-zinc-200 text-zinc-500 rounded-full cursor-pointer transition"
               >

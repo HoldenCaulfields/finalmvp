@@ -103,7 +103,7 @@ export default function Navbar() {
 
           {/* Logo Section */}
           <div className="flex items-center gap-3 shrink-0 cursor-pointer group" onClick={handleLogoClick}>
-            <div className="w-9 h-9 bg-rose-600 rounded-2xl flex items-center justify-center text-white font-black text-sm shadow-lg shadow-zinc-900/10 border border-white/10 group-hover:bg-rose-700 group-hover:scale-105 transition-all duration-300">
+            <div className="w-9 h-9 bg-rose-600 rounded-full flex items-center justify-center text-white font-black text-sm shadow-lg shadow-zinc-900/10 border border-white/10 group-hover:bg-rose-700 group-hover:scale-105 transition-all duration-300">
               LN
             </div>
             <h1 className="font-sans font-extrabold text-lg md:text-xl tracking-tight text-zinc-900">

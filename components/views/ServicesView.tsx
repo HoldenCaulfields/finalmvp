@@ -287,13 +287,6 @@ export default function ServicesView() {
                     <p className="text-xs text-zinc-500 line-clamp-3 leading-relaxed font-semibold">
                       {item.desc}
                     </p>
-
-                    {item.specialty && (
-                      <div className="p-2.5 bg-zinc-50 border border-zinc-100 rounded-xl">
-                        <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-wide block">Nổi bật:</span>
-                        <p className="text-[11px] text-zinc-600 font-extrabold mt-0.5">{item.specialty}</p>
-                      </div>
-                    )}
                   </div>
 
                   {/* Operational stats list */}
