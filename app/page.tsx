@@ -27,8 +27,6 @@ export default function App() {
         <CreateMarkerModal />
         <TipLocationBar />
       </div>
-
-        
     </main>
   );
 }

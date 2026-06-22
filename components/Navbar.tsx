@@ -71,7 +71,6 @@ export default function Navbar() {
           startSelectingLocation([position.coords.latitude, position.coords.longitude]);
         },
         () => {
-          // Fallback to default coordinating Center of Phan Rang
           startSelectingLocation();
         }
       );
@@ -85,7 +84,6 @@ export default function Navbar() {
     setActiveRoute('map');
   };
 
-  // Only hide navbar when looking at active map details (selectedCategoryId is active and route is map)
   if (selectedCategoryId !== null && activeRoute === 'map') return null;
 
   return (
@@ -120,7 +118,7 @@ export default function Navbar() {
                   key={link.id}
                   onClick={() => {
                     setActiveRoute(link.id);
-                    selectCategory(null); // Clear map selectors back to neutral
+                    selectCategory(null);
                   }}
                   className={cn(
                     "relative px-4 py-2 rounded-full text-xs font-bold tracking-wide transition-all flex items-center gap-2 group cursor-pointer",
@@ -174,29 +172,41 @@ export default function Navbar() {
 
                 <AnimatePresence>
                   {notificationOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-3 w-72 bg-white rounded-2xl border border-zinc-200 shadow-xl overflow-hidden z-[2000]"
-                    >
-                      <div className="p-4 border-b border-zinc-100 bg-zinc-50/50 flex justify-between items-center">
-                        <span className="text-xs font-black uppercase text-zinc-400">Thông báo mới</span>
-                        <button onClick={() => setNotificationOpen(false)} className="text-zinc-400 hover:text-zinc-600 cursor-pointer">
-                          <X className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                      <div className="p-3 space-y-2 max-h-60 overflow-y-auto">
-                        <div className="p-2 hover:bg-zinc-50 rounded-lg text-xs transition">
-                          <p className="font-bold text-zinc-900">🚀 Ý tưởng mới được đăng ký</p>
-                          <p className="text-zinc-500 mt-0.5">Xưởng Ý Tưởng Khởi Nghiệp vừa tiếp nhận một đề án nông nghệ sạch.</p>
+                    <>
+                      {/* Backdrop mờ phía sau */}
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setNotificationOpen(false)}
+                        className="fixed inset-0 bg-white/10 z-[1999]"
+                      />
+
+                      {/* Bảng thông báo tối ưu mobile */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute right-0 sm:right-0 -mr-24 sm:mr-0 mt-3 w-[calc(100vw-2rem)] sm:w-72 max-w-sm bg-white rounded-2xl border border-zinc-200 shadow-xl overflow-hidden z-[2000]"
+                      >
+                        <div className="p-4 border-b border-zinc-100 bg-zinc-50/50 flex justify-between items-center">
+                          <span className="text-xs font-black uppercase text-zinc-400">Thông báo mới</span>
+                          <button onClick={() => setNotificationOpen(false)} className="text-zinc-400 hover:text-zinc-600 cursor-pointer">
+                            <X className="w-3.5 h-3.5" />
+                          </button>
                         </div>
-                        <div className="p-2 hover:bg-zinc-50 rounded-lg text-xs transition">
-                          <p className="font-bold text-zinc-900">🍲 Điểm ăn uống Phan Rang cập nhật</p>
-                          <p className="text-zinc-500 mt-0.5">Hàng cơm gà lân cận được găm lên danh mục Chợ Phan Rang.</p>
+                        <div className="p-3 space-y-2 max-h-60 overflow-y-auto">
+                          <div className="p-2 hover:bg-zinc-50 rounded-lg text-xs transition">
+                            <p className="font-bold text-zinc-900">🚀 Ý tưởng mới được đăng ký</p>
+                            <p className="text-zinc-500 mt-0.5">Xưởng Ý Tưởng Khởi Nghiệp vừa tiếp nhận một đề án nông nghệ sạch.</p>
+                          </div>
+                          <div className="p-2 hover:bg-zinc-50 rounded-lg text-xs transition">
+                            <p className="font-bold text-zinc-900">🍲 Điểm ăn uống Phan Rang cập nhật</p>
+                            <p className="text-zinc-500 mt-0.5">Hàng cơm gà lân cận được găm lên danh mục Chợ Phan Rang.</p>
+                          </div>
                         </div>
-                      </div>
-                    </motion.div>
+                      </motion.div>
+                    </>
                   )}
                 </AnimatePresence>
               </div>
@@ -212,22 +222,34 @@ export default function Navbar() {
 
                 <AnimatePresence>
                   {searchOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                      className="absolute right-0 mt-3 w-64 bg-white p-2.5 rounded-2xl border border-zinc-200 shadow-xl z-[2000]"
-                    >
-                      <div className="flex items-center gap-1.5 px-2 bg-zinc-50 border rounded-xl">
-                        <Search className="w-4 h-4 text-zinc-400 shrink-0" />
-                        <input 
-                          type="text" 
-                          placeholder="Tìm địa điểm, dịch vụ..."
-                          className="w-full bg-transparent border-none text-xs py-2 outline-none text-zinc-900" 
-                          autoFocus
-                        />
-                      </div>
-                    </motion.div>
+                    <>
+                      {/* Backdrop mờ phía sau */}
+                      <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        onClick={() => setSearchOpen(false)}
+                        className="fixed inset-0 bg-white/10 z-[1999]"
+                      />
+
+                      {/* Thanh tìm kiếm tối ưu mobile */}
+                      <motion.div
+                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                        className="absolute right-0 sm:right-0 -mr-14 sm:mr-0 mt-3 w-[calc(100vw-2rem)] sm:w-64 max-w-sm bg-white p-2.5 rounded-2xl border border-zinc-200 shadow-xl z-[2000]"
+                      >
+                        <div className="flex items-center gap-1.5 px-2 bg-zinc-50 border rounded-xl">
+                          <Search className="w-4 h-4 text-zinc-400 shrink-0" />
+                          <input 
+                            type="text" 
+                            placeholder="Tìm địa điểm, dịch vụ..."
+                            className="w-full bg-transparent border-none text-xs py-2 outline-none text-zinc-900" 
+                            autoFocus
+                          />
+                        </div>
+                      </motion.div>
+                    </>
                   )}
                 </AnimatePresence>
               </div>
