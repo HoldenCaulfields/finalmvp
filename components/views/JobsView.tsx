@@ -172,13 +172,13 @@ export default function JobsView() {
       <div className="text-center max-w-2xl mx-auto mb-8">
         <span className="text-[10px] font-black tracking-[0.25em] text-indigo-600 uppercase flex items-center justify-center gap-2 mb-2">
           <Globe className="w-3.5 h-3.5 animate-spin" style={{ animationDuration: "10s" }} />
-          Ninh Thuan Tech & Innovation Portal
+          Kết nối Dev/IT
         </span>
         <h2 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tight uppercase">
           Cổng Cơ Hội Việc Làm IT & Dev
         </h2>
         <p className="text-xs md:text-sm text-zinc-500 font-medium mt-2">
-          Chung tay kết nối tài năng công nghệ thông tin trẻ của Ninh Thuận với các dự án startup, thương mại hóa du lịch và doanh nghiệp remote toàn quốc.
+          Haizz, thật sự ý tưởng của tôi là kết nối dân devs lại kiểu như Grab/ Xanh SM cho dân IT để kiếm tiền, kiếm việc làm, đưa sản phẩm công nghệ thành hiện thực chứ không còn là bản nháp nữa, ý tưởng là thế còn thực tế thì haizz kéo dài.
         </p>
       </div>
 

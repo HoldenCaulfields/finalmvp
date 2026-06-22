@@ -186,47 +186,11 @@ export default function ServicesView() {
           LovelyNet Community Hub
         </span>
         <h2 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tight uppercase">
-          Danh Mục Thương Hiệu Vùng Miền
+          Các dịch vụ của LovelyNet
         </h2>
         <p className="text-xs md:text-sm text-zinc-500 font-medium mt-2">
-          Tìm kiếm ẩm thực trứ danh, lớp hướng nghiệp cổ truyền Chăm và các nông trại sinh thái kiểm định trực tuyến tại thành phố Phan Rang.
+          Thật ra tôi cũng chưa có định nghĩa rõ ràng LovelyNet này là gì :)) Tôi nghĩ là nó dành cho những người có ý tưởng và kết nối những người ở đâu đó trên thế giới này tìm đến LovelyNet.
         </p>
-      </div>
-
-      {/* Control Actions Row (Search & filter) */}
-      <div className="flex flex-col md:flex-row gap-3 items-center justify-between bg-white border border-zinc-200/80 p-4 rounded-3xl shadow-sm mb-6 max-w-4xl mx-auto">
-        <div className="flex items-center gap-2 p-2 bg-zinc-50 border border-zinc-100 rounded-2xl w-full md:max-w-md">
-          <Search className="w-4 h-4 text-zinc-400 ml-2" />
-          <input
-            type="text"
-            placeholder="Tìm kiếm: Bún sứa, cơm gà, làng gốm..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full bg-transparent border-none text-xs outline-none py-1 text-zinc-800 placeholder:text-zinc-400 font-semibold"
-          />
-        </div>
-
-        {/* Categories filters */}
-        <div className="flex flex-wrap gap-1.5 justify-center w-full md:w-auto">
-          {[
-            { id: "all", label: "✨ Tất cả", color: "hover:bg-zinc-100" },
-            { id: "culinary", label: "🍲 Ẩm Thực", color: "hover:bg-rose-50 hover:text-rose-600" },
-            { id: "craft", label: "🏺 Làng nghề Chăm", color: "hover:bg-amber-50 hover:text-amber-800" },
-            { id: "nature", label: "🍇 Nông nghiệp sạch", color: "hover:bg-emerald-50 hover:text-emerald-700" }
-          ].map(cat => (
-            <button
-              key={cat.id}
-              onClick={() => setSelectedCat(cat.id)}
-              className={`px-3 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                selectedCat === cat.id
-                  ? "bg-zinc-950 text-white border-zinc-950 shadow-md"
-                  : `bg-white text-zinc-600 border-zinc-200/80 ${cat.color}`
-              }`}
-            >
-              {cat.label}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Services Grid layout */}
