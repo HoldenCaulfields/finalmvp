@@ -69,3 +69,26 @@ export const createMainCategory = async (catData: {
   });
   return docRef.id;
 };
+
+// Fetch sub-markers do chính user tạo ra
+export const fetchSubMarkersByUser = async (userId: string): Promise<SubMarker[]> => {
+  const q = query(collection(db, "sub_markers"), where("createdBy", "==", userId));
+  const querySnapshot = await getDocs(q);
+  
+  return querySnapshot.docs.map((doc) => {
+    const data = doc.data();
+    return {
+      id: doc.id,
+      categoryId: data.categoryId,
+      title: data.title,
+      position: [data.position.latitude, data.position.longitude],
+      type: data.type,
+      rating: data.rating,
+      createdBy: data.createdBy,
+      // Thêm các trường hiển thị (nếu có lưu trong DB, nếu không có thể fallback)
+      views: data.views || 0,
+      status: data.status || "active", 
+      revenue: data.revenue || "0đ",
+    };
+  });
+};
