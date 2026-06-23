@@ -11,7 +11,7 @@ export interface UserProfile {
   avatar: string | null;
   location?: [number, number] | null;
   onboardingComplete: boolean;
-  createdAt: Timestamp | Date; // Đổi từ any sang kiểu chuẩn
+  createdAt: Timestamp | Date;
   bio?: string;
   interests?: string[];
   socials?: {

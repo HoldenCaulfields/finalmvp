@@ -1,148 +1,116 @@
-/* import { create } from 'zustand';
+import { create } from 'zustand';
 
-export interface SubMarker {
-    id: string;
-    position: [number, number];
-    title: string;
-    description?: string;
-    type: string; //"quan-an", "coffee" , "van phong"
-}
-
-export interface MainMarkerCategory {
-    id: string;
-    title: string;
-    position: [number, number];
-    zoomLevel?: number;
-    iconType: 'market' | 'cinema' | 'startup' | 'jobs' | 'driver' | 'study' | 'caodangnghe' | 'langnghe';
-    subMarkers: SubMarker[];
-}
-
-type State = {
-    categories: MainMarkerCategory[];
-    selectedCategoryId: string | null;
-    activeSubMarkerId: string | null;
-
-    setCategories: (categories: MainMarkerCategory[]) => void;
-    selectCategory: (id: string | null) => void;
-    selectSubMarker: (id: string) => void;
-
-    //create:
-    isCreateOpen: boolean;          // Điều khiển hiển thị Modal nhập thông tin
-    isSelectingLocation: boolean;   // Điều khiển chế độ đang chọn vị trí (hiện TipBar)
-    draftLatLng: [number, number] | null; // Tọa độ của marker tạm thời
-    startSelectingLocation: (userLocation?: [number, number]) => void;
-    setDraftLatLng: (latlng: [number, number] | null) => void;
-    confirmLocation: () => void;
-    cancelSelection: () => void;
-    setDropMarkerMode: (open: boolean) => void;
-}
-
-export const useViewStore = create<State>((set) => ({
-    categories: [],
-    selectedCategoryId: null,
-    activeSubMarkerId: null,
-
-    selectCategory: (id) => set({ selectedCategoryId: id, activeSubMarkerId: null }),
-    selectSubMarker: (id) => set({ activeSubMarkerId: id }),
-    setCategories: (categories) => set({ categories }),
-
-    //create:
-    isCreateOpen: false,
-    isSelectingLocation: false,
-    draftLatLng: null,
-    // Kích hoạt chế độ chọn vị trí, lấy vị trí mặc định của user nếu có
-    startSelectingLocation: (userLocation) => set({
-        isSelectingLocation: true,
-        isCreateOpen: false,
-        draftLatLng: userLocation || [11.5732, 108.9931] // Mặc định ở Phan Rang nếu ko lấy được GPS
-    }),
-    setDraftLatLng: (latlng) => set({ draftLatLng: latlng }),
-    // Khi user ưng ý với vị trí ghim và bấm "Xác nhận"
-    confirmLocation: () => set({
-        isSelectingLocation: false,
-        isCreateOpen: true
-    }),
-    cancelSelection: () => set({
-        isSelectingLocation: false,
-        isCreateOpen: false,
-        draftLatLng: null
-    }),
-    setDropMarkerMode: (open) => set({ isCreateOpen: open })
-})) */
-
-    import { create } from "zustand";
-
-export interface SubMarker {
-  id: string;
-  position: [number, number];
-  title: string;
-  type: string;
-}
-
-export interface Category {
+export interface MainCategory {
   id: string;
   title: string;
   position: [number, number];
   iconType: string;
-  zoomLevel: number;
-  subMarkers: SubMarker[];
 }
 
-export type MainMarkerCategory = Category;
+export interface SubMarker {
+  id: string;
+  categoryId: string;
+  title: string;
+  position: [number, number];
+  type: string;
+  rating?: number;
+  createdBy: string;
+}
 
-interface ViewStore {
-  categories: Category[];
-  selectedCategoryId: string | null;
-  selectedSubMarkerId: string | null;
-  selectedFilterId: string;
-  isSelectingLocation: boolean;
-  isCreateOpen: boolean;
-  draftLatLng: [number, number] | null;
-  dropMarkerMode: boolean;
-  activeRoute: string;
-  
-  setCategories: (categories: Category[]) => void;
+interface ViewState {
+  // --- DATA STATES ---
+  categories: MainCategory[];
+  subMarkersCache: Record<string, SubMarker[]>; // categoryId -> danh sách sub-markers đã fetch
+  selectedCategoryId: string | null;            // Thay cho activeCategoryId để khớp code Map cũ của bạn
+  selectedFilterId: string;                     // Quản lý bộ lọc danh mục (ví dụ: "all", "market", "startup")
+  selectedSubMarkerId: string | null;           // Lưu id sub-marker đang được xem chi tiết
+
+  // --- INTERACTION / CREATE WORKFLOW STATES ---
+  isSelectingLocation: boolean;                 // Chế độ đang bật ngắm điểm trên bản đồ (Hiện TipBar)
+  isCreateOpen: boolean;                         // Chế độ mở Modal Form nhập tên/loại sau khi đã chấm điểm xong
+  draftLatLng: [number, number] | null;          // Tọa độ tạm thời khi user đang click/kéo thả trên map
+
+  // --- APP NAVIGATION ---
+  activeRoute: string;                           // Quản lý Tab hiện tại (Home, Ideas, Teams, Map, v.v.)
+
+  // --- ACTIONS ---
+  setCategories: (categories: MainCategory[]) => void;
+  setSubMarkersForCategory: (categoryId: string, markers: SubMarker[]) => void;
+  addSubMarker: (categoryId: string, marker: SubMarker) => void;
   selectCategory: (id: string | null) => void;
   selectSubMarker: (id: string | null) => void;
   setSelectedFilterId: (id: string) => void;
-  setDropMarkerMode: (mode: boolean) => void;
-  startSelectingLocation: (coords?: [number, number]) => void;
-  confirmLocationSelection: () => void;
-  cancelSelection: () => void;
-  setDraftLatLng: (coords: [number, number] | null) => void;
   setActiveRoute: (route: string) => void;
+  
+  // --- INTERACTION ACTIONS (Đã tối ưu flow: Chọn vị trí -> Xác nhận -> Hiện Form điền thông tin) ---
+  startSelectingLocation: (userLocation?: [number, number]) => void;
+  setDraftLatLng: (latlng: [number, number] | null) => void;
+  confirmLocationSelection: () => void;         // Bấm xác nhận điểm ghim -> Chuyển sang mở Form
+  cancelSelection: () => void;                  // Hủy ngang -> Đóng hết, xóa dấu vết ghim tạm
+  setDropMarkerMode: (open: boolean) => void;    // Ép đóng/mở trực tiếp Modal Form nếu cần
 }
 
-export const useViewStore = create<ViewStore>((set) => ({
+export const useViewStore = create<ViewState>((set) => ({
+  // --- INITIAL STATES ---
   categories: [],
+  subMarkersCache: {},
   selectedCategoryId: null,
-  selectedSubMarkerId: null,
   selectedFilterId: "all",
+  selectedSubMarkerId: null,
+
   isSelectingLocation: false,
   isCreateOpen: false,
   draftLatLng: null,
-  dropMarkerMode: false,
+
   activeRoute: "map",
 
+  // --- DATA ACTIONS ---
   setCategories: (categories) => set({ categories }),
+  
+  setSubMarkersForCategory: (categoryId, markers) => 
+    set((state) => ({
+      subMarkersCache: { ...state.subMarkersCache, [categoryId]: markers }
+    })),
+    
+  addSubMarker: (categoryId, marker) =>
+    set((state) => {
+      const currentMarkers = state.subMarkersCache[categoryId] || [];
+      return {
+        subMarkersCache: {
+          ...state.subMarkersCache,
+          [categoryId]: [...currentMarkers, marker],
+        },
+      };
+    }),
+
   selectCategory: (id) => set({ selectedCategoryId: id, selectedSubMarkerId: null }),
   selectSubMarker: (id) => set({ selectedSubMarkerId: id }),
   setSelectedFilterId: (id) => set({ selectedFilterId: id, selectedCategoryId: null, selectedSubMarkerId: null }),
-  setDropMarkerMode: (mode) => set({ dropMarkerMode: mode }),
-  startSelectingLocation: (coords) => set({
+  setActiveRoute: (route) => set({ activeRoute: route }),
+
+  // --- WORKFLOW CREATION ACTIONS ---
+  // Bước 1: Bật chế độ tìm điểm, nếu có GPS định vị thì ghim luôn tại đó, không thì mặc định Phan Rang
+  startSelectingLocation: (userLocation) => set({
     isSelectingLocation: true,
     isCreateOpen: false,
-    draftLatLng: coords || [11.5732, 108.9931],
+    draftLatLng: userLocation || [11.5732, 108.9931]
   }),
+
+  // Cập nhật liên tục khi user click điểm mới hoặc kéo thả ghim trên map
+  setDraftLatLng: (latlng) => set({ draftLatLng: latlng }),
+
+  // Bước 2: User ưng ý vị trí, bấm "Xác nhận vị trí này"
   confirmLocationSelection: () => set({
-    isSelectingLocation: false,
-    isCreateOpen: true,
+    isSelectingLocation: false, // Tắt chế độ ngắm bắn điểm
+    isCreateOpen: true          // Bật sáng Modal điền Form thông tin chi tiết
   }),
+
+  // Bước quay xe: Hủy bỏ toàn bộ tiến trình
   cancelSelection: () => set({
     isSelectingLocation: false,
     isCreateOpen: false,
-    draftLatLng: null,
+    draftLatLng: null
   }),
-  setDraftLatLng: (coords) => set({ draftLatLng: coords }),
-  setActiveRoute: (route) => set({ activeRoute: route }),
+
+  setDropMarkerMode: (open) => set({ isCreateOpen: open })
 }));

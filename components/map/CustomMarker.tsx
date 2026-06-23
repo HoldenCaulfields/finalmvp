@@ -7,10 +7,11 @@ interface CustomMarkerProps {
   title: string;
   iconType: string;
   isSubMarker?: boolean;
+  rating?: number;
   onClick: () => void;
 }
 
-export default function CustomMarker({ position, title, iconType, isSubMarker = false, onClick }: CustomMarkerProps) {
+export default function CustomMarker({ position, title, iconType, rating, isSubMarker = false, onClick }: CustomMarkerProps) {
   // Lấy hàm tạo icon tương ứng. Nếu là subMarker hoặc không tìm thấy hàm riêng, dùng hàm default.
   const iconFactory = isSubMarker
     ? createSubMarkerIcon
@@ -19,7 +20,7 @@ export default function CustomMarker({ position, title, iconType, isSubMarker = 
   return (
     <Marker
       position={position}
-      icon={iconFactory(title, iconType)}
+      icon={iconFactory(title, iconType, rating)}
       zIndexOffset={iconType === "market" ? 200 : (isSubMarker ? 50 : 100)}
       eventHandlers={{ click: onClick }}
     />
@@ -366,52 +367,61 @@ function createDefaultMainIcon(title: string) {
 // ==========================================
 // 3. HÀM TẠO ICON CHUNG CHO TOÀN BỘ SUB-MARKERS (QUÁN ĂN, CAFE...)
 // ==========================================
-function createSubMarkerIcon(title: string, iconType: string) {
+function createSubMarkerIcon(title: string, iconType: string, rating?: number) {
   const config: Record<string, { emoji: string; color: string }> = {
-    // existing
     food: { emoji: '🍲', color: 'from-orange-400 to-red-500' },
     shop: { emoji: '🛍️', color: 'from-pink-500 to-rose-500' },
     office: { emoji: '🏢', color: 'from-blue-500 to-indigo-600' },
 
-    // startup / jobs
     tech: { emoji: '💻', color: 'from-cyan-500 to-blue-600' },
     finance: { emoji: '💰', color: 'from-emerald-500 to-green-600' },
     media: { emoji: '🎬', color: 'from-purple-500 to-indigo-500' },
     edu: { emoji: '🎓', color: 'from-yellow-400 to-orange-500' },
 
-    // cinema
     studio: { emoji: '🎥', color: 'from-gray-700 to-gray-900' },
     cafe: { emoji: '☕', color: 'from-amber-500 to-orange-600' },
     team: { emoji: '👥', color: 'from-indigo-400 to-purple-500' },
 
-    // driver
     station: { emoji: '⛽', color: 'from-sky-500 to-blue-700' },
 
-    // study / làng nghề
-    craft: { emoji: '🏺', color: 'from-orange-600 to-amber-700' },
-    student: { emoji: '🧑‍🎓', color: 'from-lime-500 to-green-600' },
+    gom: { emoji: '🏺', color: 'from-orange-600 to-amber-700' },
+    craft: { emoji: '🧵', color: 'from-lime-500 to-green-600' },
 
-    // fallback
-    default: { emoji: '📍', color: 'from-gray-400 to-gray-600' },
+    default: { emoji: '📍', color: 'from-rose-400 to-rose-600' },
   };
 
   const current = config[iconType] || config.default;
 
-  // Kích thước nhỏ hơn cho các sub-markers
   const sizeClass = 'w-10 h-10';
   const textClass = 'text-xl';
+
+  // format rating (4 -> 4.0)
+  const ratingText = rating ? rating.toFixed(1) : null;
 
   return L.divIcon({
     className: "sub-marker-generic",
     html: `
-      <div class="flex flex-col items-center" style="transform: translate(-50%, -80%);">
-        <div class="relative ${sizeClass} rounded-full bg-gradient-to-br ${current.color} p-[2px] shadow-md transition-all duration-300 ease-in-out hover:scale-115 cursor-pointer flex items-center justify-center">
-          <div class="w-full h-full bg-white rounded-full p-[1.5px] flex items-center justify-center overflow-hidden">
-            <div class="w-full h-full rounded-full ${current.color} flex items-center justify-center shadow-inner">
-              <span class="${textClass} font-black text-white select-none">${current.emoji}</span>
-            </div>
+      <div class="flex flex-col items-center" style="transform: translate(-50%, -90%);">
+        
+        <!-- ICON -->
+        <div class="relative ${sizeClass} rounded-xl bg-gradient-to-br ${current.color} p-[2px] shadow-md transition-all duration-300 ease-in-out hover:scale-110 cursor-pointer flex items-center justify-center">
+          <div class="w-full h-full rounded-full ${current.color} flex items-center justify-center shadow-inner">
+            <span class="${textClass} font-black text-white select-none">${current.emoji}</span>
           </div>
         </div>
+
+        <!-- RATING BADGE -->
+        ${
+          ratingText
+            ? `
+          <div class="mt-1 px-2 py-[2px] rounded-full bg-black/70 backdrop-blur text-white text-[10px] font-semibold shadow-sm flex items-center gap-1">
+            <span>⭐</span>
+            <span>${ratingText}</span>
+          </div>
+        `
+            : ''
+        }
+
       </div>
     `,
     iconSize: [0, 0],

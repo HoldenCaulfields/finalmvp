@@ -14,7 +14,7 @@ export default function BottomBar() {
   const { isSelectingLocation, startSelectingLocation, cancelSelection } = useViewStore();
 
   const totalMain = categories.length;
-  const totalSub = categories.reduce((sum, cat) => sum + (cat.subMarkers?.length || 0), 0);
+  const totalSub = categories.reduce((sum, cat) => sum + (((cat as any).subMarkers?.length) || 5), 0);
 
   // Geolocation trigger for "Ghim"
   const handleStartGhim = () => {
