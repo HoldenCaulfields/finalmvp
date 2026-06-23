@@ -157,7 +157,7 @@ export default function MarkerOverlay() {
               <div className="grid grid-cols-3 gap-1 w-full sm:w-auto px-1">
                 {activeConfig.stats.map((stat) => (
                   <div key={stat.id} className="flex items-center gap-2 border-r border-slate-100 last:border-none pr-3 sm:pr-4">
-                    <div className="w-6 h-6 rounded-md bg-slate-50 flex items-center justify-center text-slate-500 shrink-0">
+                    <div className="w-6 h-6 rounded-md bg-rose-200 flex items-center justify-center text-rose-500 shrink-0">
                       <stat.icon size={12} />
                     </div>
                     <div className="flex flex-col">

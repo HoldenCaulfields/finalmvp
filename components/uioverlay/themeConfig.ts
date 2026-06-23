@@ -32,7 +32,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Ẩm Thực & Gian Hàng",
     shortName: "PR",
     baseRoute: "/chophanrang",
-    phoneContact: "0901234567",
+    phoneContact: "0793784133",
     donateInfo: "/chophanrang/donate",
     stats: [
       { id: "stores", label: "Quán ăn", value: "850+", icon: Factory },
@@ -40,9 +40,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "orders", label: "Đơn hàng", value: "1.2k+", icon: Calendar },
     ],
     actions: [
-      { id: "add-store", title: "Mở Quán Ăn", subtitle: "Tạo gian hàng mới", icon: PlusCircle, path: "/chophanrang/create-store", isPrimary: true },
-      { id: "reg-driver", title: "Đăng Ký Tài Xế", subtitle: "Chạy ship giao hàng", icon: Truck, path: "/chophanrang/register-driver" },
-      { id: "food-service", title: "Khám Phá Dịch Vụ", subtitle: "Đặt món ăn siêu tốc", icon: ShoppingBag, path: "/chophanrang/services" }
+      { id: "add-store", title: "Mở Quán Ăn", subtitle: "Tạo gian hàng mới", icon: PlusCircle, path: "/chophanrang", isPrimary: true },
+      { id: "reg-driver", title: "Đăng Ký Tài Xế", subtitle: "Chạy ship giao hàng", icon: Truck, path: "/chophanrang" },
+      { id: "food-service", title: "Khám Phá Dịch Vụ", subtitle: "Đặt món ăn siêu tốc", icon: ShoppingBag, path: "/chophanrang" }
     ]
   },
   jobs: {
@@ -50,7 +50,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Tuyển Dụng Cấp Tốc",
     shortName: "JB",
     baseRoute: "/jobs",
-    phoneContact: "0907654321",
+    phoneContact: "0793784133",
     donateInfo: "/jobs/premium",
     stats: [
       { id: "jobs", label: "Việc mới", value: "120+", icon: Briefcase },
@@ -58,9 +58,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "growth", label: "Công ty", value: "45+", icon: TrendingUp },
     ],
     actions: [
-      { id: "post-job", title: "Tuyển Nhân Viên", subtitle: "Đăng tin tuyển nhanh", icon: PlusCircle, path: "/jobs/post", isPrimary: true },
-      { id: "create-cv", title: "Tạo Hồ Sơ", subtitle: "Ứng tuyển việc ngay", icon: UserCheck, path: "/jobs/cv" },
-      { id: "find-job", title: "Tìm Việc Làm", subtitle: "Khám phá cơ hội", icon: Search, path: "/jobs/explore" }
+      { id: "post-job", title: "Tuyển Nhân Viên", subtitle: "Đăng tin tuyển nhanh", icon: PlusCircle, path: "/jobs", isPrimary: true },
+      { id: "create-cv", title: "Tạo Hồ Sơ", subtitle: "Ứng tuyển việc ngay", icon: UserCheck, path: "/jobs" },
+      { id: "find-job", title: "Tìm Việc Làm", subtitle: "Khám phá cơ hội", icon: Search, path: "/jobs" }
     ]
   },
   cinema: {
@@ -68,7 +68,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Cộng Đồng Làm Phim",
     shortName: "CM",
     baseRoute: "/cimanet",
-    phoneContact: "0909999999",
+    phoneContact: "0793784133",
     donateInfo: "/cinema/fund",
     stats: [
       { id: "movies", label: "Dự án phim", value: "18+", icon: Film },
@@ -76,9 +76,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "creators", label: "Creator", value: "85+", icon: Award },
     ],
     actions: [
-      { id: "add-project", title: "Thêm Dự Án", subtitle: "Đăng ký phim mới", icon: PlusCircle, path: "/cinema/create-project", isPrimary: true },
-      { id: "rent-equip", title: "Thuê Thiết Bị", subtitle: "Máy quay, lens, đèn", icon: Sparkles, path: "/cinema/rent" },
-      { id: "find-crew", title: "Tìm Ê-kíp", subtitle: "Kết nối talent & góc máy", icon: Compass, path: "/cinema/creators" }
+      { id: "add-project", title: "Thêm Dự Án", subtitle: "Đăng ký phim mới", icon: PlusCircle, path: "/cimanet", isPrimary: true },
+      { id: "rent-equip", title: "Thuê Thiết Bị", subtitle: "Máy quay, lens, đèn", icon: Sparkles, path: "/cimanet" },
+      { id: "find-crew", title: "Tìm Ê-kíp", subtitle: "Kết nối talent & góc máy", icon: Compass, path: "/cimanet" }
     ]
   },
   study: {
@@ -86,7 +86,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Góc Học Tập & Trao Đổi",
     shortName: "ST",
     baseRoute: "/caodangnghe",
-    phoneContact: "0908888888",
+    phoneContact: "0793784133",
     donateInfo: "/study/support",
     stats: [
       { id: "documents", label: "Tài liệu", value: "3.4k+", icon: BookOpen },
@@ -94,9 +94,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "mentors", label: "Trợ giảng", value: "50+", icon: Users },
     ],
     actions: [
-      { id: "share-doc", title: "Đóng Góp Tài Liệu", subtitle: "Tải lên giáo trình", icon: PlusCircle, path: "/study/upload", isPrimary: true },
-      { id: "create-group", title: "Tạo Nhóm Tự Học", subtitle: "Tìm bạn đồng hành", icon: Users, path: "/study/groups/create" },
-      { id: "find-place", title: "Địa Điểm Học", subtitle: "Thư viện, quán cà phê", icon: MapPin, path: "/study/places" }
+      { id: "share-doc", title: "Đóng Góp Tài Liệu", subtitle: "Tải lên giáo trình", icon: PlusCircle, path: "/caodangnghe", isPrimary: true },
+      { id: "create-group", title: "Tạo Nhóm Tự Học", subtitle: "Tìm bạn đồng hành", icon: Users, path: "/caodangnghe" },
+      { id: "find-place", title: "Địa Điểm Học", subtitle: "Thư viện, quán cà phê", icon: MapPin, path: "/caodangnghe" }
     ]
   },
   startup: {
@@ -104,7 +104,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Hệ Sinh Thái Gọi Vốn",
     shortName: "SU",
     baseRoute: "https://anothermvp.vercel.app",
-    phoneContact: "0901112223",
+    phoneContact: "0793784133",
     donateInfo: "/startup/invest",
     stats: [
       { id: "ideas", label: "Ý tưởng", value: "3.4k+", icon: BookOpen },
@@ -112,9 +112,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "launched", label: "Đã ra mắt", value: "50+", icon: Users },
     ],
     actions: [
-      { id: "pitch-idea", title: "Nộp Ý Tưởng", subtitle: "Gọi vốn công nghệ", icon: PlusCircle, path: "/startup/pitch", isPrimary: true },
-      { id: "find-co-founder", title: "Tìm Co-Founder", subtitle: "Ghép đội lập nghiệp", icon: Users, path: "/startup/teams" },
-      { id: "book-mentor", title: "Gặp Mentor", subtitle: "Tư vấn chiến lược", icon: MapPin, path: "/startup/mentors" }
+      { id: "pitch-idea", title: "Nộp Ý Tưởng", subtitle: "Gọi vốn công nghệ", icon: PlusCircle, path: "https://anothermvp.vercel.app", isPrimary: true },
+      { id: "find-co-founder", title: "Tìm Co-Founder", subtitle: "Ghép đội lập nghiệp", icon: Users, path: "https://anothermvp.vercel.app" },
+      { id: "book-mentor", title: "Gặp Mentor", subtitle: "Tư vấn chiến lược", icon: MapPin, path: "https://anothermvp.vercel.app" }
     ]
   },
   driver: {
@@ -122,7 +122,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Mạng Lưới Vận Chuyển",
     shortName: "DR",
     baseRoute: "/chophanrang",
-    phoneContact: "0903334445",
+    phoneContact: "0793784133",
     donateInfo: "/drivers/tip",
     stats: [
       { id: "drivers", label: "Tài xế", value: "3.4k+", icon: Car },
@@ -130,9 +130,9 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "deliveries", label: "Đối tác", value: "50+", icon: Users },
     ],
     actions: [
-      { id: "create-order", title: "Tạo Đơn Ship", subtitle: "Giao hàng hỏa tốc", icon: PlusCircle, path: "/drivers/create", isPrimary: true },
-      { id: "driver-chat", title: "Trạm Giao Lưu", subtitle: "Cộng đồng tài xế", icon: MessageSquare, path: "/drivers/hub" },
-      { id: "find-station", title: "Trạm Tiếp Nhiên Liệu", subtitle: "Điểm dừng hỗ trợ", icon: MapPin, path: "/drivers/stations" }
+      { id: "create-order", title: "Tạo Đơn Ship", subtitle: "Giao hàng hỏa tốc", icon: PlusCircle, path: "/chophanrang", isPrimary: true },
+      { id: "driver-chat", title: "Trạm Giao Lưu", subtitle: "Cộng đồng tài xế", icon: MessageSquare, path: "/chophanrang" },
+      { id: "find-station", title: "Trạm Tiếp Nhiên Liệu", subtitle: "Điểm dừng hỗ trợ", icon: MapPin, path: "/chophanrang" }
     ]
   },
   langnghe: {
@@ -140,7 +140,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Dệt thổ cẩm Chăm Mỹ Nghiệp",
     shortName: "LN",
     baseRoute: "/langnghe",
-    phoneContact: "0905556667",
+    phoneContact: "0793784133",
     donateInfo: "/langnghe/support",
     stats: [
       { id: "crafts", label: "Sản phẩm", value: "1.2k+", icon: Sparkles },
@@ -153,7 +153,7 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
         title: "Đăng Sản Phẩm",
         subtitle: "Quảng bá thủ công",
         icon: PlusCircle,
-        path: "/langnghe/create",
+        path: "/langnghe",
         isPrimary: true
       },
       {
@@ -161,14 +161,14 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
         title: "Khám Phá Làng Nghề",
         subtitle: "Du lịch trải nghiệm",
         icon: MapPin,
-        path: "/langnghe/explore"
+        path: "/langnghe"
       },
       {
         id: "connect-artisan",
         title: "Kết Nối Nghệ Nhân",
         subtitle: "Hợp tác sản xuất",
         icon: Users,
-        path: "/langnghe/artisans"
+        path: "/langnghe"
       }
     ]
   }
