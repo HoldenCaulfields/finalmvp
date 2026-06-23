@@ -24,7 +24,7 @@ export default function Flyto() {
     if (selectedCategoryId) {
       const activeCategory = categories.find(c => c.id === selectedCategoryId);
       if (activeCategory) {
-        map.flyTo(activeCategory.position, 13, { duration: 1.8 });
+        map.flyTo(activeCategory.position, 12, { duration: 1.8 });
       }
     } else {
       // Tọa độ mặc định khi không chọn mục nào (Toàn cảnh khu vực miền Trung/Khánh Hòa - Ninh Thuận)

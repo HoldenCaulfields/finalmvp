@@ -1,9 +1,11 @@
+// themeConfig.ts
 import {
   Factory, HardDrive, Calendar, Briefcase, UserCheck, TrendingUp,
   Film, Video, Award, BookOpen, GraduationCap, Users,
   ShoppingBag, Truck, MessageSquare, Search, ClipboardList,
-  Tv, Sparkles, Compass, MapPin, Car, LucideIcon,
-  PlusCircle, Heart, Phone, DollarSign
+  Sparkles, Compass, MapPin, Car, LucideIcon,
+  PlusCircle, Heart, Phone, DollarSign, Star, 
+  Navigation, Share2, Clock, Gift, Zap, Info
 } from "lucide-react";
 
 export interface HudAction {
@@ -12,164 +14,154 @@ export interface HudAction {
   subtitle?: string;
   icon: LucideIcon;
   path: string;
-  isPrimary?: boolean; // Nút nổi bật hơn
+  isPrimary?: boolean;
+  badge?: string;
 }
 
 export interface ThemeConfig {
   tagline: string;
   title: string;
+  subtitle?: string;
   shortName: string;
   baseRoute: string;
   phoneContact: string;
-  donateInfo: string; // Thông tin hoặc route nhận bonus/ủng hộ
-  stats: Array<{ id: string; label: string; value: string; icon: LucideIcon }>;
-  actions: Array<HudAction>; // Các công cụ tương tác động thay đổi theo chủ đề
+  donateInfo: string;
+  stats: Array<{ id: string; label: string; value: string; icon: LucideIcon; trend?: string }>;
+  actions: Array<HudAction>;
 }
 
 export const THEME_CONFIGS: Record<string, ThemeConfig> = {
   market: {
-    tagline: "Chợ Phan Rang",
-    title: "Ẩm Thực & Gian Hàng",
+    tagline: "Ẩm thực Phan Rang",
+    title: "Chợ Phan Rang",
+    subtitle: "Khám phá ẩm thực địa phương",
     shortName: "PR",
     baseRoute: "/chophanrang",
     phoneContact: "0793784133",
     donateInfo: "/chophanrang/donate",
     stats: [
-      { id: "stores", label: "Quán ăn", value: "850+", icon: Factory },
-      { id: "drivers", label: "Tài xế", value: "35+", icon: HardDrive },
-      { id: "orders", label: "Đơn hàng", value: "1.2k+", icon: Calendar },
+      { id: "stores", label: "Quán ăn", value: "850+", icon: Factory, trend: "+12%" },
+      { id: "drivers", label: "Tài xế", value: "35+", icon: Car, trend: "+5%" },
+      { id: "orders", label: "Đơn hàng", value: "1.2k+", icon: Calendar, trend: "+23%" },
     ],
     actions: [
-      { id: "add-store", title: "Mở Quán Ăn", subtitle: "Tạo gian hàng mới", icon: PlusCircle, path: "/chophanrang", isPrimary: true },
-      { id: "reg-driver", title: "Đăng Ký Tài Xế", subtitle: "Chạy ship giao hàng", icon: Truck, path: "/chophanrang" },
-      { id: "food-service", title: "Khám Phá Dịch Vụ", subtitle: "Đặt món ăn siêu tốc", icon: ShoppingBag, path: "/chophanrang" }
+      { id: "add-store", title: "Mở Quán", subtitle: "Tạo gian hàng", icon: PlusCircle, path: "/chophanrang", isPrimary: true, badge: "Hot" },
+      { id: "reg-driver", title: "Đăng Ký Tài Xế", subtitle: "Chạy ship", icon: Truck, path: "/chophanrang" },
+      { id: "food-service", title: "Đặt Món", subtitle: "Giao tận nơi", icon: ShoppingBag, path: "/chophanrang" }
     ]
   },
   jobs: {
-    tagline: "Trung tâm Việc Làm",
-    title: "Tuyển Dụng Cấp Tốc",
+    tagline: "Cơ hội việc làm",
+    title: "Trung tâm Việc Làm",
+    subtitle: "Kết nối ứng viên - nhà tuyển dụng",
     shortName: "JB",
     baseRoute: "/jobs",
     phoneContact: "0793784133",
     donateInfo: "/jobs/premium",
     stats: [
-      { id: "jobs", label: "Việc mới", value: "120+", icon: Briefcase },
-      { id: "applied", label: "Ứng tuyển", value: "450+", icon: UserCheck },
-      { id: "growth", label: "Công ty", value: "45+", icon: TrendingUp },
+      { id: "jobs", label: "Việc mới", value: "120+", icon: Briefcase, trend: "+8%" },
+      { id: "applied", label: "Ứng tuyển", value: "450+", icon: UserCheck, trend: "+15%" },
+      { id: "growth", label: "Công ty", value: "45+", icon: TrendingUp, trend: "+3%" },
     ],
     actions: [
-      { id: "post-job", title: "Tuyển Nhân Viên", subtitle: "Đăng tin tuyển nhanh", icon: PlusCircle, path: "/jobs", isPrimary: true },
-      { id: "create-cv", title: "Tạo Hồ Sơ", subtitle: "Ứng tuyển việc ngay", icon: UserCheck, path: "/jobs" },
-      { id: "find-job", title: "Tìm Việc Làm", subtitle: "Khám phá cơ hội", icon: Search, path: "/jobs" }
+      { id: "post-job", title: "Tuyển Dụng", subtitle: "Đăng tin tuyển", icon: PlusCircle, path: "/jobs", isPrimary: true, badge: "Urgent" },
+      { id: "create-cv", title: "Tạo CV", subtitle: "Ứng tuyển ngay", icon: UserCheck, path: "/jobs" },
+      { id: "find-job", title: "Tìm Việc", subtitle: "Khám phá cơ hội", icon: Search, path: "/jobs" }
     ]
   },
   cinema: {
     tagline: "Studio & Cinema",
     title: "Cộng Đồng Làm Phim",
+    subtitle: "Nơi hội tụ những người làm phim",
     shortName: "CM",
     baseRoute: "/cimanet",
     phoneContact: "0793784133",
     donateInfo: "/cinema/fund",
     stats: [
-      { id: "movies", label: "Dự án phim", value: "18+", icon: Film },
-      { id: "studios", label: "Phòng studio", value: "12+", icon: Video },
-      { id: "creators", label: "Creator", value: "85+", icon: Award },
+      { id: "movies", label: "Dự án", value: "18+", icon: Film, trend: "+4%" },
+      { id: "studios", label: "Studio", value: "12+", icon: Video, trend: "+2%" },
+      { id: "creators", label: "Creator", value: "85+", icon: Award, trend: "+10%" },
     ],
     actions: [
-      { id: "add-project", title: "Thêm Dự Án", subtitle: "Đăng ký phim mới", icon: PlusCircle, path: "/cimanet", isPrimary: true },
-      { id: "rent-equip", title: "Thuê Thiết Bị", subtitle: "Máy quay, lens, đèn", icon: Sparkles, path: "/cimanet" },
-      { id: "find-crew", title: "Tìm Ê-kíp", subtitle: "Kết nối talent & góc máy", icon: Compass, path: "/cimanet" }
+      { id: "add-project", title: "Thêm Dự Án", subtitle: "Đăng ký phim mới", icon: PlusCircle, path: "/cimanet", isPrimary: true, badge: "New" },
+      { id: "rent-equip", title: "Thuê TB", subtitle: "Máy quay, đèn", icon: Sparkles, path: "/cimanet" },
+      { id: "find-crew", title: "Tìm Ê-kíp", subtitle: "Kết nối talent", icon: Compass, path: "/cimanet" }
     ]
   },
   study: {
-    tagline: "Cộng Đồng Học Tập",
-    title: "Góc Học Tập & Trao Đổi",
+    tagline: "Học tập & Trao đổi",
+    title: "Góc Học Tập",
+    subtitle: "Cùng nhau tiến bộ",
     shortName: "ST",
     baseRoute: "/caodangnghe",
     phoneContact: "0793784133",
     donateInfo: "/study/support",
     stats: [
-      { id: "documents", label: "Tài liệu", value: "3.4k+", icon: BookOpen },
-      { id: "rooms", label: "Phòng học", value: "28+", icon: GraduationCap },
-      { id: "mentors", label: "Trợ giảng", value: "50+", icon: Users },
+      { id: "documents", label: "Tài liệu", value: "3.4k+", icon: BookOpen, trend: "+20%" },
+      { id: "rooms", label: "Phòng học", value: "28+", icon: GraduationCap, trend: "+5%" },
+      { id: "mentors", label: "Trợ giảng", value: "50+", icon: Users, trend: "+8%" },
     ],
     actions: [
-      { id: "share-doc", title: "Đóng Góp Tài Liệu", subtitle: "Tải lên giáo trình", icon: PlusCircle, path: "/caodangnghe", isPrimary: true },
-      { id: "create-group", title: "Tạo Nhóm Tự Học", subtitle: "Tìm bạn đồng hành", icon: Users, path: "/caodangnghe" },
-      { id: "find-place", title: "Địa Điểm Học", subtitle: "Thư viện, quán cà phê", icon: MapPin, path: "/caodangnghe" }
+      { id: "share-doc", title: "Đóng Góp TL", subtitle: "Tải lên giáo trình", icon: PlusCircle, path: "/caodangnghe", isPrimary: true },
+      { id: "create-group", title: "Tạo Nhóm", subtitle: "Bạn đồng hành", icon: Users, path: "/caodangnghe" },
+      { id: "find-place", title: "Địa Điểm", subtitle: "Thư viện, quán", icon: MapPin, path: "/caodangnghe" }
     ]
   },
   startup: {
-    tagline: "Tuổi Trẻ & Khởi Nghiệp",
+    tagline: "Khởi nghiệp & Đổi mới",
     title: "Hệ Sinh Thái Gọi Vốn",
+    subtitle: "Ươm mầm ý tưởng đột phá",
     shortName: "SU",
     baseRoute: "https://anothermvp.vercel.app",
     phoneContact: "0793784133",
     donateInfo: "/startup/invest",
     stats: [
-      { id: "ideas", label: "Ý tưởng", value: "3.4k+", icon: BookOpen },
-      { id: "teams", label: "Đội ngũ", value: "28+", icon: GraduationCap },
-      { id: "launched", label: "Đã ra mắt", value: "50+", icon: Users },
+      { id: "ideas", label: "Ý tưởng", value: "3.4k+", icon: BookOpen, trend: "+15%" },
+      { id: "teams", label: "Đội ngũ", value: "28+", icon: Users, trend: "+7%" },
+      { id: "launched", label: "Đã ra mắt", value: "50+", icon: Award, trend: "+10%" },
     ],
     actions: [
-      { id: "pitch-idea", title: "Nộp Ý Tưởng", subtitle: "Gọi vốn công nghệ", icon: PlusCircle, path: "https://anothermvp.vercel.app", isPrimary: true },
-      { id: "find-co-founder", title: "Tìm Co-Founder", subtitle: "Ghép đội lập nghiệp", icon: Users, path: "https://anothermvp.vercel.app" },
-      { id: "book-mentor", title: "Gặp Mentor", subtitle: "Tư vấn chiến lược", icon: MapPin, path: "https://anothermvp.vercel.app" }
+      { id: "pitch-idea", title: "Nộp Ý Tưởng", subtitle: "Gọi vốn", icon: PlusCircle, path: "https://anothermvp.vercel.app", isPrimary: true, badge: "Hot" },
+      { id: "find-co-founder", title: "Tìm Co-Founder", subtitle: "Ghép đội", icon: Users, path: "https://anothermvp.vercel.app" },
+      { id: "book-mentor", title: "Gặp Mentor", subtitle: "Tư vấn", icon: MapPin, path: "https://anothermvp.vercel.app" }
     ]
   },
   driver: {
-    tagline: "Tài xế & Giao hàng",
+    tagline: "Vận tải & Giao hàng",
     title: "Mạng Lưới Vận Chuyển",
+    subtitle: "Kết nối tài xế - đối tác",
     shortName: "DR",
     baseRoute: "/chophanrang",
     phoneContact: "0793784133",
     donateInfo: "/drivers/tip",
     stats: [
-      { id: "drivers", label: "Tài xế", value: "3.4k+", icon: Car },
-      { id: "orders", label: "Đơn hàng", value: "28+", icon: ClipboardList },
-      { id: "deliveries", label: "Đối tác", value: "50+", icon: Users },
+      { id: "drivers", label: "Tài xế", value: "3.4k+", icon: Car, trend: "+11%" },
+      { id: "orders", label: "Đơn hàng", value: "28+", icon: ClipboardList, trend: "+9%" },
+      { id: "deliveries", label: "Đối tác", value: "50+", icon: Users, trend: "+4%" },
     ],
     actions: [
-      { id: "create-order", title: "Tạo Đơn Ship", subtitle: "Giao hàng hỏa tốc", icon: PlusCircle, path: "/chophanrang", isPrimary: true },
-      { id: "driver-chat", title: "Trạm Giao Lưu", subtitle: "Cộng đồng tài xế", icon: MessageSquare, path: "/chophanrang" },
-      { id: "find-station", title: "Trạm Tiếp Nhiên Liệu", subtitle: "Điểm dừng hỗ trợ", icon: MapPin, path: "/chophanrang" }
+      { id: "create-order", title: "Tạo Đơn", subtitle: "Giao hàng", icon: PlusCircle, path: "/chophanrang", isPrimary: true, badge: "Express" },
+      { id: "driver-chat", title: "Trạm Giao Lưu", subtitle: "Cộng đồng", icon: MessageSquare, path: "/chophanrang" },
+      { id: "find-station", title: "Trạm Nhiên Liệu", subtitle: "Điểm dừng", icon: MapPin, path: "/chophanrang" }
     ]
   },
   langnghe: {
     tagline: "Văn hóa truyền thống",
-    title: "Dệt thổ cẩm Chăm Mỹ Nghiệp",
+    title: "Dệt thổ cẩm Chăm",
+    subtitle: "Giữ gìn bản sắc dân tộc",
     shortName: "LN",
     baseRoute: "/langnghe",
     phoneContact: "0793784133",
     donateInfo: "/langnghe/support",
     stats: [
-      { id: "crafts", label: "Sản phẩm", value: "1.2k+", icon: Sparkles },
-      { id: "artisans", label: "Nghệ nhân", value: "320+", icon: Users },
-      { id: "villages", label: "Làng nghề", value: "12+", icon: Compass },
+      { id: "crafts", label: "Sản phẩm", value: "1.2k+", icon: Sparkles, trend: "+6%" },
+      { id: "artisans", label: "Nghệ nhân", value: "320+", icon: Users, trend: "+8%" },
+      { id: "villages", label: "Làng nghề", value: "12+", icon: Compass, trend: "+2%" },
     ],
     actions: [
-      {
-        id: "add-product",
-        title: "Đăng Sản Phẩm",
-        subtitle: "Quảng bá thủ công",
-        icon: PlusCircle,
-        path: "/langnghe",
-        isPrimary: true
-      },
-      {
-        id: "visit-village",
-        title: "Khám Phá Làng Nghề",
-        subtitle: "Du lịch trải nghiệm",
-        icon: MapPin,
-        path: "/langnghe"
-      },
-      {
-        id: "connect-artisan",
-        title: "Kết Nối Nghệ Nhân",
-        subtitle: "Hợp tác sản xuất",
-        icon: Users,
-        path: "/langnghe"
-      }
+      { id: "add-product", title: "Đăng Sản Phẩm", subtitle: "Quảng bá", icon: PlusCircle, path: "/langnghe", isPrimary: true, badge: "New" },
+      { id: "visit-village", title: "Khám Phá", subtitle: "Du lịch trải nghiệm", icon: MapPin, path: "/langnghe" },
+      { id: "connect-artisan", title: "Kết Nối", subtitle: "Hợp tác", icon: Users, path: "/langnghe" }
     ]
   }
 };

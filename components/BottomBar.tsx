@@ -49,9 +49,9 @@ export default function BottomBar() {
 
   const tabs: TabItem[] = [
     { id: "map", label: "Bản đồ", icon: "🌍", route: "map" },
-    { id: "home", label: "Đội nhóm", icon: "🏛️", route: "home" },
-    { id: "create", label: "Ghim", icon: "+", isAction: true },
     { id: "teams", label: "Dịch vụ", icon: "🤝", route: "teams" },
+    { id: "create", label: "Ghim", icon: "+", isAction: true },
+    { id: "home", label: "Đội nhóm", icon: "🏛️", route: "home" },
     { id: "profile", label: "Cá nhân", icon: "👤", route: "profile" },
   ];
 
