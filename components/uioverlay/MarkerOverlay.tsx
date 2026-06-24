@@ -75,7 +75,7 @@ function BonusModal({
               {/* QR Code placeholder - bạn có thể thay bằng QR thật */}
               <div className="w-full h-full rounded-lg overflow-hidden">
                 <img
-                  src="/qr.jpg" // <-- thay bằng link QR của bạn
+                  src="/qr.jpg"
                   alt="QR Code"
                   className="w-full h-full object-cover"
                 />
