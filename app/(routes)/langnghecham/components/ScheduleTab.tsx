@@ -1,22 +1,13 @@
-
 import React, { useState } from 'react';
 import { ScheduleItem } from '../types';
-import { Clock, MapPin, Filter, Sparkles, CalendarDays, BookOpen, AlertCircle } from 'lucide-react';
+import { Clock, MapPin, Sparkles, CalendarDays, AlertCircle } from 'lucide-react';
 
 interface ScheduleTabProps {
   schedule: ScheduleItem[];
 }
 
 export default function ScheduleTab({ schedule }: ScheduleTabProps) {
-  const [selectedDay, setSelectedDay] = useState<'all' | '2026-06-26' | '2026-06-27' | '2026-06-28'>('all');
   const [selectedType, setSelectedType] = useState<'all' | 'main' | 'culture' | 'workshop' | 'exhibition'>('all');
-
-  const days = [
-    { value: 'all', label: 'Tất Cả Ngày' },
-    { value: '2026-06-26', label: 'Ngày 26/06 (Khai Mạc)' },
-    { value: '2026-06-27', label: 'Ngày 27/06 (Hội Thảo & Hội Thi)' },
-    { value: '2026-06-28', label: 'Ngày 28/06 (Thể Thao & Bế Mạc)' },
-  ];
 
   const types = [
     { value: 'all', label: 'Tất Cả Hoạt Động' },
@@ -41,11 +32,10 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
     }
   };
 
-  // Filter schedule list
+  // Lọc danh sách lịch trình
   const filteredSchedule = schedule.filter((item) => {
-    const matchDay = selectedDay === 'all' || item.date === selectedDay;
     const matchType = selectedType === 'all' || item.type === selectedType;
-    return matchDay && matchType;
+    return matchType;
   });
 
   const getDayLabel = (dateStr: string) => {
@@ -63,38 +53,16 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
           <CalendarDays className="w-3.5 h-3.5 text-rose-600" />
           <span>LỊCH TRÌNH CHÍNH THỨC</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-serif">
-          Khám Phá Hoạt Động Lễ Hội Chăm VI
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
+          Khám Phá Các Hoạt Động Lễ Hội Văn Hóa Chăm
         </h2>
-        <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
-          Đừng bỏ lỡ các màn trống hội rộn rã, trình diễn dệt vải thổ cẩm của nghệ nhân, hội thi ẩm thực và đêm múa hội dân tộc lung linh diễn ra từ 26/06 đến 28/06/2026.
-        </p>
+        <p className="text-xs text-zinc-500 font-medium">Diễn ra từ ngày 26/06 đến 28/06/2026</p>
       </section>
 
       {/* Filtering Toolbar */}
       <section className="bg-white p-5 rounded-2xl border border-rose-100/50 shadow-xs space-y-4 max-w-4xl mx-auto">
-        {/* Filter by Day */}
-        <div className="space-y-2">
-          <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider block">Chọn ngày diễn ra:</span>
-          <div className="flex flex-wrap gap-2">
-            {days.map((day) => (
-              <button
-                key={day.value}
-                onClick={() => setSelectedDay(day.value as any)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all ${
-                  selectedDay === day.value
-                    ? 'bg-rose-600 text-white shadow-xs'
-                    : 'bg-zinc-50 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
-                }`}
-              >
-                {day.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Filter by Category */}
-        <div className="space-y-2 pt-2 border-t border-zinc-100">
+        {/* Bộ lọc Phân loại hoạt động */}
+        <div className="space-y-2 pt-3 border-t border-zinc-100">
           <span className="text-xs font-bold text-zinc-500 uppercase tracking-wider block">Phân loại hoạt động:</span>
           <div className="flex flex-wrap gap-2">
             {types.map((type) => (
@@ -103,7 +71,7 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
                 onClick={() => setSelectedType(type.value as any)}
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold cursor-pointer transition-all ${
                   selectedType === type.value
-                    ? 'bg-zinc-950 text-white shadow-xs'
+                    ? 'bg-rose-500 text-white shadow-xs'
                     : 'bg-zinc-50 text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900'
                 }`}
               >
@@ -116,10 +84,8 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
 
       {/* Schedule Chronological Timeline */}
       <section className="max-w-3xl mx-auto relative">
-        {/* Decorative central line for timeline on desktop */}
         <div className="absolute left-4 sm:left-1/2 top-2 bottom-2 w-0.5 bg-zinc-200 -translate-x-1/2 hidden sm:block"></div>
 
-        {/* List of items */}
         <div className="space-y-8">
           {filteredSchedule.map((item, index) => {
             const isEven = index % 2 === 0;
@@ -129,19 +95,17 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
               <div
                 key={item.id}
                 id={`schedule-item-${item.id}`}
-                className={`relative flex flex-col sm:flex-row items-stretch sm:justify-between w-full group`}
+                className="relative flex flex-col sm:flex-row items-stretch sm:justify-between w-full group"
               >
                 {/* Timeline Dot Icon */}
                 <div className="absolute left-4 sm:left-1/2 w-8 h-8 rounded-full bg-white border-2 border-rose-500 shadow-xs flex items-center justify-center -translate-x-1/2 z-10 top-0 group-hover:scale-110 transition-transform hidden sm:flex">
                   <Clock className="w-3.5 h-3.5 text-rose-600" />
                 </div>
 
-                {/* Left Side Container (takes full width on mobile, half on desktop) */}
+                {/* Content Card */}
                 <div className={`w-full sm:w-[46%] ${isEven ? 'sm:order-first text-left sm:text-right' : 'sm:order-last text-left'}`}>
-                  {/* Outer card wrapping event details */}
                   <div className="bg-white rounded-2xl border border-rose-100/60 p-5 sm:p-6 shadow-3xs hover:shadow-xs transition-all space-y-3 relative">
-                    {/* Corner date badge for quick scan */}
-                    <div className="flex items-center justify-between sm:justify-start gap-2 flex-wrap">
+                    <div className={`flex items-center gap-2 flex-wrap ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
                       <span className="text-[10px] text-zinc-500 font-bold font-mono bg-zinc-100 px-2 py-0.5 rounded">
                         {getDayLabel(item.date)}
                       </span>
@@ -150,11 +114,11 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
                       </span>
                     </div>
 
-                    <h4 className="text-base sm:text-lg font-extrabold text-zinc-900 font-serif leading-snug">
+                    <h4 className="text-base sm:text-lg font-extrabold text-zinc-900 leading-snug">
                       {item.title}
                     </h4>
 
-                    {/* Time & Place Details Row */}
+                    {/* Time & Location */}
                     <div className={`flex flex-wrap items-center gap-y-1.5 gap-x-3 text-xs text-zinc-500 ${isEven ? 'sm:justify-end' : 'justify-start'}`}>
                       <span className="font-bold flex items-center gap-1 text-zinc-800 bg-rose-50/50 px-2 py-1 rounded border border-rose-100/30">
                         <Clock className="w-3.5 h-3.5 text-rose-500" /> {item.time}
@@ -170,14 +134,13 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
                   </div>
                 </div>
 
-                {/* Placeholders on the opposite side to balance grid on desktop */}
                 <div className="w-0 sm:w-[46%] hidden sm:block"></div>
               </div>
             );
           })}
         </div>
 
-        {filteredSchedule.length === 0 && (
+          {filteredSchedule.length === 0 && (
           <div className="text-center py-12 bg-white rounded-3xl border border-dashed border-zinc-200 text-zinc-500 space-y-2">
             <AlertCircle className="w-10 h-10 mx-auto text-zinc-300" />
             <p className="text-sm font-bold">Không tìm thấy hoạt động phù hợp bộ lọc.</p>
@@ -189,10 +152,10 @@ export default function ScheduleTab({ schedule }: ScheduleTabProps) {
       {/* Info Warning */}
       <section className="bg-zinc-900 text-white rounded-2xl p-6 text-center max-w-2xl mx-auto space-y-2">
         <p className="text-xs font-bold text-rose-400 uppercase tracking-widest flex items-center justify-center gap-1">
-          <Sparkles className="w-4 h-4 text-rose-500 animate-spin" /> Lưu ý thời gian thực tế
+          <Sparkles className="w-4 h-4 text-rose-500" /> Lưu ý thời gian thực tế
         </p>
         <p className="text-xs sm:text-sm leading-relaxed text-zinc-300">
-          Chương trình Ngày hội diễn ra liên tục tại bãi biển Nha Trang và Tháp Bà Po Nagar. Lịch thi ẩm thực có thể thay đổi nhẹ tùy thuộc vào tiến độ của từng đoàn nghệ thuật địa phương.
+          Chương trình Ngày hội diễn ra tập trung tại **Quảng trường 16/4 (Phan Rang - Tháp Chàm)**. Lịch thi văn nghệ, thể thao có thể thay đổi nhẹ tùy thuộc vào tiến độ điều phối thực tế từ Ban tổ chức địa phương.
         </p>
       </section>
     </div>

@@ -159,8 +159,8 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
           <ShoppingBag className="w-3.5 h-3.5 text-rose-600" />
           <span>CHỢ ONLINE GIAN HÀNG CHĂM</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-serif">
-          Ghé Gian Hàng Online - Trải Nghiệm Thổ Sản Chăm
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
+          Ghé Gian Hàng Online - Trải Nghiệm Sản Phẩm Chăm
         </h2>
         <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
           Tạo đòn bẩy kinh tế cho đồng bào người Chăm bằng cách kết nối trực tiếp khách tham quan lễ hội với các nghệ nhân nặn gốm, dệt vải thổ cẩm thủ công.
@@ -253,11 +253,11 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
                     className="w-10 h-10 rounded-full border border-white -mt-7 relative z-10 shadow-sm bg-white"
                   />
                   <div>
-                    <h3 className="text-base font-extrabold text-zinc-950 font-serif leading-tight truncate group-hover:text-rose-600 transition-colors">
+                    <h3 className="text-base font-extrabold text-zinc-950 leading-tight truncate group-hover:text-rose-600 transition-colors">
                       {stall.name}
                     </h3>
                     <p className="text-[10px] text-zinc-500 font-semibold">
-                      Chủ gian: {stall.owner} {stall.ownerTitle ? `(${stall.ownerTitle})` : ''}
+                      {stall.owner} {stall.ownerTitle ? `(${stall.ownerTitle})` : ''}
                     </p>
                   </div>
                 </div>
@@ -308,7 +308,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* Selected Stall Detail Modal */}
       {selectedStall && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center py-4 z-50 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-rose-100 flex flex-col animate-slide-up">
             {/* Banner top */}
             <div className="relative h-44 sm:h-52 w-full flex-shrink-0">
@@ -329,7 +329,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
                 <span className="text-[9px] font-extrabold uppercase tracking-wider bg-rose-600 px-2 py-0.5 rounded-md">
                   {getCategoryLabel(selectedStall.category)}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold font-serif mt-1">{selectedStall.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold mt-1">{selectedStall.name}</h3>
                 <p className="text-zinc-200 text-xs mt-0.5">Người đại diện: {selectedStall.owner} ({selectedStall.ownerTitle})</p>
               </div>
             </div>
@@ -378,7 +378,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
                 {/* Right: Products List */}
                 <div className="md:col-span-8 space-y-4">
                   <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
-                    <h4 className="text-sm font-extrabold text-zinc-950 font-serif">Danh Sách Sản Phẩm Đăng Bán</h4>
+                    <h4 className="text-sm font-extrabold text-zinc-950">Danh Sách Sản Phẩm Đăng Bán</h4>
                     <span className="text-[10px] text-rose-600 font-bold bg-rose-50 px-2 py-0.5 rounded">
                       Chính chủ đồng bào đăng
                     </span>
@@ -446,7 +446,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-rose-100 p-6 sm:p-8 animate-slide-up space-y-5 text-left">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
-              <h3 className="text-base sm:text-lg font-extrabold text-zinc-900 font-serif flex items-center gap-1">
+              <h3 className="text-base sm:text-lg font-extrabold text-zinc-900 flex items-center gap-1">
                 <Store className="w-5 h-5 text-rose-600" /> Đăng Ký Gian Hàng Mới
               </h3>
               <button
@@ -586,7 +586,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-rose-100 p-6 sm:p-8 animate-slide-up space-y-5 text-left z-60">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
-              <h3 className="text-base font-extrabold text-zinc-900 font-serif">
+              <h3 className="text-base font-extrabold text-zinc-900">
                 Thêm Sản Phẩm Mới (vào: {selectedStall?.name})
               </h3>
               <button
@@ -678,7 +678,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl border border-rose-100 animate-slide-up text-left space-y-5">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
-              <h3 className="text-base font-extrabold text-zinc-950 font-serif">
+              <h3 className="text-base font-extrabold text-zinc-950">
                 Gửi Lời Nhắn Cho Chủ Gian
               </h3>
               <button onClick={() => setShowContactForm(false)} className="text-zinc-400 hover:text-zinc-600">

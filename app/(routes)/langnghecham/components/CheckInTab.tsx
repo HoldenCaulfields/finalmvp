@@ -15,31 +15,31 @@ const PRESET_PHOTOS = [
   {
     id: 'p1',
     name: 'Múa Quạt',
-    url: 'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?auto=format&fit=crop&w=600&q=80',
+    url: '/muacham.jpg',
     desc: 'Điệu múa quạt Chăm rực rỡ'
   },
   {
     id: 'p2',
     name: 'Làng Gốm',
-    url: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80',
+    url: '/gombautruc.jpg',
     desc: 'Bàn tay nghệ nhân làm gốm'
   },
   {
     id: 'p3',
-    name: 'Khung Cửi',
-    url: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=600&q=80',
+    name: 'Dệt vải',
+    url: '/vhoa-cham.jpg',
     desc: 'Sợi tơ thổ cẩm rạng ngời'
   },
   {
     id: 'p4',
-    name: 'Nha Trang',
-    url: 'https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80',
+    name: 'Văn Hóa',
+    url: 'thapcham.webp',
     desc: 'Bãi biển Nha Trang lộng gió'
   }
 ];
 
 const LOCATIONS = [
-  "Sân khấu chính Quảng trường 2/4",
+  "Sân khấu chính Quảng trường 16/4",
   "Gian hàng dệt Mỹ Nghiệp - Làng nghề",
   "Khu ẩm thực Chăm Lễ Hội",
   "Khu triển lãm gốm cổ Bàu Trúc",
@@ -141,12 +141,21 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
       }
 
       // Use the chosen image (either preset URL or uploaded Cloudinary URL)
+      const avatarIds = [
+        '1534528741775-53994a69daeb', // Nữ
+        '1539571696357-5a69c17a67c6', // Nam
+        '1507003211169-0a1dd7228f2d', // Nam
+        '1494790108377-be9c29b29330', // Nữ
+        '1500648767791-00dcc994a43e'  // Nam
+      ];
+      const randomId = avatarIds[Math.floor(Math.random() * avatarIds.length)];
+
       await onAddCheckIn({
         name: name.trim(),
         caption: caption.trim(),
         location,
         image: finalImageUrl,
-        avatar: `https://images.unsplash.com/photo-${1500000000000 + Math.floor(Math.random() * 999999)}?auto=format&fit=crop&w=100&q=80`
+        avatar: `https://images.unsplash.com/photo-${randomId}?auto=format&fit=crop&w=100&h=100&q=80`
       });
 
       // Clear inputs upon success
@@ -185,11 +194,11 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
           <Camera className="w-3.5 h-3.5 text-rose-600" />
           <span>KHOẢNH KHẮC NGÀY HỘI</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-serif">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
           Ghi Lại Kỷ Niệm & Gửi Gắm Tình Thân
         </h2>
         <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
-          Đăng ảnh check-in thực tế của bạn tại Tháp Bà, bãi biển hay các gian hàng thổ cẩm để kết nối người Chăm với hàng nghìn du khách muôn phương.
+          Đăng ảnh check-in thực tế của bạn tại Phan Rang - Tháp Chàm, bãi biển hay các gian hàng thổ cẩm để kết nối người Chăm với hàng nghìn du khách muôn phương.
         </p>
       </section>
 
@@ -197,7 +206,7 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
         {/* Left column: Posting Form */}
         <section className="lg:col-span-5 bg-white rounded-3xl border border-rose-100/60 p-6 sm:p-8 shadow-sm space-y-6">
           <div className="space-y-1">
-            <h3 className="text-lg font-extrabold text-zinc-900 font-serif flex items-center gap-1.5">
+            <h3 className="text-lg font-extrabold text-zinc-900 flex items-center gap-1.5">
               <Sparkles className="w-5 h-5 text-rose-500" /> Gửi Check-In Của Bạn
             </h3>
             <p className="text-xs text-zinc-500">
@@ -270,9 +279,8 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
                 onDragLeave={handleDrag}
                 onDrop={handleDrop}
                 onClick={() => fileInputRef.current?.click()}
-                className={`w-full h-36 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all relative overflow-hidden group ${
-                  customImageBase64 ? 'border-rose-500 bg-rose-50/25' : 'border-zinc-300 hover:border-rose-400 hover:bg-rose-50/10'
-                } ${isDragActive ? 'border-rose-600 bg-rose-50/40 scale-[1.02]' : ''}`}
+                className={`w-full h-36 border-2 border-dashed rounded-2xl flex flex-col items-center justify-center p-4 cursor-pointer transition-all relative overflow-hidden group ${customImageBase64 ? 'border-rose-500 bg-rose-50/25' : 'border-zinc-300 hover:border-rose-400 hover:bg-rose-50/10'
+                  } ${isDragActive ? 'border-rose-600 bg-rose-50/40 scale-[1.02]' : ''}`}
               >
                 {customImageBase64 ? (
                   <>
@@ -331,9 +339,8 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
                             setSelectedPhoto(photo.url);
                             setErrorMsg('');
                           }}
-                          className={`relative h-14 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
-                            isSelected ? 'border-rose-600 scale-[1.04] ring-2 ring-rose-200' : 'border-transparent opacity-70 hover:opacity-100'
-                          }`}
+                          className={`relative h-14 rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${isSelected ? 'border-rose-600 scale-[1.04] ring-2 ring-rose-200' : 'border-transparent opacity-70 hover:opacity-100'
+                            }`}
                           title={photo.desc}
                         >
                           <img
@@ -379,7 +386,7 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
         {/* Right column: Photo Wall Grid */}
         <section className="lg:col-span-7 space-y-6">
           <div className="flex justify-between items-center border-b border-rose-100 pb-3">
-            <h3 className="text-lg font-extrabold text-zinc-950 font-serif">
+            <h3 className="text-lg font-extrabold text-zinc-950">
               Tường Ảnh Kỷ Niệm ({checkins.length})
             </h3>
             <span className="text-xs text-rose-600 font-bold font-display bg-rose-50 px-2.5 py-1 rounded-full border border-rose-100">

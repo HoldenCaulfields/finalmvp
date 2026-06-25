@@ -9,12 +9,12 @@ interface HomeTabProps {
 }
 
 const slideImages = [
-    'https://images.unsplash.com/photo-1518235506717-e1ed3306a89b?auto=format&fit=crop&w=1200&q=80', // Apsara/Dancing/Festival style
-    'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=1200&q=80', // Weaving/Thổ cẩm
-    'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=1200&q=80', // Pottery/Gốm Bàu Trúc
-    'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80', // Nha Trang beach
-    'https://images.unsplash.com/photo-1621886292650-520f76c747d6?auto=format&fit=crop&w=1200&q=80', // Po Nagar Cham towers
-  ];
+  '/vanhoacham.jpg', // Apsara/Dancing/Festival style
+  '/cham_ninhthuan.jpg', // Weaving/Thổ cẩm
+  '/thapcham.webp', // Pottery/Gốm Bàu Trúc
+  '/gombautruc.jpg', // Nha Trang beach
+  '/vhoa-cham.jpg', // Po Nagar Cham towers
+];
 
 export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
@@ -116,18 +116,20 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
   return (
     <div className="space-y-12 animate-fade-in pb-16">
       {/* Dynamic Hero Banner with Background Slideshow */}
-      <section className="relative overflow-hidden rounded-3xl bg-zinc-950 text-white shadow-2xl min-h-[420px] sm:min-h-[480px] flex flex-col justify-between">
-        
+      <section className="relative overflow-hidden rounded-3xl bg-zinc-600 text-white shadow-2xl min-h-[420px] sm:min-h-[480px] flex flex-col justify-between">
+
         {/* Background Images with Fade Transition */}
         <div className="absolute inset-0">
           {slideImages.map((image, index) => (
-            <div
+            <img
               key={index}
-              className={`absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out ${
-                currentSlide === index ? 'opacity-50 scale-100 visible' : 'opacity-0 scale-95 invisible'
-              }`}
-              style={{ backgroundImage: `url('${image}')` }}
-            ></div>
+              src={image}
+              alt=""
+              className={`absolute inset-0 w-full h-full object-cover transition-all duration-1000 ease-in-out ${currentSlide === index
+                  ? 'opacity-80 scale-100 visible'
+                  : 'opacity-0 scale-95 invisible'
+                }`}
+            />
           ))}
         </div>
 
@@ -136,18 +138,18 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
           <div className="inline-flex items-center space-x-2 bg-rose-600/95 text-white px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6 border border-rose-400 self-start">
             <Sparkles className="w-3.5 h-3.5" /> <span>ĐANG DIỄN RA TRONG TUẦN NÀY</span>
           </div>
-          
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-serif leading-tight text-white mb-4">
-            Chào Mừng Đến Với <br/>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-rose-200">
-              Ngày Hội Văn Hóa Chăm VI
+
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight text-white mb-4">
+            Chào Mừng Đến Với <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-600 to-rose-500">
+              Ngày Hội Văn Hóa Dân tộc Chăm
             </span>
           </h2>
-          
+
           <p className="text-zinc-200 text-sm sm:text-base md:text-lg mb-8 max-w-xl leading-relaxed">
-            Hòa mình vào không khí rộn rã của Lễ hội tại Nha Trang - Khánh Hòa từ <span className="font-bold text-rose-300">26/06 đến 28/06/2026</span>. Đồng hành, sẻ chia và kết nối cùng đồng bào Chăm bản địa.
+            Hòa mình vào không khí rộn rã của Lễ hội tại Phan Rang - Khánh Hòa từ <span className="font-bold text-rose-300">26/06 đến 28/06/2026</span>. Đồng hành, sẻ chia và kết nối cùng đồng bào Chăm bản địa.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <button
               onClick={() => setActiveTab('checkin')}
@@ -183,14 +185,13 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
         </div>
 
         {/* Dots indicator */}
-        <div className="absolute bottom-16 sm:bottom-20 left-6 sm:left-12 flex space-x-1.5 z-20">
+        <div className="absolute bottom-24 left-6 sm:left-12 flex space-x-1.5 z-20">
           {slideImages.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setCurrentSlide(idx)}
-              className={`h-1.5 rounded-full transition-all cursor-pointer ${
-                currentSlide === idx ? 'w-6 bg-rose-500' : 'w-2 bg-zinc-500 hover:bg-zinc-400'
-              }`}
+              className={`h-1.5 rounded-full transition-all cursor-pointer ${currentSlide === idx ? 'w-6 bg-rose-500' : 'w-2 bg-zinc-500 hover:bg-zinc-400'
+                }`}
               aria-label={`Đi tới slide ${idx + 1}`}
             ></button>
           ))}
@@ -220,7 +221,7 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
       <section className="space-y-6">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <span className="text-xs font-extrabold tracking-widest text-rose-600 uppercase font-display">TÌM HIỂU TRUYỀN THỐNG</span>
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-serif">Di Sản Ngàn Năm Của Người Chăm</h3>
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">Di Sản Ngàn Năm Của Người Chăm</h3>
           <p className="text-zinc-500 text-sm sm:text-base">
             Khám phá những nét mộc mạc, gần gũi trong đời sống sinh hoạt, dệt thổ cẩm Mỹ Nghiệp rực rỡ sắc màu, hay làm gốm nung lộ thiên độc đáo.
           </p>
@@ -246,7 +247,7 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
               <div className="p-6 flex flex-col flex-1 space-y-3">
                 <div className="space-y-1">
                   <span className="text-xs text-rose-600 font-medium font-display">{topic.subtitle}</span>
-                  <h4 className="text-lg font-bold text-zinc-950 font-serif leading-snug">{topic.title}</h4>
+                  <h4 className="text-lg font-bold text-zinc-950 leading-snug">{topic.title}</h4>
                 </div>
                 <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed flex-1">
                   {topic.shortDesc}
@@ -268,7 +269,7 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-rose-100 pb-3">
           <div className="space-y-1 text-left">
             <span className="text-xs font-extrabold tracking-widest text-rose-600 uppercase font-display">Giao Lưu & Chia Sẻ</span>
-            <h3 className="text-2xl font-extrabold text-zinc-900 font-serif">Khoảnh Khắc Lễ Hội Từ Du Khách</h3>
+            <h3 className="text-2xl font-extrabold text-zinc-900">Khoảnh Khắc Lễ Hội Từ Du Khách</h3>
             <p className="text-zinc-500 text-xs sm:text-sm">
               Xem ảnh đẹp từ các du khách khác đăng tải. Đăng ảnh ngay để giao lưu cùng mọi người nhé!
             </p>
@@ -332,8 +333,8 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
           <div className="inline-flex items-center space-x-1 bg-white text-rose-600 px-3 py-1 rounded-full text-xs font-bold border border-rose-100 shadow-3xs">
             <Award className="w-3.5 h-3.5 text-rose-600" /> <span>Tôi là người Chăm đồng hành</span>
           </div>
-          <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900 font-serif">
-            Hỗ Trợ Đồng Bào Chăm Kết Nối Toàn Cầu
+          <h3 className="text-xl sm:text-2xl font-extrabold text-zinc-900">
+            Đồng Bào Chăm Kết Nối Toàn Cầu
           </h3>
           <p className="text-zinc-600 text-xs sm:text-sm leading-relaxed">
             Chào quý vị! Tôi cũng là một người con của đồng bào Chăm. Tôi xây dựng ứng dụng này nhằm lưu giữ khoảnh khắc tuyệt vời của mọi du khách ghé thăm ngày hội lớn lần này, và đặc biệt là mở ra các gian hàng trực tuyến để các hộ gia đình Chăm, các nghệ nhân dệt thổ cẩm, nặn gốm tại làng quê có cơ hội giới thiệu sản phẩm trực tiếp đến khách tham quan gần xa.
@@ -402,7 +403,7 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
                       <span className="text-[10px] font-bold uppercase tracking-widest bg-rose-600 px-2 py-1 rounded-md">
                         {topic.tag}
                       </span>
-                      <h3 className="text-xl sm:text-2xl font-bold font-serif mt-2">{topic.title}</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold mt-2">{topic.title}</h3>
                       <p className="text-zinc-200 text-xs mt-1">{topic.subtitle}</p>
                     </div>
                   </div>

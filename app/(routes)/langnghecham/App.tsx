@@ -255,7 +255,7 @@ export default function App() {
     ];
     try {
       for (const item of defaults) {
-        await addDoc(collection(db, 'stalls'), item);
+        await addDoc(collection(db, 'stalls-cham'), item);
       }
     } catch (err) {
       console.error("Seeding stalls failed", err);
@@ -358,7 +358,7 @@ export default function App() {
     });
 
     // 2. Sync stalls real-time
-    const unsubscribeStalls = onSnapshot(collection(db, 'stalls'), (snapshot) => {
+    const unsubscribeStalls = onSnapshot(collection(db, 'stalls-cham'), (snapshot) => {
       const items: Stall[] = [];
       snapshot.forEach((doc) => {
         const data = doc.data();
@@ -607,17 +607,17 @@ export default function App() {
         ...newStall,
         products: []
       };
-      await addDoc(collection(db, 'stalls'), finalStall);
+      await addDoc(collection(db, 'stalls-cham'), finalStall);
       showToast(`🏪 Đăng ký gian hàng "${newStall.name}" thành công!`);
     } catch (err) {
-      handleFirestoreError(err, OperationType.WRITE, 'stalls');
+      handleFirestoreError(err, OperationType.WRITE, 'stalls-cham');
     }
   };
 
   // Register/Add product to a specific stall
   const handleAddProduct = async (stallId: string, newProduct: Omit<Product, 'id'>) => {
     try {
-      const docRef = doc(db, 'stalls', stallId);
+      const docRef = doc(db, 'stalls-cham', stallId);
       const stall = stalls.find(s => s.id === stallId);
       if (!stall) throw new Error("Không tìm thấy gian hàng");
       
@@ -631,7 +631,7 @@ export default function App() {
       });
       showToast(`🏷️ Đã thêm sản phẩm "${newProduct.name}" vào kệ hàng!`);
     } catch (err) {
-      handleFirestoreError(err, OperationType.WRITE, `stalls/${stallId}`);
+      handleFirestoreError(err, OperationType.WRITE, `stalls-cham/${stallId}`);
     }
   };
 
@@ -695,10 +695,10 @@ export default function App() {
       </main>
 
       {/* Footer copyright */}
-      <footer className="bg-white border-t border-zinc-100 py-6 text-center text-xs text-zinc-400 mt-auto hidden md:block">
+      <footer className="bg-white border-t border-zinc-100 py-6 text-center text-xs text-zinc-600 mt-auto hidden md:block">
         <div className="max-w-7xl mx-auto px-4">
           <p>© 2026 Lễ Hội Văn Hóa Dân Tộc Chăm Lần Thứ VI. Đồng hành bởi đồng bào người Chăm.</p>
-          <p className="mt-1 text-zinc-300">Khánh Hòa, Ngày 26 - 28 tháng 06 năm 2026</p>
+          <p className="mt-1 text-zinc-500">Khánh Hòa, Ngày 26 - 28 tháng 06 năm 2026</p>
         </div>
       </footer>
 

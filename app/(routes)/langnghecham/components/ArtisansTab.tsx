@@ -37,12 +37,9 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
           <Award className="w-3.5 h-3.5 text-rose-600" />
           <span>BẢO TỒN VĂN HÓA SỐNG</span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900 font-serif">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
           Gặp Gỡ & Kết Nối Cùng Nghệ Nhân Chăm
         </h2>
-        <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
-          Tôn vinh những đôi bàn tay tài hoa lưu giữ hồn cốt Chăm pa. Hãy ghé thăm trực tiếp các nghệ nhân tại khu vực làng nghề trình diễn dệt vải, nặn gốm tại Nha Trang.
-        </p>
       </section>
 
       {/* Artisans Grid List */}
@@ -71,7 +68,7 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
               {/* Artisan Summary details */}
               <div className="p-5 flex flex-col flex-1 space-y-4">
                 <div className="space-y-1">
-                  <h3 className="text-base sm:text-lg font-extrabold text-zinc-950 font-serif group-hover:text-rose-600 transition-colors">
+                  <h3 className="text-base sm:text-lg font-extrabold text-zinc-950 group-hover:text-rose-600 transition-colors">
                     {artisan.name}
                   </h3>
                   <p className="text-xs text-rose-600 font-bold font-display flex items-center gap-1">
@@ -120,7 +117,7 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
 
       {/* Artisan Biography Detailed Modal */}
       {selectedArtisan && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center py-4 z-50 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-rose-100 animate-slide-up flex flex-col text-left">
             <div className="relative h-56 flex-shrink-0">
               <img
@@ -140,7 +137,7 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
                 <span className="text-[10px] font-bold uppercase tracking-wider bg-rose-600 px-2.5 py-1 rounded">
                   {selectedArtisan.experience}
                 </span>
-                <h3 className="text-xl sm:text-2xl font-bold font-serif mt-2">{selectedArtisan.name}</h3>
+                <h3 className="text-xl sm:text-2xl font-bold mt-2">{selectedArtisan.name}</h3>
                 <p className="text-rose-300 text-xs font-semibold">{selectedArtisan.title}</p>
               </div>
             </div>

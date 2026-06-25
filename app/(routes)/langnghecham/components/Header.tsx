@@ -53,7 +53,7 @@ export default function Header({ activeTab, setActiveTab, onOpenCart, cartCount 
                 <span className="h-1 w-1 bg-zinc-300 rounded-full"></span>
                 <span className="text-xs text-zinc-500 font-medium">Khánh Hòa 2026</span>
               </div>
-              <h1 className="text-lg sm:text-xl font-bold text-zinc-950 font-serif leading-tight">
+              <h1 className="text-sm sm:text-xl font-bold text-zinc-950 font-serif leading-tight">
                 Ngày Hội Văn Hóa <span className="text-rose-600">Dân Tộc Chăm</span>
               </h1>
             </div>
