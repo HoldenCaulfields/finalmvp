@@ -59,10 +59,7 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <div className="absolute top-3 left-3 bg-white/95 text-rose-600 text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider shadow-2xs border border-rose-100">
-                  {artisan.experience}
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
               </div>
 
               {/* Artisan Summary details */}
@@ -126,7 +123,7 @@ export default function ArtisansTab({ artisans }: ArtisansTabProps) {
                 referrerPolicy="no-referrer"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/30 to-transparent"></div>
               <button
                 onClick={() => setSelectedArtisan(null)}
                 className="absolute top-4 right-4 p-2 bg-black/50 text-white rounded-full hover:bg-black/70 cursor-pointer transition-all"
