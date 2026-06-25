@@ -30,6 +30,9 @@ export const fetchSubMarkersByCategory = async (categoryId: string): Promise<Sub
       type: data.type,
       rating: data.rating,
       createdBy: data.createdBy,
+      imageUrl: data.imageUrl || undefined,
+      externalUrl: data.externalUrl || undefined,
+      address: data.address || undefined,
     };
   });
 };
@@ -38,7 +41,7 @@ export const fetchSubMarkersByCategory = async (categoryId: string): Promise<Sub
 export const createSubMarker = async (
   markerData: Omit<SubMarker, "id">
 ): Promise<string> => {
-  const docRef = await addDoc(collection(db, "sub_markers"), {
+  const payload: Record<string, any> = {
     categoryId: markerData.categoryId,
     title: markerData.title,
     position: new GeoPoint(markerData.position[0], markerData.position[1]),
@@ -46,7 +49,13 @@ export const createSubMarker = async (
     rating: markerData.rating || null,
     createdBy: markerData.createdBy,
     createdAt: new Date().toISOString(),
-  });
+  };
+
+  if (markerData.imageUrl) payload.imageUrl = markerData.imageUrl;
+  if (markerData.externalUrl) payload.externalUrl = markerData.externalUrl;
+  if (markerData.address) payload.address = markerData.address;
+
+  const docRef = await addDoc(collection(db, "sub_markers"), payload);
   return docRef.id;
 };
 

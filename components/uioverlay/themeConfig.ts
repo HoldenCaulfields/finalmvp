@@ -28,6 +28,7 @@ export interface ThemeConfig {
   donateInfo: string;
   stats: Array<{ id: string; label: string; value: string; icon: LucideIcon; trend?: string }>;
   actions: Array<HudAction>;
+  fallbackImages?: string[];
 }
 
 export const THEME_CONFIGS: Record<string, ThemeConfig> = {
@@ -48,6 +49,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "add-store", title: "Mở Quán", subtitle: "Tạo gian hàng", icon: PlusCircle, path: "/chophanrang", isPrimary: true, badge: "Hot" },
       { id: "reg-driver", title: "Đăng Ký Tài Xế", subtitle: "Chạy ship", icon: Truck, path: "/chophanrang" },
       { id: "food-service", title: "Đặt Món", subtitle: "Giao tận nơi", icon: ShoppingBag, path: "/chophanrang" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   jobs: {
@@ -67,6 +72,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "post-job", title: "Tuyển Dụng", subtitle: "Đăng tin tuyển", icon: PlusCircle, path: "/jobs", isPrimary: true, badge: "Urgent" },
       { id: "create-cv", title: "Tạo CV", subtitle: "Ứng tuyển ngay", icon: UserCheck, path: "/jobs" },
       { id: "find-job", title: "Tìm Việc", subtitle: "Khám phá cơ hội", icon: Search, path: "/jobs" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1515162305284-9c0f4c3f8e7a?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   cinema: {
@@ -86,6 +95,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "add-project", title: "Thêm Dự Án", subtitle: "Đăng ký phim mới", icon: PlusCircle, path: "/cimanet", isPrimary: true, badge: "New" },
       { id: "rent-equip", title: "Thuê TB", subtitle: "Máy quay, đèn", icon: Sparkles, path: "/cimanet" },
       { id: "find-crew", title: "Tìm Ê-kíp", subtitle: "Kết nối talent", icon: Compass, path: "/cimanet" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   study: {
@@ -105,6 +118,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "share-doc", title: "Đóng Góp TL", subtitle: "Tải lên giáo trình", icon: PlusCircle, path: "/caodangnghe", isPrimary: true },
       { id: "create-group", title: "Tạo Nhóm", subtitle: "Bạn đồng hành", icon: Users, path: "/caodangnghe" },
       { id: "find-place", title: "Địa Điểm", subtitle: "Thư viện, quán", icon: MapPin, path: "/caodangnghe" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1494949649100-ec6c31a70b2d?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1517430816045-df4b7de1f5f7?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   startup: {
@@ -124,6 +141,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "pitch-idea", title: "Nộp Ý Tưởng", subtitle: "Gọi vốn", icon: PlusCircle, path: "https://anothermvp.vercel.app", isPrimary: true, badge: "Hot" },
       { id: "find-co-founder", title: "Tìm Co-Founder", subtitle: "Ghép đội", icon: Users, path: "https://anothermvp.vercel.app" },
       { id: "book-mentor", title: "Gặp Mentor", subtitle: "Tư vấn", icon: MapPin, path: "https://anothermvp.vercel.app" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1557425493-08153496af3a?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   driver: {
@@ -143,6 +164,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "create-order", title: "Tạo Đơn", subtitle: "Giao hàng", icon: PlusCircle, path: "/chophanrang", isPrimary: true, badge: "Express" },
       { id: "driver-chat", title: "Trạm Giao Lưu", subtitle: "Cộng đồng", icon: MessageSquare, path: "/chophanrang" },
       { id: "find-station", title: "Trạm Nhiên Liệu", subtitle: "Điểm dừng", icon: MapPin, path: "/chophanrang" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=1200&auto=format&fit=crop"
     ]
   },
   langnghe: {
@@ -162,6 +187,10 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
       { id: "add-product", title: "Đăng Sản Phẩm", subtitle: "Quảng bá", icon: PlusCircle, path: "/langnghe", isPrimary: true, badge: "New" },
       { id: "visit-village", title: "Khám Phá", subtitle: "Du lịch trải nghiệm", icon: MapPin, path: "/langnghe" },
       { id: "connect-artisan", title: "Kết Nối", subtitle: "Hợp tác", icon: Users, path: "/langnghe" }
+    ],
+    fallbackImages: [
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?q=80&w=1200&auto=format&fit=crop"
     ]
   }
 };

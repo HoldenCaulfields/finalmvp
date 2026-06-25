@@ -15,6 +15,12 @@ export interface SubMarker {
   type: string;
   rating?: number;
   createdBy: string;
+  imageUrl?: string;
+  externalUrl?: string;
+  address?: string;
+  views?: number;
+  status?: string;
+  revenue?: string;
 }
 
 interface ViewState {

@@ -1,21 +1,31 @@
+"use client";
+
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { THEME_CONFIGS } from "@/components/uioverlay/themeConfig";
+import { ExternalLink } from "lucide-react";
+
+interface SubMarkerData {
+  id: string;
+  categoryId?: string;
+  title: string;
+  position: [number, number]; // [latitude, longitude]
+  type?: string;
+  rating?: number;
+  imageUrl?: string; // Thêm trường ảnh nền tùy chọn
+  address?: string;  // Thêm trường địa chỉ hiển thị thay cho tọa độ thô
+  externalUrl?: string;
+}
 
 interface SubMarkerModalProps {
   isOpen: boolean;
   onClose: () => void;
-  subMarkerData: {
-    id: string;
-    title: string;
-    position: [number, number]; // [latitude, longitude]
-    type?: string;
-    rating?: number;
-    imageUrl?: string; // Thêm trường ảnh nền tùy chọn
-    address?: string;  // Thêm trường địa chỉ hiển thị thay cho tọa độ thô
-  } | null;
+  subMarkerData: SubMarkerData | null;
 }
 
 export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMarkerModalProps) {
   const [animate, setAnimate] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     if (isOpen) {
@@ -37,18 +47,43 @@ export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMa
   };
 
   const handleViewDetails = () => {
-    // Logic xử lý khi bấm nút xem chi tiết (ví dụ: chuyển trang hoặc mở rộng modal)
-    console.log("Xem chi tiết địa điểm:", subMarkerData.id);
+    if (!subMarkerData) return;
+
+    // Ưu tiên mở externalUrl nếu có
+    if (subMarkerData.externalUrl) {
+      const url = subMarkerData.externalUrl.startsWith("http")
+        ? subMarkerData.externalUrl
+        : `https://${subMarkerData.externalUrl}`;
+
+      window.open(url, "_blank", "noopener,noreferrer");
+      onClose();
+      return;
+    }
+
+    // Fallback về route của category
+    const categoryId = subMarkerData.categoryId;
+    const route = categoryId && THEME_CONFIGS[categoryId]?.baseRoute;
+
+    if (route) {
+      onClose();
+      router.push(route);
+      return;
+    }
+
+    console.warn(
+      "Không tìm thấy externalUrl hoặc route cho sub-marker:",
+      subMarkerData
+    );
   };
 
   return (
-    <div className="absolute inset-0 z-[3000] flex items-end md:items-center md:justify-center p-0 md:p-4 bg-zinc-900/20 backdrop-blur-[2px] transition-opacity duration-300">
+    <div className="absolute inset-0 z-3000 flex items-end md:items-center md:justify-center p-0 md:p-4 bg-zinc-900/20 backdrop-blur-[2px] transition-opacity duration-300">
       {/* Backdrop nền mờ */}
       <div className="absolute inset-0" onClick={onClose} />
 
       {/* Thân Modal */}
       <div
-        className={`relative w-full md:max-w-md bg-white shadow-[0_24px_60px_-15px_rgba(244,63,94,0.12),0_12px_40px_-20px_rgba(0,0,0,0.15)] rounded-t-[28px] md:rounded-[24px] overflow-hidden flex flex-col transition-all duration-500 transform cubic-bezier(0.34, 1.56, 0.64, 1)
+        className={`relative w-full md:max-w-md bg-white shadow-[0_24px_60px_-15px_rgba(244,63,94,0.12),0_12px_40px_-20px_rgba(0,0,0,0.15)] rounded-t-[28px] md:rounded-3xl overflow-hidden shrink-0 flex flex-col transition-all duration-500 transform cubic-bezier(0.34, 1.56, 0.64, 1)
           ${animate ? "translate-y-0 opacity-100" : "translate-y-full md:translate-y-8 md:opacity-0"}
         `}
       >
@@ -56,15 +91,15 @@ export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMa
         <div className="absolute top-3 left-1/2 -translate-x-1/2 w-12 h-1 bg-white/60 backdrop-blur-md rounded-full z-10 md:hidden" onClick={onClose} />
 
         {/* Khu vực Hình ảnh Background & Header tích hợp */}
-        <div className="relative h-48 w-full bg-rose-50 overflow-hidden flex-shrink-0">
+        <div className="relative h-48 w-full bg-rose-50 overflow-hidden shrink-0">
           <img
-            src={subMarkerData.imageUrl || "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=600&auto=format&fit=crop"} 
+            src={subMarkerData.imageUrl || "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=600&auto=format&fit=crop"}
             alt={subMarkerData.title}
             className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
           />
           {/* Lớp gradient đè để text hoặc nút back nổi bật hơn */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent" />
-          
+          <div className="absolute inset-0 bg-linear-to-t from-black/50 via-black/10 to-transparent" />
+
           {/* Nút Đóng (Góc trên phải ảnh) */}
           <button
             onClick={onClose}
@@ -91,9 +126,9 @@ export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMa
               <h3 className="text-xl font-extrabold text-zinc-900 leading-snug tracking-tight">
                 {subMarkerData.title}
               </h3>
-              
+
               {subMarkerData.rating && (
-                <div className="flex items-center gap-0.5 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-lg flex-shrink-0">
+                <div className="flex items-center gap-0.5 bg-amber-50 border border-amber-200/60 px-2.5 py-1 rounded-lg shrink-0">
                   <span className="text-amber-500 font-bold text-xs">★</span>
                   <span className="text-amber-700 font-bold text-xs">{subMarkerData.rating.toFixed(1)}</span>
                 </div>
@@ -104,6 +139,18 @@ export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMa
             <p className="text-sm text-zinc-500 leading-relaxed">
               {subMarkerData.address || "Nhấn chỉ đường để xem vị trí chi tiết trên bản đồ."}
             </p>
+
+            {subMarkerData.externalUrl && (
+              <a
+                href={subMarkerData.externalUrl.startsWith('http') ? subMarkerData.externalUrl : `https://${subMarkerData.externalUrl}`}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 text-rose-600 text-sm font-semibold"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Mở link liên kết
+              </a>
+            )}
           </div>
         </div>
 
@@ -125,7 +172,7 @@ export default function SubMarkerModal({ isOpen, onClose, subMarkerData }: SubMa
             <svg className="w-4 h-4 text-rose-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M11.25 4.5l7.5 7.5-7.5 7.5M3 12h16.5" />
             </svg>
-            Chỉ đường (Maps)
+            Chỉ đường
           </button>
         </div>
       </div>
