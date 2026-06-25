@@ -4,8 +4,7 @@ import {
   Film, Video, Award, BookOpen, GraduationCap, Users,
   ShoppingBag, Truck, MessageSquare, Search, ClipboardList,
   Sparkles, Compass, MapPin, Car, LucideIcon,
-  PlusCircle, Heart, Phone, DollarSign, Star, 
-  Navigation, Share2, Clock, Gift, Zap, Info
+  PlusCircle, 
 } from "lucide-react";
 
 export interface HudAction {
@@ -175,18 +174,18 @@ export const THEME_CONFIGS: Record<string, ThemeConfig> = {
     title: "Dệt thổ cẩm Chăm",
     subtitle: "Giữ gìn bản sắc dân tộc",
     shortName: "LN",
-    baseRoute: "/langnghe",
+    baseRoute: "/langnghecham",
     phoneContact: "0793784133",
-    donateInfo: "/langnghe/support",
+    donateInfo: "/langnghecham/support",
     stats: [
       { id: "crafts", label: "Sản phẩm", value: "1.2k+", icon: Sparkles, trend: "+6%" },
       { id: "artisans", label: "Nghệ nhân", value: "320+", icon: Users, trend: "+8%" },
       { id: "villages", label: "Làng nghề", value: "12+", icon: Compass, trend: "+2%" },
     ],
     actions: [
-      { id: "add-product", title: "Đăng Sản Phẩm", subtitle: "Quảng bá", icon: PlusCircle, path: "/langnghe", isPrimary: true, badge: "New" },
-      { id: "visit-village", title: "Khám Phá", subtitle: "Du lịch trải nghiệm", icon: MapPin, path: "/langnghe" },
-      { id: "connect-artisan", title: "Kết Nối", subtitle: "Hợp tác", icon: Users, path: "/langnghe" }
+      { id: "add-product", title: "Đăng Sản Phẩm", subtitle: "Quảng bá", icon: PlusCircle, path: "/langnghecham", isPrimary: true, badge: "New" },
+      { id: "visit-village", title: "Khám Phá", subtitle: "Du lịch trải nghiệm", icon: MapPin, path: "/langnghecham" },
+      { id: "connect-artisan", title: "Kết Nối", subtitle: "Hợp tác", icon: Users, path: "/langnghecham" }
     ],
     fallbackImages: [
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop",
