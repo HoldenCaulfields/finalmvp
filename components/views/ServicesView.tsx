@@ -1,22 +1,18 @@
+'use client';
+
 import React, { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { 
-  Search, 
-  MapPin, 
-  Phone, 
-  Clock, 
-  Star, 
-  Coffee, 
-  UtensilsCrossed, 
-  Sparkles, 
-  Heart, 
-  Share2, 
-  SlidersHorizontal,
+import {
+  MapPin,
+  Phone,
+  Clock,
+  Star,
+  Coffee,
+  Heart,
   Compass,
   ArrowRight,
-  Bookmark
 } from "lucide-react";
-import { useViewStore } from "../../stores/useViewStore";
 import DirectoryTabs from "../DirectoryTabs";
 
 interface ServiceItem {
@@ -32,100 +28,71 @@ interface ServiceItem {
   coords: [number, number];
   tag: string;
   image: string;
+  route: string;
   priceRange?: string;
   specialty?: string;
 }
 
-const NATIVE_SERVICES: ServiceItem[] = [
+const ROUTE_SERVICES: ServiceItem[] = [
   {
-    id: "ser_1",
-    name: "HTX Gốm Mỹ Nghệ Bàu Trúc",
-    category: "craft",
-    desc: "Làng gốm cổ nhất Đông Nam Á của người Chăm. Trải nghiệm tự tay làm gốm nguyên bản thủ công mộc mạc, không dùng bàn xoay độc đáo.",
-    phone: "0945.333.129",
-    hours: "07:00 - 18:00 hàng ngày",
+    id: "route_caodangnghe",
+    name: "Hội Sinh Viên Cao đẳng nghề",
+    category: "hub",
+    desc: "Đi thẳng tới khu vực đào tạo nghề và cộng đồng sáng tạo của ứng dụng.",
+    phone: "/caodangnghe",
+    hours: "Route app",
     rate: 4.9,
-    reviews: 148,
-    location: "Trại gốm trung tâm, Thị trấn Phước Dân, Ninh Phước",
-    coords: [11.523420, 108.968210],
-    tag: "Di sản phi vật thể",
-    image: "https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80",
-    specialty: "Nghệ nhân đập gốm bằng đôi bàn tay chuyển động xoay quanh tượng đất sét"
+    reviews: 128,
+    location: "/caodangnghe",
+    coords: [11.573200, 108.993100],
+    tag: "Route chính",
+    image: "/mdt.jpg",
+    route: "/caodangnghe"
   },
   {
-    id: "ser_2",
-    name: "HTX Thổ Cẩm Mỹ Nghiệp (Inrahani)",
-    category: "craft",
-    desc: "Thưởng ngoạn các hoa văn thổ cẩm cổ truyền dệt tay hoàn toàn tự nhiên từ tơ tằm, sợi bông Chăm độc bản.",
-    phone: "0918.455.122",
-    hours: "07:30 - 17:30 hằng ngày",
+    id: "route_chophanrang",
+    name: "Chợ Phan Rang",
+    category: "hub",
+    desc: "Mở giao diện gian hàng và món ăn trong route /chophanrang, bao gồm dữ liệu stalls.",
+    phone: "/chophanrang",
+    hours: "stalls",
     rate: 4.8,
-    reviews: 95,
-    location: "Làng Mỹ Nghiệp, Thị trấn Phước Dân",
-    coords: [11.518600, 108.974550],
-    tag: "Thổ cẩm dệt tay",
-    image: "https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=600&q=80",
-    specialty: "Trải nghiệm dệt trực tiếp cùng nghệ nhân cao tuổi"
-  },
-  {
-    id: "ser_3",
-    name: "Bánh Căn Quê Nhà Phan Rang",
-    category: "culinary",
-    desc: "Thưởng thức bánh căn nóng hổi đổ khuôn đất sét nướng than hồng, ăn kèm nước đậu phộng bùi béo hoặc mắm nêm đậm đà.",
-    phone: "0393.125.772",
-    hours: "15:00 - 22:30",
-    rate: 4.9,
-    reviews: 312,
-    location: "Góc ngã tư Yên Ninh - Phan Đăng Lưu",
-    coords: [11.571400, 109.006800],
-    tag: "Được yêu thích nhất",
-    image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=600&q=80",
-    priceRange: "30.000đ - 65.000đ/phần"
-  },
-  {
-    id: "ser_4",
-    name: "Cơm Gà Khánh Kỳ Phan Rang",
-    category: "culinary",
-    desc: "Cơm chiên gà thả vườn ráo mỡ thơm ngon trứ danh. Thịt gà săn chắc ngọt vị hòa quyện nước mắm gừng chua ngọt sánh quyện.",
-    phone: "0259.382.4355",
-    hours: "09:00 - 21:00",
-    rate: 4.6,
-    reviews: 580,
-    location: "61 Trần Quang Diệu, Phan Rang - Tháp Chàm",
+    reviews: 214,
+    location: "Gian hàng stalls",
     coords: [11.564200, 109.014310],
-    tag: "Đặc sản lâu đời",
-    image: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=600&q=80",
-    priceRange: "40.000đ - 120.000đ"
+    tag: "stalls",
+    image: "/phanrang.jpg",
+    route: "/chophanrang"
   },
   {
-    id: "ser_5",
-    name: "Vườn Nho Sạch & Rượu Vang Ba Mọi Lừng Danh",
-    category: "nature",
-    desc: "Tham quan vườn nho sai trĩu quả chín mọng nổi tiếng, lắng nghe cụ Ba Mọi chia sẻ bí quyết làm rượu vang đặc trưng.",
-    phone: "0259.396.3377",
-    hours: "08:00 - 17:00",
+    id: "route_cimanet",
+    name: "Cimanet",
+    category: "hub",
+    desc: "Truy cập không gian yêu phim ảnh, tìm người làm phim.",
+    phone: "/cimanet",
+    hours: "Route app",
     rate: 4.7,
-    reviews: 215,
-    location: "Xã Phước Thuận, Ninh Phước",
-    coords: [11.554310, 108.954210],
-    tag: "Sinh thái tự nhiên",
-    image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=600&q=80",
-    specialty: "Nếm thử nho sấy lạnh & tẩm vang miễn phí"
+    reviews: 96,
+    location: "/cimanet",
+    coords: [11.558500, 108.998100],
+    tag: "Innovation",
+    image: "https://blog.coccoc.com/wp-content/uploads/2025/04/1-dinh-nghia-absolute-cinema.jpg",
+    route: "/cimanet"
   },
   {
-    id: "ser_6",
-    name: "Bún Sứa Phan Rang - Sứa Cát Biển Sâu",
-    category: "culinary",
-    desc: "Nước dùng nóng thanh từ cá thu tươi, sứa cát giòn sần sật mọng nước ngon ngọt kết hợp chả cá thu dẹt độc trưng Ninh Thuận.",
-    phone: "0908.204.119",
-    hours: "06:00 - 11:30 sáng",
-    rate: 4.8,
-    reviews: 194,
-    location: "Khu Bún sứa đêm Ngô Gia Tự",
-    coords: [11.567800, 109.010400],
-    tag: "Điểm ăn sáng ngon",
-    image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=600&q=80",
-    priceRange: "35.000đ - 50.000đ"
+    id: "route_langnghecham",
+    name: "Làng nghề Chăm",
+    category: "hub",
+    desc: "Mở giao diện gian hàng Chăm trong route /langnghecham, dùng bộ dữ liệu stalls-cham.",
+    phone: "/langnghecham",
+    hours: "stalls-cham",
+    rate: 4.9,
+    reviews: 183,
+    location: "Gian hàng stalls-cham",
+    coords: [11.523400, 108.968200],
+    tag: "stalls-cham",
+    image: "/vanhoacham.jpg",
+    route: "/langnghecham"
   }
 ];
 
@@ -134,12 +101,10 @@ export default function ServicesView() {
   const [selectedCat, setSelectedCat] = useState<string>("all");
   const [favorites, setFavorites] = useState<string[]>([]);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  const selectCategory = useViewStore(s => s.selectCategory);
-  const setActiveRoute = useViewStore(s => s.setActiveRoute);
+  const router = useRouter();
 
   const filteredServices = useMemo(() => {
-    return NATIVE_SERVICES.filter(item => {
+    return ROUTE_SERVICES.filter(item => {
       const matchSearch = 
         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.desc.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -158,17 +123,15 @@ export default function ServicesView() {
     }
   };
 
-  const handleCopyPhone = (id: string, phone: string, e: React.MouseEvent) => {
-    e.stopPropagation();
-    navigator.clipboard.writeText(phone);
-    setCopiedId(id);
-    setTimeout(() => setCopiedId(null), 1500);
+  const handleOpenRoute = (route: string) => {
+    router.push(route);
   };
 
-  const locateOnMap = (coords: [number, number], categoryIdToFocus: string) => {
-    // Focus category and fly back to Map Route
-    selectCategory(categoryIdToFocus);
-    setActiveRoute("map");
+  const handleCopyRoute = (id: string, route: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    navigator.clipboard.writeText(route);
+    setCopiedId(id);
+    setTimeout(() => setCopiedId(null), 1500);
   };
 
   return (
@@ -186,10 +149,10 @@ export default function ServicesView() {
           LovelyNet Community Hub
         </span>
         <h2 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tight uppercase">
-          Các dịch vụ của LovelyNet
+          Các route chính trong ứng dụng
         </h2>
         <p className="text-xs md:text-sm text-zinc-500 font-medium mt-2">
-          Thật ra tôi cũng chưa có định nghĩa rõ ràng LovelyNet này là gì :)) Tôi nghĩ là nó dành cho những người có ý tưởng và kết nối những người ở đâu đó trên thế giới này tìm đến LovelyNet.
+          Chuyển thẳng đến các trang chính của app như Sinh Viên Cao đẳng nghề, Chợ Phan Rang, Cimanet và Làng nghề Chăm. Các card Chợ Phan Rang và Làng nghề Chăm đã được nối tới các gian hàng tương ứng là stalls và stalls-cham.
         </p>
       </div>
 
@@ -243,7 +206,10 @@ export default function ServicesView() {
                 </div>
 
                 {/* Info Content */}
-                <div className="p-5 flex-1 flex flex-col justify-between">
+                <div
+                  className="p-5 flex-1 flex flex-col justify-between cursor-pointer"
+                  onClick={() => handleOpenRoute(item.route)}
+                >
                   <div className="space-y-2.5">
                     <h3 className="text-sm md:text-base font-black text-zinc-900 leading-snug group-hover:text-rose-600 transition-colors">
                       {item.name}
@@ -275,18 +241,21 @@ export default function ServicesView() {
                   {/* Actions Bar */}
                   <div className="grid grid-cols-2 gap-2 mt-5 border-t border-zinc-100/60 pt-3">
                     <button
-                      onClick={(e) => handleCopyPhone(item.id, item.phone, e)}
+                      onClick={(e) => handleCopyRoute(item.id, item.route, e)}
                       className="py-2 px-3 border border-zinc-200 hover:border-zinc-300 rounded-xl text-xs font-extrabold text-zinc-700 flex items-center justify-center gap-1.5 cursor-pointer bg-white active:scale-95 transition-all"
                     >
                       <Phone size={12} />
-                      <span>{copiedId === item.id ? "Đã lưu" : "Liên hệ"}</span>
+                      <span>{copiedId === item.id ? "Đã sao chép" : "Sao chép link"}</span>
                     </button>
 
                     <button
-                      onClick={() => locateOnMap(item.coords, item.category === "craft" ? "langnghe" : "market")}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleOpenRoute(item.route);
+                      }}
                       className="py-2 px-3 bg-zinc-950 hover:bg-zinc-900 rounded-xl text-xs font-black text-white flex items-center justify-center gap-1 cursor-pointer active:scale-95 transition-all"
                     >
-                      <span>Xem bản đồ</span>
+                      <span>Mở route</span>
                       <ArrowRight size={12} />
                     </button>
                   </div>
@@ -307,7 +276,7 @@ export default function ServicesView() {
           </p>
         </div>
         <button
-          onClick={() => setActiveRoute("map")}
+          onClick={() => handleOpenRoute("/map")}
           className="px-5 py-3 rounded-2xl bg-white text-zinc-950 hover:bg-zinc-100 active:scale-95 font-black text-xs transition-all uppercase tracking-widest cursor-pointer whitespace-nowrap shrink-0 border border-transparent shadow-md"
         >
           📍 Đi đến Bản Đồ

@@ -15,8 +15,8 @@ interface MarketplaceTabProps {
 
 // Preset stall banners
 const PRESET_BANNERS = [
-  { id: 'b1', name: 'Vải dệt Chăm', url: 'https://images.unsplash.com/photo-1528164344705-47542687000d?auto=format&fit=crop&w=600&q=80' },
-  { id: 'b2', name: 'Đất nung Bàu Trúc', url: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80' },
+  { id: 'b1', name: 'Vải dệt Chăm', url: 'https://kyluc.vn/Userfiles/Upload/images/ipiccy_image%20-%202025-05-11T152531_247.jpg' },
+  { id: 'b2', name: 'Đất nung Bàu Trúc', url: 'https://vietnamtourism.vn//imguploads/tourist/2014/NinhThuan/LanggomBauTruc/44Gombautruc04.jpg' },
   { id: 'b3', name: 'Khô dê Thảo mộc', url: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80' },
   { id: 'b4', name: 'Hạt giống sen Chăm', url: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80' }
 ];
@@ -162,15 +162,12 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
         <h2 className="text-2xl sm:text-3xl font-extrabold text-zinc-900">
           Ghé Gian Hàng Online - Trải Nghiệm Sản Phẩm Chăm
         </h2>
-        <p className="text-zinc-500 text-sm sm:text-base leading-relaxed">
-          Tạo đòn bẩy kinh tế cho đồng bào người Chăm bằng cách kết nối trực tiếp khách tham quan lễ hội với các nghệ nhân nặn gốm, dệt vải thổ cẩm thủ công.
-        </p>
       </section>
 
       {/* Control Buttons & Filter Categories */}
       <section className="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 max-w-6xl mx-auto border-b border-rose-100 pb-4">
         {/* Category Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 justify-center">
           {(['all', 'weaving', 'pottery', 'cuisine', 'agriculture'] as const).map((cat) => (
             <button
               key={cat}
@@ -187,19 +184,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
         </div>
 
         {/* Register Button & Cart Button */}
-        <div className="flex items-center gap-3 self-end sm:self-auto">
-          <button
-            onClick={onOpenCart}
-            className="relative px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-bold rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer border border-rose-100 shadow-3xs"
-          >
-            <ShoppingCart className="w-4 h-4 text-rose-600" /> Giỏ Hàng
-            {cartCount > 0 && (
-              <span className="absolute -top-1.5 -right-1.5 bg-rose-600 text-white font-extrabold text-[9px] w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
-                {cartCount}
-              </span>
-            )}
-          </button>
-
+        <div className="flex justify-center">
           <button
             onClick={() => {
               setErrorMsg('');
@@ -226,6 +211,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
             <div
               key={stall.id}
               id={`stall-card-${stall.id}`}
+              onClick={() => setSelectedStall(stall)}
               className="bg-white rounded-2xl border border-rose-100/60 overflow-hidden shadow-xs hover:shadow-md transition-all flex flex-col group"
             >
               {/* Banner */}
@@ -299,8 +285,8 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
           {filteredStalls.length === 0 && (
             <div className="col-span-full text-center py-12 bg-white rounded-3xl border border-dashed border-zinc-200 text-zinc-500 space-y-2">
               <Store className="w-10 h-10 mx-auto text-zinc-300" />
-              <p className="text-sm font-bold">Chưa có gian hàng online nào thuộc phân mục này.</p>
-              <p className="text-xs text-zinc-400">Bạn là người kinh doanh Chăm? Hãy đăng ký gian hàng miễn phí ngay nhé!</p>
+              <p className="text-sm font-bold">Chưa có gian hàng online nào.</p>
+              <p className="text-xs text-zinc-400">Hãy đăng ký gian hàng miễn phí ngay nhé!</p>
             </div>
           )}
         </div>
@@ -308,8 +294,8 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* Selected Stall Detail Modal */}
       {selectedStall && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center py-4 z-50 animate-fade-in">
-          <div className="bg-white rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-rose-100 flex flex-col animate-slide-up">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[100vh] overflow-y-auto shadow-2xl border border-rose-100 flex flex-col animate-slide-up">
             {/* Banner top */}
             <div className="relative h-44 sm:h-52 w-full flex-shrink-0">
               <img
@@ -623,15 +609,15 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
                   />
                 </div>
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-zinc-700 block uppercase">Chọn mẫu ảnh nền sản phẩm</label>
+                  <label className="text-xs font-bold text-zinc-700 block uppercase">Chọn mẫu ảnh sản phẩm</label>
                   <select
                     value={newProdImage}
                     onChange={(e) => setNewProdImage(e.target.value)}
                     className="w-full px-3 py-2 border border-zinc-200 rounded-xl text-xs sm:text-sm bg-white"
                   >
-                    <option value="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80">Gốm nung mộc mạc</option>
-                    <option value="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80">Khăn dệt thổ cẩm</option>
-                    <option value="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=400&q=80">Túi đeo thổ cẩm</option>
+                    <option value="https://admin.vov.gov.vn/UploadFolder/KhoTin/Images/UploadFolder/VOVVN/Images/sites/default/files/styles/large/public/2020-11/1_-_ngay_27-11.jpg">Gốm nung mộc mạc</option>
+                    <option value="https://khankm0.com/media/uploads/V%E1%BA%A2I%20TH%E1%BB%94%20C%E1%BA%A8M%202022/10.5/vai-tho-cam-cham4.jpg">Khăn dệt thổ cẩm</option>
+                    <option value="https://down-vn.img.susercontent.com/file/bd8cbf1bbf07e7614711d3d17ae1cbd0">Túi đeo thổ cẩm</option>
                     <option value="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80">Bánh gừng cổ truyền</option>
                     <option value="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=400&q=80">Khô dê thảo mộc rừng</option>
                   </select>

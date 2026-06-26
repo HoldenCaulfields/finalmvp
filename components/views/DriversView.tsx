@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Car, 
-  MapPin, 
-  Phone, 
-  Star, 
-  Zap, 
-  Calculator, 
-  Play, 
-  Loader2, 
+import {
+  Car,
+  MapPin,
+  Phone,
+  Star,
+  Zap,
+  Calculator,
+  Play,
+  Loader2,
   CheckCircle,
   HelpCircle,
   Navigation,
@@ -38,7 +38,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     carModel: "Toyota Vios 2023 (4 Chỗ)",
     plate: "85A-122.94",
     rate: 4.9,
-    trips: 1250,
+    trips: 50,
     phone: "0908.123.456",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=MinhHai"
@@ -49,7 +49,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     carModel: "Hyundai Accent 2022 (4 Chỗ)",
     plate: "85A-098.11",
     rate: 4.8,
-    trips: 840,
+    trips: 40,
     phone: "0915.992.110",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=DinhLuat"
@@ -60,7 +60,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     carModel: "Mitsubishi Xpander 2023 (7 Chỗ)",
     plate: "85B-014.55",
     rate: 4.9,
-    trips: 1980,
+    trips: 60,
     phone: "0345.881.256",
     status: "busy",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=HoangLam"
@@ -71,7 +71,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     carModel: "VinFast VF8 (Xe Điện)",
     plate: "85A-301.22",
     rate: 5.0,
-    trips: 450,
+    trips: 30,
     phone: "0898.331.425",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=QuocHuy"
@@ -91,7 +91,7 @@ export default function DriversView() {
   const [pickup, setPickup] = useState(PRESET_PLACES[0].id);
   const [dropoff, setDropoff] = useState(PRESET_PLACES[1].id);
   const [distanceKm, setDistanceKm] = useState<number>(8.5);
-  
+
   // Dispatch simulator state
   const [activeDispatch, setActiveDispatch] = useState<{
     stage: "none" | "searching" | "success";
@@ -103,7 +103,7 @@ export default function DriversView() {
 
   // Simple fare estimate calculator (VND)
   // Base fare: 15,000 VND. Per km: 12,000 VND.
-  const estimatedFare = 15000 + distanceKm * 12000;
+  const estimatedFare = 15000 + distanceKm * 3000;
 
   const handleCalculate = (pId: string, dId: string) => {
     // Generate simulated distance in KM based on coordinates
@@ -127,7 +127,7 @@ export default function DriversView() {
       // Pick specified driver or default random idle driver
       const candidates = VERIFIED_DRIVERS.filter(item => item.status === "idle");
       const matched = driver || candidates[Math.floor(Math.random() * candidates.length)] || VERIFIED_DRIVERS[0];
-      
+
       setActiveDispatch({
         stage: "success",
         selectedDriver: matched
@@ -144,7 +144,7 @@ export default function DriversView() {
 
   return (
     <div className="pt-20 lg:pt-28 pb-32 lg:pb-24 px-3 md:px-6 w-full max-w-7xl mx-auto overflow-y-auto h-full max-h-[100vh]">
-      
+
       {/* Mobile-friendly Sub-bar switcher */}
       <div className="lg:hidden">
         <DirectoryTabs />
@@ -157,7 +157,7 @@ export default function DriversView() {
           Phan Rang Ride Services
         </span>
         <h2 className="text-2xl md:text-3xl font-black text-zinc-900 tracking-tight uppercase">
-          Ban Điều Hành Tài Xế Toàn Tỉnh
+          Tài Xế Phan Rang
         </h2>
         <p className="text-xs md:text-sm text-zinc-500 font-medium mt-2">
           Kết nối trực tiếp tới lực lượng taxi, xe ôm công nghệ bản địa. Đã qua đào tạo kỹ năng du lịch, phục vụ tận tâm túc trực đêm khuya 24/7.
@@ -165,8 +165,94 @@ export default function DriversView() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start max-w-6xl mx-auto">
-        
-        {/* LEFT COLUMN: FARE CALCULATOR ENGINE (Lg: 5cols) */}
+
+        <div className="lg:col-span-7 col-span-1 space-y-4">
+          <div className="bg-white border border-zinc-200/80 rounded-3xl p-4 flex items-center justify-between shadow-sm">
+            <div className="flex items-center gap-2.5">
+              <div className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+              </div>
+              <span className="text-xs font-black text-zinc-900 uppercase tracking-tight">Tài xế trực tuyến</span>
+            </div>
+            <span className="text-[10px] font-black px-2.5 py-1 bg-zinc-100 text-zinc-800 rounded-lg">
+              HOTLINE: 0793784133
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {VERIFIED_DRIVERS.map((driver) => (
+              <div
+                key={driver.id}
+                className="bg-white border border-zinc-200/80 hover:border-zinc-300 rounded-3xl p-5 shadow-sm space-y-4 hover:shadow-md transition-all flex flex-col justify-between"
+              >
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={driver.avatar}
+                      alt={driver.name}
+                      referrerPolicy="no-referrer"
+                      className="w-12 h-12 rounded-2xl bg-zinc-100 border border-zinc-100 object-cover"
+                    />
+                    <div>
+                      <h4 className="text-xs md:text-sm font-black text-zinc-900 leading-none">
+                        {driver.name}
+                      </h4>
+                      <p className="text-[10px] text-emerald-700 font-extrabold mt-1 uppercase tracking-wide">
+                        {driver.carModel}
+                      </p>
+                      <span className="text-[9px] font-mono font-bold bg-zinc-100 text-zinc-600 px-1.5 py-0.5 rounded mt-1.5 inline-block">
+                        {driver.plate}
+                      </span>
+                    </div>
+                  </div>
+
+                  <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md
+                    ${driver.status === "idle"
+                      ? "bg-emerald-50 text-emerald-800 border border-emerald-100"
+                      : "bg-zinc-100 text-zinc-500 border border-zinc-200"}`}
+                  >
+                    {driver.status === "idle" ? "🔥 Rảnh" : "🛞 Đang bận"}
+                  </span>
+                </div>
+
+                <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[11px] text-zinc-500 font-bold">
+                  <div className="flex items-center gap-1">
+                    <Star size={11} className="text-amber-500 fill-amber-500" />
+                    <span className="text-zinc-900">{driver.rate}</span>
+                    <span className="text-zinc-400">({driver.trips} chuyến)</span>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(driver.phone);
+                      alert(`Đã sao chép SĐT: ${driver.phone}. Hệ thống đang kết nối trực tiếp cuộc điện thoại.`);
+                    }}
+                    className="text-zinc-600 hover:text-zinc-900 flex items-center gap-1 cursor-pointer"
+                  >
+                    <Phone size={10} /> {driver.phone}
+                  </button>
+                </div>
+
+                {driver.status === "idle" ? (
+                  <button
+                    onClick={() => handleStartGhimDriver(driver)}
+                    className="w-full py-2.5 bg-zinc-950 hover:bg-zinc-900 text-white text-xs font-black rounded-2xl cursor-pointer transition-all active:scale-95"
+                  >
+                    🎯 Chọn điều phối xe này
+                  </button>
+                ) : (
+                  <button
+                    disabled
+                    className="w-full py-2.5 bg-zinc-100 text-zinc-400 text-xs font-bold rounded-2xl cursor-not-allowed"
+                  >
+                    Đang trên hành trình
+                  </button>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="lg:col-span-5 bg-white border border-zinc-200/80 rounded-3xl p-5 md:p-6 shadow-sm space-y-5">
           <div className="flex items-center gap-2 pb-3 border-b border-zinc-100">
             <Calculator className="w-5 h-5 text-emerald-600" />
@@ -174,7 +260,7 @@ export default function DriversView() {
           </div>
 
           <div className="space-y-4">
-            
+
             {/* Pickup */}
             <div>
               <label className="text-[10px] font-extrabold text-zinc-400 uppercase tracking-widest block mb-1.5">
@@ -223,9 +309,9 @@ export default function DriversView() {
             </div>
             <div className="flex items-center justify-between text-xs text-zinc-600 font-bold border-t border-emerald-100/60 pt-2">
               <span>Đơn giá cơ sở:</span>
-              <span className="text-zinc-600">12.000đ/KM</span>
+              <span className="text-zinc-600">3.000đ/KM</span>
             </div>
-            
+
             <div className="border-t border-emerald-200 pt-2.5 flex items-center justify-between">
               <span className="text-xs font-extrabold text-emerald-800 uppercase tracking-wide">Giá cước ước tính:</span>
               <span className="text-base font-black text-emerald-600 font-mono">
@@ -248,96 +334,6 @@ export default function DriversView() {
             🚀 Đặt xe tốc hành ngay
           </button>
         </div>
-
-        {/* RIGHT COLUMN: DIRECTORY OF TÀI XẾ (Lg: 7cols) */}
-        <div className="lg:col-span-7 col-span-1 space-y-4">
-          <div className="bg-white border border-zinc-200/80 rounded-3xl p-4 flex items-center justify-between shadow-sm">
-            <div className="flex items-center gap-2.5">
-              <div className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-              </div>
-              <span className="text-xs font-black text-zinc-900 uppercase tracking-tight">Thống kê tài xế trực tuyến</span>
-            </div>
-            <span className="text-[10px] font-black px-2.5 py-1 bg-zinc-100 text-zinc-800 rounded-lg">
-              HOTLINE: 0259.333.1212
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {VERIFIED_DRIVERS.map((driver) => (
-              <div
-                key={driver.id}
-                className="bg-white border border-zinc-200/80 hover:border-zinc-300 rounded-3xl p-5 shadow-sm space-y-4 hover:shadow-md transition-all flex flex-col justify-between"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={driver.avatar}
-                      alt={driver.name}
-                      referrerPolicy="no-referrer"
-                      className="w-12 h-12 rounded-2xl bg-zinc-100 border border-zinc-100 object-cover"
-                    />
-                    <div>
-                      <h4 className="text-xs md:text-sm font-black text-zinc-900 leading-none">
-                        {driver.name}
-                      </h4>
-                      <p className="text-[10px] text-emerald-700 font-extrabold mt-1 uppercase tracking-wide">
-                        {driver.carModel}
-                      </p>
-                      <span className="text-[9px] font-mono font-bold bg-zinc-100 text-zinc-600 px-1.5 py-0.5 rounded mt-1.5 inline-block">
-                        {driver.plate}
-                      </span>
-                    </div>
-                  </div>
-
-                  <span className={`text-[9px] font-black uppercase tracking-wider px-2 py-1 rounded-md
-                    ${driver.status === "idle" 
-                      ? "bg-emerald-50 text-emerald-800 border border-emerald-100" 
-                      : "bg-zinc-100 text-zinc-500 border border-zinc-200"}`}
-                  >
-                    {driver.status === "idle" ? "🔥 Rảnh" : "🛞 Đang bận"}
-                  </span>
-                </div>
-
-                <div className="border-t border-zinc-100 pt-3.5 flex items-center justify-between text-[11px] text-zinc-500 font-bold">
-                  <div className="flex items-center gap-1">
-                    <Star size={11} className="text-amber-500 fill-amber-500" />
-                    <span className="text-zinc-900">{driver.rate}</span>
-                    <span className="text-zinc-400">({driver.trips} chuyến)</span>
-                  </div>
-                  
-                  <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(driver.phone);
-                      alert(`Đã sao chép SĐT: ${driver.phone}. Hệ thống đang kết nối trực tiếp cuộc điện thoại.`);
-                    }}
-                    className="text-zinc-600 hover:text-zinc-900 flex items-center gap-1 cursor-pointer"
-                  >
-                    <Phone size={10} /> {driver.phone}
-                  </button>
-                </div>
-
-                {driver.status === "idle" ? (
-                  <button
-                    onClick={() => handleStartGhimDriver(driver)}
-                    className="w-full py-2.5 bg-zinc-950 hover:bg-zinc-900 text-white text-xs font-black rounded-2xl cursor-pointer transition-all active:scale-95"
-                  >
-                    🎯 Chọn điều phối xe này
-                  </button>
-                ) : (
-                  <button
-                    disabled
-                    className="w-full py-2.5 bg-zinc-100 text-zinc-400 text-xs font-bold rounded-2xl cursor-not-allowed"
-                  >
-                    Đang trên hành trình
-                  </button>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
       </div>
 
       {/* DISPATCH SIMULATOR OVERLAY DIALOG */}
@@ -350,7 +346,7 @@ export default function DriversView() {
               exit={{ opacity: 0, scale: 0.95 }}
               className="bg-white rounded-3xl p-6 shadow-2xl border border-zinc-200 max-w-sm w-full text-center space-y-6"
             >
-              
+
               {activeDispatch.stage === "searching" ? (
                 <div className="space-y-4">
                   <div className="w-16 h-16 bg-emerald-50 rounded-full flex items-center justify-center mx-auto relative border border-emerald-100">
@@ -378,7 +374,7 @@ export default function DriversView() {
                   <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto border border-emerald-200 text-emerald-600">
                     <CheckCircle className="w-8 h-8 animate-bounce" />
                   </div>
-                  
+
                   <div>
                     <span className="text-[9px] font-black uppercase tracking-widest text-emerald-600">
                       Tìm Thấy Tài Xế Gần Nhất!
@@ -409,7 +405,7 @@ export default function DriversView() {
                     >
                       Đóng Lại
                     </button>
-                    
+
                     <a
                       href={`tel:${activeDispatch.selectedDriver?.phone}`}
                       className="flex-1 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs cursor-pointer block text-center shadow-md shadow-emerald-100"

@@ -143,9 +143,9 @@ export default function App() {
 
     try {
       await addDoc(collection(db, 'orders'), orderData);
-      
+
       showToast(`🎉 Đặt hàng thành công! Chủ gian hàng sẽ sớm liên hệ số: ${customerPhone}`);
-      
+
       // Clear cart & state
       setCart([]);
       setCustomerName('');
@@ -620,12 +620,12 @@ export default function App() {
       const docRef = doc(db, 'stalls-cham', stallId);
       const stall = stalls.find(s => s.id === stallId);
       if (!stall) throw new Error("Không tìm thấy gian hàng");
-      
+
       const localProduct: Product = {
         ...newProduct,
         id: `prod-${Date.now()}`
       };
-      
+
       await updateDoc(docRef, {
         products: [...stall.products, localProduct]
       });
@@ -670,9 +670,9 @@ export default function App() {
   return (
     <div className="min-h-screen bg-zinc-50 flex flex-col font-sans select-none pb-20 md:pb-0">
       {/* Syncing Header logo & desktop navigation */}
-      <Header 
-        activeTab={activeTab} 
-        setActiveTab={setActiveTab} 
+      <Header
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
         onOpenCart={() => setIsCartOpen(true)}
         cartCount={cart.reduce((total, item) => total + item.quantity, 0)}
       />
@@ -706,27 +706,24 @@ export default function App() {
       <nav className="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-rose-100 py-2 px-2 flex justify-around items-center md:hidden z-40 shadow-lg">
         <button
           onClick={() => setActiveTab('home')}
-          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
-            activeTab === 'home' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
-          }`}
+          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${activeTab === 'home' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
+            }`}
         >
           <Home className="w-5 h-5" />
           <span className="text-[10px] font-semibold mt-0.5">Trang chủ</span>
         </button>
         <button
-          onClick={() => setActiveTab('schedule')}
-          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
-            activeTab === 'schedule' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
-          }`}
+          onClick={() => setActiveTab('stalls')}
+          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${activeTab === 'stalls' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
+            }`}
         >
-          <Calendar className="w-5 h-5" />
-          <span className="text-[10px] font-semibold mt-0.5">Lịch trình</span>
+          <ShoppingBag className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5">Gian hàng</span>
         </button>
         <button
           onClick={() => setActiveTab('checkin')}
-          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all relative ${
-            activeTab === 'checkin' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
-          }`}
+          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all relative ${activeTab === 'checkin' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
+            }`}
         >
           <div className="w-10 h-10 -mt-5 bg-rose-600 hover:bg-rose-700 text-white rounded-full flex items-center justify-center shadow-md border-2 border-white transform transition-transform active:scale-95">
             <Camera className="w-5 h-5" />
@@ -734,19 +731,17 @@ export default function App() {
           <span className="text-[10px] font-semibold mt-0.5">Check-in</span>
         </button>
         <button
-          onClick={() => setActiveTab('stalls')}
-          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
-            activeTab === 'stalls' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
-          }`}
+          onClick={() => setActiveTab('schedule')}
+          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${activeTab === 'schedule' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
+            }`}
         >
-          <ShoppingBag className="w-5 h-5" />
-          <span className="text-[10px] font-semibold mt-0.5">Gian hàng</span>
+          <Calendar className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5">Lịch trình</span>
         </button>
         <button
           onClick={() => setActiveTab('artisans')}
-          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${
-            activeTab === 'artisans' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
-          }`}
+          className={`flex flex-col items-center justify-center flex-1 py-1 transition-all ${activeTab === 'artisans' ? 'text-rose-600' : 'text-zinc-500 hover:text-rose-400'
+            }`}
         >
           <Award className="w-5 h-5" />
           <span className="text-[10px] font-semibold mt-0.5">Nghệ nhân</span>
@@ -766,7 +761,7 @@ export default function App() {
         <div className="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 flex justify-end animate-fade-in">
           {/* Backdrop Click Closer */}
           <div className="absolute inset-0 cursor-default" onClick={() => setIsCartOpen(false)}></div>
-          
+
           {/* Drawer Body */}
           <div className="relative w-full max-w-md bg-white h-full shadow-2xl flex flex-col z-10 overflow-hidden border-l border-rose-100 animate-slide-left">
             {/* Header */}
@@ -899,7 +894,7 @@ export default function App() {
                   {/* Checkout Information Form */}
                   <form onSubmit={handlePlaceOrder} className="space-y-4 text-left border-t border-zinc-100 pt-4">
                     <p className="text-xs font-bold text-zinc-400 uppercase tracking-wider">Thông tin nhận hàng</p>
-                    
+
                     <div className="space-y-1">
                       <label htmlFor="customerName" className="block text-xs font-bold text-zinc-700">Họ và Tên khách hàng</label>
                       <input

@@ -8,8 +8,8 @@ export default function DirectoryTabs() {
 
   const tabs = [
     { id: "teams", label: "Dịch vụ", icon: <Handshake className="w-3.5 h-3.5" /> },
-    { id: "launched", label: "Danh bạ Tài xế", icon: <Car className="w-3.5 h-3.5" /> },
-    { id: "developer", label: "IT / Tuyển dụng", icon: <Code className="w-3.5 h-3.5" /> },
+    { id: "launched", label: "Tài xế", icon: <Car className="w-3.5 h-3.5" /> },
+    { id: "developer", label: "IT/Devs", icon: <Code className="w-3.5 h-3.5" /> },
   ];
 
   return (
