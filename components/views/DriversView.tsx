@@ -79,12 +79,31 @@ const VERIFIED_DRIVERS: Driver[] = [
 ];
 
 const PRESET_PLACES = [
+  // --- GỐC & TRUNG TÂM / CÔNG CỘNG (ĐÔNG NGƯỜI) ---
   { id: "center", name: "Trung tâm Phan Rang (Bến xe tỉnh)", lat: 11.5672, lng: 109.0062 },
+  { id: "quangtruong164", name: "Quảng trường 16/4 (Trung tâm sự kiện/Check-in)", lat: 11.5695, lng: 109.0015 },
+  { id: "congvien164", name: "Công viên 16/4", lat: 11.5682, lng: 108.9995 },
+  { id: "chophanrang", name: "Chợ Phan Rang (Khu mua sắm sầm uất ngày/đêm)", lat: 11.5632, lng: 109.0031 },
+  { id: "vincomphanrang", name: "Vincom Plaza Phan Rang", lat: 11.5684, lng: 109.0072 },
+  { id: "ganhathapcham", name: "Ga Tháp Chàm", lat: 11.5647, lng: 108.9431 },
+
+  // --- KINH ĐÔ ĂN UỐNG & CAFE / PHỐ ĐI BỘ CHỢ ĐÊM ---
+  { id: "chodem_thongnhat", name: "Chợ đêm Ninh Thuận (Đường Thống Nhất - 16/4)", lat: 11.5678, lng: 109.0008 },
+  { id: "khu_k1", name: "Khu đô thị K1 (Thiên đường Cafe, Ăn vặt, Nhậu đêm)", lat: 11.5725, lng: 109.0055 },
+  { id: "banhcan_leloi", name: "Khu Bánh căn - Bánh xèo Lập Là (Đường Lê Lợi)", lat: 11.5642, lng: 109.0118 },
+  { id: "banhcanh_nhon", name: "Bánh canh Chả cá Nhơn (Khu ăn uống Ngô Gia Tự)", lat: 11.5688, lng: 108.9922 },
+  { id: "comga_khanhky", name: "Cơm gà Khánh Kỳ (Trần Quang Diệu)", lat: 11.5711, lng: 109.0080 },
+
+  // --- DU LỊCH & BIỂN (TẬP TRUNG ĐÔNG NGƯỜI VỀ CHIỀU/TỐI) ---
+  { id: "ninhchu", name: "Bãi biển Ninh Chữ (Khu bãi tắm chính)", lat: 11.5830, lng: 109.0345 },
+  { id: "congvien_binhson", name: "Công viên Biển Bình Sơn (Nơi tập trung đông người về đêm)", lat: 11.5675, lng: 109.0272 },
+  { id: "thapcham_porome", name: "Tháp Po Klong Garai", lat: 11.5942, lng: 108.9458 },
+  { id: "trungsonco_tu", name: "Thiền viện Trúc Lâm Tự Hải / Trùng Sơn Cổ Tự (Núi Đá Chồng)", lat: 11.5912, lng: 109.0235 },
+
+  // --- LÀNG NGHỀ TRUYỀN THỐNG ---
   { id: "bautruc", name: "Làng gốm Bàu Trúc", lat: 11.5234, lng: 108.9682 },
   { id: "mynghiep", name: "Làng dệt Mỹ Nghiệp", lat: 11.5186, lng: 108.9745 },
-  { id: "bamoifarm", name: "Vườn nho Ba Mọi", lat: 11.5543, lng: 108.9542 },
-  { id: "ninhchu", name: "Bãi biển Ninh Chữ", lat: 11.5830, lng: 109.0345 },
-  { id: "ca_na", name: "Biển Cà Ná hoang sơ", lat: 11.3323, lng: 108.8872 }
+  { id: "bamoifarm", name: "Vườn nho Ba Mọi", lat: 11.5543, lng: 108.9542 }
 ];
 
 export default function DriversView() {
