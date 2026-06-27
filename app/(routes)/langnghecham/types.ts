@@ -31,6 +31,8 @@ export interface CheckIn {
   location: string;
   likes: number;
   createdAt: string;
+  lat?: number;
+  lng?: number;
 }
 
 export interface Artisan {

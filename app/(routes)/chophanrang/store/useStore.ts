@@ -47,8 +47,9 @@ interface StoreState {
 
 // Read cart from localStorage helper
 const getInitialCart = (): OrderItem[] => {
+  if (typeof window === 'undefined') return [];
   try {
-    const saved = localStorage.getItem('pr_cart_items');
+    const saved = window.localStorage.getItem('pr_cart_items');
     return saved ? JSON.parse(saved) : [];
   } catch (err) {
     console.error('Failed to parse cart items from localStorage:', err);
@@ -58,9 +59,12 @@ const getInitialCart = (): OrderItem[] => {
 
 // Read Cloudinary settings helper
 const getInitialCloudinary = (): CloudinaryConfig => {
+  if (typeof window === 'undefined') {
+    return { cloudName: 'chophanrang', preset: 'pr_unsigned_preset' };
+  }
   try {
-    const cloudName = localStorage.getItem('pr_cloudinary_cloud') || 'chophanrang';
-    const preset = localStorage.getItem('pr_cloudinary_preset') || 'pr_unsigned_preset';
+    const cloudName = window.localStorage.getItem('pr_cloudinary_cloud') || 'chophanrang';
+    const preset = window.localStorage.getItem('pr_cloudinary_preset') || 'pr_unsigned_preset';
     return { cloudName, preset };
   } catch {
     return { cloudName: 'chophanrang', preset: 'pr_unsigned_preset' };
@@ -95,7 +99,9 @@ export const useStore = create<StoreState>((set) => ({
     } else {
       nextCart = [...state.cartItems, item];
     }
-    localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    }
     return { cartItems: nextCart };
   }),
 
@@ -107,24 +113,32 @@ export const useStore = create<StoreState>((set) => ({
       }
       return item;
     });
-    localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    }
     return { cartItems: nextCart };
   }),
 
   removeFromCart: (dishId) => set((state) => {
     const nextCart = state.cartItems.filter((item) => item.dishId !== dishId);
-    localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('pr_cart_items', JSON.stringify(nextCart));
+    }
     return { cartItems: nextCart };
   }),
 
   clearCart: () => set(() => {
-    localStorage.removeItem('pr_cart_items');
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('pr_cart_items');
+    }
     return { cartItems: [] };
   }),
 
   setCloudinaryConfig: (cloudName, preset) => set(() => {
-    localStorage.setItem('pr_cloudinary_cloud', cloudName);
-    localStorage.setItem('pr_cloudinary_preset', preset);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('pr_cloudinary_cloud', cloudName);
+      window.localStorage.setItem('pr_cloudinary_preset', preset);
+    }
     return { cloudinaryConfig: { cloudName, preset } };
   }),
 }));

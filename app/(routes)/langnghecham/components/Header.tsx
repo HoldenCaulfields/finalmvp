@@ -11,15 +11,15 @@ interface HeaderProps {
 export default function Header({ activeTab, setActiveTab, onOpenCart, cartCount }: HeaderProps) {
   const navItems = [
     { id: 'home', label: 'Trang Chủ' },
-    { id: 'schedule', label: 'Lịch Trình' },
     { id: 'checkin', label: 'Khoảnh Khắc' },
     { id: 'stalls', label: 'Gian Hàng Chăm' },
     { id: 'artisans', label: 'Nghệ Nhân' },
+    { id: 'schedule', label: 'Lịch Trình' },
   ];
 
 
   return (
-    <header className="w-full bg-white border-b border-rose-100 sticky top-0 z-50 shadow-xs">
+    <header className="w-full bg-white border-b border-rose-100 sticky top-0 z-2000 shadow-xs">
       <div className="max-w-8xl mx-auto px-4 ">
         <div className="flex justify-between items-center h-20">
           {/* Logo & Branding */}

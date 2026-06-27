@@ -39,7 +39,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     plate: "85A-122.94",
     rate: 4.9,
     trips: 50,
-    phone: "0908.123.456",
+    phone: "0793784133",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=MinhHai"
   },
@@ -50,7 +50,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     plate: "85A-098.11",
     rate: 4.8,
     trips: 40,
-    phone: "0915.992.110",
+    phone: "0793784133",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=DinhLuat"
   },
@@ -61,7 +61,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     plate: "85B-014.55",
     rate: 4.9,
     trips: 60,
-    phone: "0345.881.256",
+    phone: "0793784133",
     status: "busy",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=HoangLam"
   },
@@ -72,7 +72,7 @@ const VERIFIED_DRIVERS: Driver[] = [
     plate: "85A-301.22",
     rate: 5.0,
     trips: 30,
-    phone: "0898.331.425",
+    phone: "0793784133",
     status: "idle",
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=QuocHuy"
   }

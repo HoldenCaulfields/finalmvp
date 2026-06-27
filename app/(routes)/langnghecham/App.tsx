@@ -34,12 +34,20 @@ export default function App() {
 
   // Notification Toast State
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [pendingCheckInLocation, setPendingCheckInLocation] = useState<string | null>(null);
+  const [pendingCheckInCoords, setPendingCheckInCoords] = useState<{ lat: number; lng: number } | null>(null);
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
     setTimeout(() => {
       setToastMessage(null);
     }, 4000);
+  };
+
+  const handleRequestCheckInFromMap = (locationLabel?: string, coords?: { lat: number; lng: number }) => {
+    setPendingCheckInLocation(locationLabel || 'Sân khấu chính Quảng trường 16/4');
+    setPendingCheckInCoords(coords || null);
+    setActiveTab('checkin');
   };
 
   // Helper price functions
@@ -638,7 +646,7 @@ export default function App() {
   const renderActiveTab = () => {
     switch (activeTab) {
       case 'home':
-        return <HomeTab setActiveTab={setActiveTab} checkins={checkins} />;
+        return <HomeTab setActiveTab={setActiveTab} checkins={checkins} onAddCheckIn={handleAddCheckIn} onLikeCheckIn={handleLikeCheckIn} onRequestCheckIn={handleRequestCheckInFromMap} />;
       case 'schedule':
         return <ScheduleTab schedule={schedule} />;
       case 'checkin':
@@ -647,6 +655,8 @@ export default function App() {
             checkins={checkins}
             onAddCheckIn={handleAddCheckIn}
             onLikeCheckIn={handleLikeCheckIn}
+            initialLocation={pendingCheckInLocation || undefined}
+            initialCoords={pendingCheckInCoords || undefined}
           />
         );
       case 'stalls':
@@ -663,7 +673,7 @@ export default function App() {
       case 'artisans':
         return <ArtisansTab artisans={artisans} />;
       default:
-        return <HomeTab setActiveTab={setActiveTab} checkins={checkins} />;
+        return <HomeTab setActiveTab={setActiveTab} checkins={checkins} onAddCheckIn={handleAddCheckIn} onLikeCheckIn={handleLikeCheckIn} onRequestCheckIn={handleRequestCheckInFromMap} />;
     }
   };
 

@@ -1,57 +1,25 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { CheckIn } from '../types';
 import { Camera, Heart, MapPin, Upload, Sparkles, Trash2, Image as ImageIcon } from 'lucide-react';
 import { uploadImage } from '../lib/cloudinary';
+import { CHECKIN_LOCATIONS, CHECKIN_PRESET_PHOTOS, getCheckInCoordinates, getDefaultAvatar } from '../lib/checkinFlow';
 
 interface CheckInTabProps {
   checkins: CheckIn[];
   onAddCheckIn: (newCheckIn: Omit<CheckIn, 'id' | 'likes' | 'createdAt'>) => Promise<void>;
   onLikeCheckIn: (id: string) => Promise<void>;
+  initialLocation?: string;
+  initialCoords?: { lat: number; lng: number };
 }
 
-// Preset photos for visitors who want to test right away without uploading files
-const PRESET_PHOTOS = [
-  {
-    id: 'p1',
-    name: 'Múa Quạt',
-    url: '/muacham.jpg',
-    desc: 'Điệu múa quạt Chăm rực rỡ'
-  },
-  {
-    id: 'p2',
-    name: 'Làng Gốm',
-    url: '/gombautruc.jpg',
-    desc: 'Bàn tay nghệ nhân làm gốm'
-  },
-  {
-    id: 'p3',
-    name: 'Dệt vải',
-    url: '/vhoa-cham.jpg',
-    desc: 'Sợi tơ thổ cẩm rạng ngời'
-  },
-  {
-    id: 'p4',
-    name: 'Văn Hóa',
-    url: 'thapcham.webp',
-    desc: 'Bãi biển Nha Trang lộng gió'
-  }
-];
+const PRESET_PHOTOS = CHECKIN_PRESET_PHOTOS;
+const LOCATIONS = CHECKIN_LOCATIONS;
 
-const LOCATIONS = [
-  "Sân khấu chính Quảng trường 16/4",
-  "Gian hàng dệt Mỹ Nghiệp - Làng nghề",
-  "Khu ẩm thực Chăm Lễ Hội",
-  "Khu triển lãm gốm cổ Bàu Trúc",
-  "Đền Tháp Bà Po Nagar",
-  "Trung tâm Hội nghị tỉnh Khánh Hòa",
-  "Khu thi đấu Thể thao bãi biển"
-];
-
-export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: CheckInTabProps) {
+export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn, initialLocation, initialCoords }: CheckInTabProps) {
   const [name, setName] = useState('');
   const [caption, setCaption] = useState('');
-  const [location, setLocation] = useState(LOCATIONS[0]);
+  const [location, setLocation] = useState(initialLocation || LOCATIONS[0]);
   const [selectedPhoto, setSelectedPhoto] = useState(PRESET_PHOTOS[0].url);
   const [customImageBase64, setCustomImageBase64] = useState<string | null>(null);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -61,6 +29,12 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
   const [isDragActive, setIsDragActive] = useState(false);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (initialLocation) {
+      setLocation(initialLocation);
+    }
+  }, [initialLocation]);
 
   // Helper to handle file selection and conversion to base64
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -140,22 +114,18 @@ export default function CheckInTab({ checkins, onAddCheckIn, onLikeCheckIn }: Ch
         finalImageUrl = await uploadImage(selectedFile);
       }
 
-      // Use the chosen image (either preset URL or uploaded Cloudinary URL)
-      const avatarIds = [
-        '1534528741775-53994a69daeb', // Nữ
-        '1539571696357-5a69c17a67c6', // Nam
-        '1507003211169-0a1dd7228f2d', // Nam
-        '1494790108377-be9c29b29330', // Nữ
-        '1500648767791-00dcc994a43e'  // Nam
-      ];
-      const randomId = avatarIds[Math.floor(Math.random() * avatarIds.length)];
+      const coords = initialCoords && location === initialLocation
+        ? [initialCoords.lat, initialCoords.lng] as [number, number]
+        : getCheckInCoordinates(location, `checkin-${Date.now()}`);
 
       await onAddCheckIn({
         name: name.trim(),
         caption: caption.trim(),
         location,
         image: finalImageUrl,
-        avatar: `https://images.unsplash.com/photo-${randomId}?auto=format&fit=crop&w=100&h=100&q=80`
+        avatar: getDefaultAvatar(),
+        lat: coords[0],
+        lng: coords[1]
       });
 
       // Clear inputs upon success

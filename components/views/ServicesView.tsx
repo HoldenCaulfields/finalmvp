@@ -45,7 +45,7 @@ const ROUTE_SERVICES: ServiceItem[] = [
     reviews: 128,
     location: "/caodangnghe",
     coords: [11.573200, 108.993100],
-    tag: "Route chính",
+    tag: "Sinh Viên",
     image: "/mdt.jpg",
     route: "/caodangnghe"
   },
@@ -60,7 +60,7 @@ const ROUTE_SERVICES: ServiceItem[] = [
     reviews: 214,
     location: "Gian hàng stalls",
     coords: [11.564200, 109.014310],
-    tag: "stalls",
+    tag: "Marketing",
     image: "/phanrang.jpg",
     route: "/chophanrang"
   },
@@ -75,7 +75,7 @@ const ROUTE_SERVICES: ServiceItem[] = [
     reviews: 96,
     location: "/cimanet",
     coords: [11.558500, 108.998100],
-    tag: "Innovation",
+    tag: "Cinema",
     image: "https://blog.coccoc.com/wp-content/uploads/2025/04/1-dinh-nghia-absolute-cinema.jpg",
     route: "/cimanet"
   },
@@ -90,7 +90,7 @@ const ROUTE_SERVICES: ServiceItem[] = [
     reviews: 183,
     location: "Gian hàng stalls-cham",
     coords: [11.523400, 108.968200],
-    tag: "stalls-cham",
+    tag: "Văn Hóa",
     image: "/vanhoacham.jpg",
     route: "/langnghecham"
   }

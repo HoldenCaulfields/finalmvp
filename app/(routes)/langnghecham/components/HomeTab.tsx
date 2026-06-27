@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, BookOpen, Sparkles, Award, Map, CheckCircle2, ChevronRight, ChevronLeft, Camera, Heart, MapPin, Play, ExternalLink, X } from 'lucide-react';
 import { CheckIn } from '../types';
+import FestivalMap from './FestivalMap';
 
 interface HomeTabProps {
   setActiveTab: (tab: string) => void;
   checkins: CheckIn[];
+  onAddCheckIn?: (newCheckIn: Omit<CheckIn, 'id' | 'likes' | 'createdAt'>) => Promise<void>;
+  onLikeCheckIn?: (id: string) => Promise<void>;
+  onRequestCheckIn?: (locationLabel?: string, coords?: { lat: number; lng: number }) => void;
 }
 
 const slideImages = [
   '/chmnt.jpg',
-  '/vanhoacham.jpg',
-  '/cham_ninhthuan.jpg',
-  '/thapcham.webp',
-  '/gombautruc.jpg',
-  '/vhoa-cham.jpg',
+  '/g.jpg',
+  '/bg.jpg',
+  '/bbg4.jpg',
+  '/bg2.jpg',
 ];
 
-export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
+export default function HomeTab({ setActiveTab, checkins, onAddCheckIn, onLikeCheckIn, onRequestCheckIn }: HomeTabProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [activeVideoId, setActiveVideoId] = useState<string | null>(null);
 
@@ -67,7 +70,7 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
     <div className="space-y-10 animate-fade-in pb-20 mx-auto lg:px-8">
 
       {/* Dynamic Hero Banner with Background Slideshow */}
-      <section className="relative overflow-hidden rounded-3xl bg-zinc-800 text-white shadow-xl min-h-[420px] max-h-120 md:max-h-140 flex flex-col justify-between group/hero">
+      <section className="relative overflow-hidden rounded-3xl bg-zinc-800 text-white shadow-xl min-h-[420px] max-h-120 md:min-h-130 md:max-h-180 flex flex-col justify-between group/hero">
 
         {/* Background Images with Fade Transition */}
         <div className="absolute inset-0 z-0">
@@ -231,6 +234,17 @@ export default function HomeTab({ setActiveTab, checkins }: HomeTabProps) {
             <p className="text-xs text-zinc-400 px-6">Hãy là người đầu tiên ghi lại dấu ấn tuyệt đẹp tại Ngày hội Văn hóa Chăm 2026!</p>
           </div>
         )}
+      </section>
+
+      {/* Live Interactive Festival Map */}
+      <section className="space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-rose-100 pb-3">
+          <div className="space-y-1 text-left">
+            <span className="text-xs font-extrabold tracking-widest text-rose-600 uppercase font-display">BẢN ĐỒ SỐ TƯƠNG TÁC</span>
+            <h3 className="text-2xl font-extrabold text-zinc-900">Bản Đồ Check-In Trực Tuyến</h3>
+          </div>
+        </div>
+        <FestivalMap checkins={checkins} onAddCheckIn={onAddCheckIn} onLikeCheckIn={onLikeCheckIn} onRequestCheckIn={onRequestCheckIn} />
       </section>
 
       {/* Traditional Culture Section (Media & Journalism) */}
