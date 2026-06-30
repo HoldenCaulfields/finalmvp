@@ -294,7 +294,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* Selected Stall Detail Modal */}
       {selectedStall && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center z-2000 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-5xl w-full max-h-[100vh] overflow-y-auto shadow-2xl border border-rose-100 flex flex-col animate-slide-up">
             {/* Banner top */}
             <div className="relative h-44 sm:h-52 w-full flex-shrink-0">
@@ -429,7 +429,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* New Stall Modal Form */}
       {showStallForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-2000 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-rose-100 p-6 sm:p-8 animate-slide-up space-y-5 text-left">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
               <h3 className="text-base sm:text-lg font-extrabold text-zinc-900 flex items-center gap-1">
@@ -569,7 +569,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* New Product Modal Form */}
       {showProductForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-2000 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-md w-full shadow-2xl border border-rose-100 p-6 sm:p-8 animate-slide-up space-y-5 text-left z-60">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
               <h3 className="text-base font-extrabold text-zinc-900">
@@ -661,7 +661,7 @@ export default function MarketplaceTab({ stalls, onAddStall, onAddProduct, onAdd
 
       {/* Direct Contact Modal Form */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 z-2000 animate-fade-in">
           <div className="bg-white rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl border border-rose-100 animate-slide-up text-left space-y-5">
             <div className="flex justify-between items-center border-b border-zinc-100 pb-2">
               <h3 className="text-base font-extrabold text-zinc-950">

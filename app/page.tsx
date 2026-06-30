@@ -2,7 +2,6 @@
 
 import FilterBar from "@/components/FilterBar";
 import BottomBar from "@/components/BottomBar";
-import EventCountdownCta from "@/components/EventCountdownCta";
 import MarkerOverlay from "@/components/uioverlay/MarkerOverlay";
 import Navbar from "@/components/Navbar";
 import CreateMarkerModal from "@/components/map/CreateMarkerModal";
@@ -24,7 +23,6 @@ export default function App() {
           <ViewMode activeRoute={activeRoute} />
         </div>
         <BottomBar />
-        <EventCountdownCta />
         <MarkerOverlay />
         <CreateMarkerModal />
         <TipLocationBar />
